@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pobl4.doa;
+package pobl4.dao;
 
 import java.io.IOException;
 import java.io.InputStream;

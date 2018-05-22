@@ -1,9 +1,10 @@
-package pobl4.doa;
+package pobl4.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import pobl4.daoexception.DAOException;
 import pobl4.user.User;
@@ -11,11 +12,13 @@ import pobl4.user.User;
 public class UserDAOJDBC implements UserDAO {
 
     private static final String SQL_FIND_BY_ID =
-        "SELECT id, username FROM usuario WHERE id = ?";
+        "SELECT id,nombre,apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID"
+        + " FROM usuario WHERE id = ?";
     private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD =
-        "SELECT id, username FROM usuario WHERE username = ? AND password = MD5(?)";
+        "SELECT id FROM usuario WHERE nombre_usuario = ? AND contraseña = MD5(?)";
     private static final String SQL_INSERT =
-        "INSERT INTO usuario (username, password) VALUES (?, MD5(?))";
+        "INSERT INTO usuario (nombre, apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID) "
+        + "VALUES (?,?,?,MD5(?),?,?)";
 
     
     
@@ -71,6 +74,26 @@ public class UserDAOJDBC implements UserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+
+
+	@Override
+	public void update(User user) throws IllegalArgumentException, DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(User user) throws IllegalArgumentException, DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<User> userList() throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	private User map(ResultSet resultSet) throws SQLException {
