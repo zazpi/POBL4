@@ -48,6 +48,10 @@ public abstract class DAOFactory {
 	public UserDAO getUserDAO() {
 		return new UserDAOJDBC(this);
 	}
+	
+	public ConsumoDAO getConsumoDAO() {
+		return new ConsumoDAOJDBC(this);
+	}
 
 
 }
