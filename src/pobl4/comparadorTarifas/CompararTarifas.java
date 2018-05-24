@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package popbl4.comparadorTarifas;
+package pobl4.comparadorTarifas;
 
 import java.awt.Color;
 import java.awt.Dimension;

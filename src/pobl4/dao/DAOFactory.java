@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pobl4.doa;
+package pobl4.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -48,6 +48,21 @@ public abstract class DAOFactory {
 	public UserDAO getUserDAO() {
 		return new UserDAOJDBC(this);
 	}
-
+	
+	public ConsumoDAO getConsumoDAO() {
+		return new ConsumoDAOJDBC(this);
+	}
+	
+	public PrecioDAO getPrecioDAO() {
+		return new PrecioDAOJDBC(this);
+	}
+	
+	public TarifaDAO getTarifaDAO() {
+		return new TarifaDAOJDBC(this);
+	}
+	
+	public CompaniaDAO getCompaniaDAO() {
+		return new CompaniaDAOJDBC(this);
+	}
 
 }

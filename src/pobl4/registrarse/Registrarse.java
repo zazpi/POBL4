@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package registrarse;
+package pobl4.registrarse;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -250,6 +250,7 @@ public class Registrarse extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txRContrasenaActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JComboBox<String> jComboBox1;

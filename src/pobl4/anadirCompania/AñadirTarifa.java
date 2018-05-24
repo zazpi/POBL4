@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package añadirCompañia;
+package pobl4.anadirCompania;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,12 +25,12 @@ import javax.swing.border.BevelBorder;
  *
  * @author asier
  */
-public class AñadirCompañia extends javax.swing.JPanel {
+public class AñadirTarifa extends javax.swing.JPanel {
 
     /**
-     * Creates new form AñadirCompañia
+     * Creates new form AñadirTarifa
      */
-    public AñadirCompañia() {
+    public AñadirTarifa() {
         initComponents();
     }
 
@@ -46,13 +46,13 @@ public class AñadirCompañia extends javax.swing.JPanel {
         JPanel panelNombre = new JPanel();
         JLabel labelNombre = new JLabel();
         JPanel panelDatos = new JPanel();
-        JLabel labelNombreCompania = new JLabel();
-        JTextField txNombreCompania = new JTextField();
-        JLabel labelTarifa = new JLabel();
-        JScrollPane listaTarifas = new JScrollPane();
+        JLabel labelNombreTarifa = new JLabel();
+        JTextField txNombreTarifa = new JTextField();
+        JLabel labelTramo = new JLabel();
+        JScrollPane listaTramos = new JScrollPane();
         JList<String> jList1 = new JList<>();
-        JButton btAnadir = new JButton();
         JButton btGuardar = new JButton();
+        JButton btAnadir = new JButton();
         JButton btCancelar = new JButton();
 
         setMaximumSize(new Dimension(400, 418));
@@ -64,15 +64,15 @@ public class AñadirCompañia extends javax.swing.JPanel {
         labelNombre.setFont(new Font("Ubuntu", 1, 15)); // NOI18N
         labelNombre.setForeground(new Color(16, 103, 218));
         labelNombre.setHorizontalAlignment(SwingConstants.CENTER);
-        labelNombre.setText("AÑADIR COMPAÑÍA");
+        labelNombre.setText("AÑADIR TARIFA");
 
         GroupLayout panelNombreLayout = new GroupLayout(panelNombre);
         panelNombre.setLayout(panelNombreLayout);
         panelNombreLayout.setHorizontalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelNombreLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
+                .addGap(135, 135, 135)
                 .addComponent(labelNombre)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         panelNombreLayout.setVerticalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelNombreLayout.createSequentialGroup()
@@ -83,34 +83,34 @@ public class AñadirCompañia extends javax.swing.JPanel {
 
         panelDatos.setBackground(new Color(190, 191, 190));
         panelDatos.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
-        panelDatos.setMaximumSize(new Dimension(400, 366));
-        panelDatos.setMinimumSize(new Dimension(400, 366));
 
-        labelNombreCompania.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
-        labelNombreCompania.setForeground(new Color(1, 1, 1));
-        labelNombreCompania.setText("Nombre Compañía: ");
+        labelNombreTarifa.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
+        labelNombreTarifa.setForeground(new Color(1, 1, 1));
+        labelNombreTarifa.setText("Nombre Tarifa: ");
 
-        txNombreCompania.setText("nombreCompañía");
+        txNombreTarifa.setText("nombreTarifa");
+        txNombreTarifa.setMaximumSize(new Dimension(400, 418));
+        txNombreTarifa.setMinimumSize(new Dimension(400, 418));
 
-        labelTarifa.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
-        labelTarifa.setForeground(new Color(1, 1, 1));
-        labelTarifa.setText("Tarifas: ");
+        labelTramo.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
+        labelTramo.setForeground(new Color(1, 1, 1));
+        labelTramo.setText("Tramos: ");
 
         jList1.setBackground(new Color(242, 241, 240));
         jList1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
         jList1.setForeground(new Color(1, 1, 1));
         jList1.setModel(new AbstractListModel<String>() {
-            String[] strings = { "Tarifa 1", "Tarifa 2", "Tarifa 3", "Tarifa 4", "Tarifa 5" };
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        listaTarifas.setViewportView(jList1);
-
-        btAnadir.setText("Añadir");
-        btAnadir.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        listaTramos.setViewportView(jList1);
 
         btGuardar.setText("Guardar");
         btGuardar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+
+        btAnadir.setText("Añadir");
+        btAnadir.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
         btCancelar.setText("Cancelar");
         btCancelar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
@@ -121,41 +121,46 @@ public class AñadirCompañia extends javax.swing.JPanel {
             .addGroup(panelDatosLayout.createSequentialGroup()
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelTarifa)
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addComponent(labelNombreCompania)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txNombreCompania, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(btGuardar, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btCancelar, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(listaTarifas)))
+                        .addGap(119, 119, 119)
+                        .addComponent(btAnadir, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btAnadir, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(btGuardar, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btCancelar, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTramo)
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(labelNombreTarifa)
+                                .addGap(18, 18, 18)
+                                .addComponent(txNombreTarifa, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(listaTramos, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDatosLayout.setVerticalGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(25, 25, 25)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombreCompania)
-                    .addComponent(txNombreCompania, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelNombreTarifa)
+                    .addComponent(txNombreTarifa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelTarifa)
-                .addGap(12, 12, 12)
-                .addComponent(listaTarifas, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTramo)
+                .addGap(18, 18, 18)
+                .addComponent(listaTramos, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btAnadir)
                 .addGap(18, 18, 18)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btCancelar))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(this);
