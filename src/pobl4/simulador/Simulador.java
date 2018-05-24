@@ -1,4 +1,4 @@
-package simulador;
+package pobl4.simulador;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
