@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import pobl4.daoexception.DAOException;
+import pobl4.generalobjectclasses.Compania;
 import pobl4.generalobjectclasses.Consumo;
 
 /**
@@ -23,6 +26,8 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			"SELECT SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ?";
 	private static final String SQL_INSERT = 
 			"INSERT INTO consumo (año,mes,dia,hora,consumo,usuarioID) VALUES(?,?,?,?,?)";
+	private static final String SQL_LIST_CONSUMES =
+			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo";
 
 	private DAOFactory daoFactory;
 	
@@ -39,9 +44,18 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	public Consumo findByUserId(Long userID) throws DAOException {
 		return find(FIND_BY_USER_ID,userID);
 	}
+	
+	@Override
+	public List<Consumo> find() throws DAOException {
+		return find(SQL_LIST_CONSUMES);
+	}
 
 	@Override
 	public void create(Consumo consumo) throws IllegalArgumentException, DAOException {
+		
+		if((Integer)consumo.getConsumoID() != null) {
+			throw new IllegalArgumentException("Consumo already exists");
+		}
 		Object[] values = {
 	            consumo.getAño(),
 	            consumo.getMes(),
@@ -79,6 +93,23 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
         }
 
         return consumo;
+	}
+	
+	private List<Consumo> find(String sql){
+		List<Consumo> consumo = new ArrayList<>();
+		
+	    try (
+	            Connection connection = daoFactory.getConnection();
+	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_CONSUMES);
+	            ResultSet resultSet = statement.executeQuery();
+	        ) {
+	            while (resultSet.next()) {
+	                consumo.add(map(resultSet));
+	            }
+	        } catch (SQLException e) {
+	            throw new DAOException(e);
+	        }
+	    return consumo;
 	}
 
 	private Consumo map(ResultSet resultSet) throws SQLException {

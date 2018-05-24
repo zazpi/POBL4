@@ -52,6 +52,17 @@ public abstract class DAOFactory {
 	public ConsumoDAO getConsumoDAO() {
 		return new ConsumoDAOJDBC(this);
 	}
-
+	
+	public PrecioDAO getPrecioDAO() {
+		return new PrecioDAOJDBC(this);
+	}
+	
+	public TarifaDAO getTarifaDAO() {
+		return new TarifaDAOJDBC(this);
+	}
+	
+	public CompaniaDAO getCompaniaDAO() {
+		return new CompaniaDAOJDBC(this);
+	}
 
 }

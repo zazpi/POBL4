@@ -1,5 +1,7 @@
 package pobl4.dao;
-
+/**
+ * @author Lucas
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -3,11 +3,18 @@
  */
 package pobl4.generalobjectclasses;
 
+import java.io.Serializable;
+
 /**
  * @author Lucas
  *
  */
-public class Tarifa {
+public class Tarifa implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String descripcion;
