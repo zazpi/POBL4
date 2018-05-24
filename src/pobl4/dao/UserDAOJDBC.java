@@ -16,7 +16,7 @@ public class UserDAOJDBC implements UserDAO {
         "SELECT usuarioID,nombre,apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID"
         + " FROM usuario WHERE id = ?";
     private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD =
-        "SELECT usuarioID FROM usuario WHERE nombre_usuario = ? AND contraseña = MD5(?)";
+        "SELECT usuarioID,nombre,apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID FROM usuario WHERE nombre_usuario = ? AND contraseña = MD5(?)";
     private static final String SQL_INSERT =
         "INSERT INTO usuario (nombre, apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID) "
         + "VALUES (?,?,?,MD5(?),?,?)";
@@ -84,9 +84,9 @@ public class UserDAOJDBC implements UserDAO {
 
 	@Override
 	public void create(User user) throws IllegalArgumentException, DAOException {
-		if ((Integer)user.getId() != null) {
+		/*if ((Integer)user.getId() != null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
-		}
+		}*/
             
 		Object[] values = {
 	            user.getNombre(),
@@ -112,7 +112,7 @@ public class UserDAOJDBC implements UserDAO {
 	
 	private User map(ResultSet resultSet) throws SQLException {
 		 User user = new User();
-	     user.setId(resultSet.getInt("id"));
+	     user.setId(resultSet.getInt("usuarioID"));
 	     user.setNombre(resultSet.getString("nombre"));
 	     user.setApellido(resultSet.getString("apellido"));
 	     user.setUsername(resultSet.getString("nombre_usuario"));
