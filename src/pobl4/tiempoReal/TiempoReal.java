@@ -30,7 +30,7 @@ import gnu.io.SerialPortEventListener;
 public class TiempoReal extends JDialog implements SerialPortEventListener {
 	Controlador controlador;
 	
-	public DefaultValueDataset dataset = new DefaultValueDataset(15);	
+	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
 	int minimumValue = 0;
 	int maximumValue = 100;
 	int majorTickGap = 10;
@@ -52,9 +52,9 @@ public class TiempoReal extends JDialog implements SerialPortEventListener {
 	
 		/*cargarSerial();
 		if (seriala != null) {
-			seriala.addListener(this);
-			addListener(controlador);
-		}*/
+			seriala.addListener(this);		
+		}
+		addListener(controlador);*/
 		
 		this.add(crearPanelDialogo());
 		this.setLocation(485, 252);
@@ -187,10 +187,14 @@ public class TiempoReal extends JDialog implements SerialPortEventListener {
 		controlador.recibirConsumo(balioa);	
 	}
 	
-	public void consumo (double consumo, double consumoTotal, double maxConsumo) {
+	public void setVelocimetro (double consumo) {
 		dataset.setValue(consumo);
-		lvalorConsumo.setText(consumoTotal/1000 + " kW");
-		lvalorMaxConsumo.setText(maxConsumo + " W");
+	}
+	
+	public void consumo (double consumo, double consumoTotal, double maxConsumo) {
+		setVelocimetro(consumo);
+		lvalorConsumo.setText(consumoTotal + " kW");
+		lvalorMaxConsumo.setText(maxConsumo + " kW");
 	}
 	
 	public void tiempo (int horas, int minutos, int segundos) {

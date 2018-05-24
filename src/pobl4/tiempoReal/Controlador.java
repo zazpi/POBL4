@@ -72,7 +72,7 @@ public class Controlador implements ActionListener, SerialListener {
 				timer = new Timer (1000, this);
 				timer.start();
 			} else {
-				dialogo.dataset.setValue(consumo);
+				dialogo.setVelocimetro(0.0);
 				timer.stop();
 				timer = null;
 			}
