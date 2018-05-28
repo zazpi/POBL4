@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.Compania;
-import pobl4.generalobjectclasses.Consumo;
+import pobl4.dominio.Compania;
+import pobl4.dominio.Consumo;
 
 /**
  * @author Lucas

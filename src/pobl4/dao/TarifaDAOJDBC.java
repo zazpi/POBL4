@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.Tarifa;
+import pobl4.dominio.Tarifa;
 
 /**
  * @author root

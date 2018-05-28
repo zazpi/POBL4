@@ -4,7 +4,7 @@
 package pobl4.dao;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.User;
+import pobl4.dominio.User;
 
 /**
  * @author Lucas Sousa
