@@ -1,7 +1,7 @@
 package pobl4.dao;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.Tarifa;
+import pobl4.dominio.Tarifa;
 
 public interface TarifaDAO {
 	

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.User;
+import pobl4.dominio.User;
 
 public class UserDAOJDBC implements UserDAO {
 

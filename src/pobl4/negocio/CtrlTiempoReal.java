@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
-import pobl4.tiempoReal.SerialListener;
-import pobl4.tiempoReal.TiempoReal;
+import pobl4.serial.SerialListener;
+
 
 public class CtrlTiempoReal implements ActionListener, SerialListener {
 	double consumo;
@@ -16,7 +16,7 @@ public class CtrlTiempoReal implements ActionListener, SerialListener {
 	
 	Timer timer;
 	
-	TiempoReal dialogo;
+	/*VistaTiempoReal dialogo;
 		
 	public CtrlTiempoReal () {
 		this.consumo = 0;
@@ -79,5 +79,15 @@ public class CtrlTiempoReal implements ActionListener, SerialListener {
 				timer = null;
 			}
 		}		
-	}	
+	}	*/
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void recibirConsumo(double consumo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

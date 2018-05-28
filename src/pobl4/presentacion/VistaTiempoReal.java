@@ -26,12 +26,12 @@ import org.jfree.data.general.DefaultValueDataset;
 
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import pobl4.tiempoReal.Controlador;
-import pobl4.tiempoReal.Serial;
-import pobl4.tiempoReal.SerialListener;
+import pobl4.negocio.CtrlTiempoReal;
+import pobl4.serial.Serial;
+import pobl4.serial.SerialListener;
 
 public class VistaTiempoReal extends JDialog implements SerialPortEventListener {
-	Controlador controlador;
+	CtrlTiempoReal controlador;
 	
 	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
 	int minimumValue = 0;
@@ -47,11 +47,11 @@ public class VistaTiempoReal extends JDialog implements SerialPortEventListener 
 	
 	double balioa;
 	
-	public VistaTiempoReal (JFrame vista, Controlador control) {
+	public VistaTiempoReal (JFrame vista, CtrlTiempoReal control) {
 		super (vista, "Tiempo real", true);
 		
 		this.controlador = control;
-		controlador.setDialogo(this);
+		//controlador.setDialogo(this);
 	
 		/*cargarSerial();
 		if (seriala != null) {

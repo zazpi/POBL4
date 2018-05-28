@@ -6,7 +6,7 @@ package pobl4.dao;
 import java.util.List;
 
 import pobl4.daoexception.DAOException;
-import pobl4.generalobjectclasses.Consumo;
+import pobl4.dominio.Consumo;
 
 /**
  * @author Lucas
