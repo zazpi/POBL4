@@ -1,4 +1,4 @@
-package pobl4.tiempoReal;
+package pobl4.serial;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
