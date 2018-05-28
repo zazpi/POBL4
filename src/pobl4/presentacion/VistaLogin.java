@@ -36,8 +36,7 @@ public class VistaLogin extends javax.swing.JDialog {
         labelContrasena = new javax.swing.JLabel();
         txContraseña = new javax.swing.JPasswordField();
         txUsuario = new javax.swing.JTextField();
-        btAceptar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
+        btEntrar = new javax.swing.JButton();
         labelPregunta = new javax.swing.JLabel();
         btRegistrarse = new javax.swing.JButton();
 
@@ -86,40 +85,35 @@ public class VistaLogin extends javax.swing.JDialog {
 
         txUsuario.setText("NombreUsuario");
 
-        btAceptar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        btAceptar.setForeground(new java.awt.Color(1, 1, 1));
-        btAceptar.setText("Aceptar");
-        btAceptar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btAceptar.addActionListener(new java.awt.event.ActionListener() {
+        btEntrar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        btEntrar.setForeground(new java.awt.Color(1, 1, 1));
+        btEntrar.setText("Entrar");
+        btEntrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAceptarActionPerformed(evt);
+                btEntrarActionPerformed(evt);
             }
         });
-
-        btCancelar.setForeground(new java.awt.Color(1, 1, 1));
-        btCancelar.setText("Cancelar");
-        btCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout panelCentroLayout = new javax.swing.GroupLayout(panelCentro);
         panelCentro.setLayout(panelCentroLayout);
         panelCentroLayout.setHorizontalGroup(
             panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCentroLayout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addComponent(btAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
-            .addGroup(panelCentroLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
                 .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelUsuario))
-                .addGap(34, 34, 34)
-                .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(txContraseña))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelCentroLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelUsuario))
+                        .addGap(34, 34, 34)
+                        .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                            .addComponent(txContraseña)))
+                    .addGroup(panelCentroLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         panelCentroLayout.setVerticalGroup(
             panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,11 +126,9 @@ public class VistaLogin extends javax.swing.JDialog {
                 .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(panelCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                .addGap(35, 35, 35)
+                .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         labelPregunta.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -202,9 +194,9 @@ public class VistaLogin extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btAceptarActionPerformed
+    }//GEN-LAST:event_btEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,8 +242,7 @@ public class VistaLogin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAceptar;
-    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btEntrar;
     private javax.swing.JButton btRegistrarse;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContrasena;

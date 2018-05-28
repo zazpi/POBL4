@@ -5,25 +5,17 @@
  */
 package pobl4.presentacion;
 
-import java.awt.Font;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-
 /**
  *
- * @author galaipa
+ * @author asier
  */
-public class VistaSimulador extends javax.swing.JPanel {
+public class VistaSimulador extends javax.swing.JDialog {
 
     /**
-     * Creates new form Simulador
+     * Creates new form VistaSimulador2
      */
-    public VistaSimulador() {
+    public VistaSimulador(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -36,230 +28,336 @@ public class VistaSimulador extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JComboBox<String> comboCompañias = new JComboBox<>();
-        JComboBox<String> comboTarifas = new JComboBox<>();
-        JTextField textPotencia = new JTextField();
-        JTextField textDias = new JTextField();
-        JLabel labelCompañia = new JLabel();
-        JLabel labelTarifa = new JLabel();
-        JLabel labelPotenia = new JLabel();
-        JLabel labelConsumo = new JLabel();
-        JLabel labelDias = new JLabel();
-        JButton buttonAñadir = new JButton();
-        JLabel labelKW = new JLabel();
-        JButton ayudaTarifa = new JButton();
-        JButton ayudaPotencia = new JButton();
-        JButton ayudaSelConsumo = new JButton();
-        JButton ayudaDias = new JButton();
-        JLabel labelPunta = new JLabel();
-        JLabel labelValle = new JLabel();
-        JLabel labelSuperValle = new JLabel();
-        JTextField texPunta = new JTextField();
-        JTextField textValle = new JTextField();
-        JTextField textSuperValle = new JTextField();
-        JLabel labelKW1 = new JLabel();
-        JLabel labelKW2 = new JLabel();
-        JLabel labelKW3 = new JLabel();
-        JLabel labelTitulo = new JLabel();
-        JButton ayudaSelConsumo1 = new JButton();
-        JButton ayudaSelConsumo2 = new JButton();
-        JButton buttonCargar = new JButton();
+        jPanel1 = new javax.swing.JPanel();
+        panelNombreç = new javax.swing.JPanel();
+        labelNombre = new javax.swing.JLabel();
+        panelDatos = new javax.swing.JPanel();
+        labelCompania = new javax.swing.JLabel();
+        compania = new javax.swing.JComboBox<>();
+        labelTarifa = new javax.swing.JLabel();
+        tarifa = new javax.swing.JComboBox<>();
+        labelPContratada = new javax.swing.JLabel();
+        txPotenciaContratada = new javax.swing.JTextField();
+        labelConsumo = new javax.swing.JLabel();
+        txPunta = new javax.swing.JTextField();
+        txValle = new javax.swing.JTextField();
+        txSuperValle = new javax.swing.JTextField();
+        btCargar = new javax.swing.JButton();
+        labelDias = new javax.swing.JLabel();
+        txDias = new javax.swing.JTextField();
+        btAyuda = new javax.swing.JButton();
+        btAnadir = new javax.swing.JButton();
+        panelGrafico = new javax.swing.JPanel();
+        panelTabla = new javax.swing.JScrollPane();
+        tablaFactura = new javax.swing.JTable();
 
-        comboCompañias.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        comboCompañias.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        comboTarifas.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        comboTarifas.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.setMaximumSize(new java.awt.Dimension(905, 565));
+        jPanel1.setMinimumSize(new java.awt.Dimension(905, 565));
 
-        textPotencia.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
+        panelNombreç.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        textDias.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
+        labelNombre.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        labelNombre.setForeground(new java.awt.Color(16, 103, 218));
+        labelNombre.setText("SIMULADOR DE FACTURAS");
 
-        labelCompañia.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelCompañia.setText("Compañia:");
-
-        labelTarifa.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelTarifa.setText("Tarifa:");
-
-        labelPotenia.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelPotenia.setText("Potencia:");
-
-        labelConsumo.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelConsumo.setText("Consumo:");
-
-        labelDias.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelDias.setText("Nº de dias:");
-
-        buttonAñadir.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        buttonAñadir.setText("+");
-
-        labelKW.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        labelKW.setText("Kw");
-
-        ayudaTarifa.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaTarifa.setText("?");
-
-        ayudaPotencia.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaPotencia.setText("?");
-
-        ayudaSelConsumo.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaSelConsumo.setText("?");
-
-        ayudaDias.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaDias.setText("?");
-
-        labelPunta.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        labelPunta.setText("Punta:");
-
-        labelValle.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        labelValle.setText("Valle:");
-
-        labelSuperValle.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        labelSuperValle.setText("SuperValle:");
-
-        labelKW1.setFont(new Font("Ubuntu", 0, 17)); // NOI18N
-        labelKW1.setText("Kw/h");
-
-        labelKW2.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        labelKW2.setText("Kw/h");
-
-        labelKW3.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        labelKW3.setText("Kw/h");
-
-        labelTitulo.setFont(new Font("Ubuntu", 1, 25)); // NOI18N
-        labelTitulo.setText("Simulador de facturas");
-
-        ayudaSelConsumo1.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaSelConsumo1.setText("?");
-
-        ayudaSelConsumo2.setFont(new Font("Ubuntu", 0, 20)); // NOI18N
-        ayudaSelConsumo2.setText("?");
-
-        buttonCargar.setText("Cargar desde histórico");
-
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelCompañia)
-                                    .addComponent(labelTarifa)
-                                    .addComponent(labelPotenia)
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(labelPunta)
-                                        .addComponent(labelConsumo)
-                                        .addComponent(labelValle)
-                                        .addComponent(labelSuperValle)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comboTarifas, 0, 241, Short.MAX_VALUE)
-                                    .addComponent(comboCompañias, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(textPotencia, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(labelKW)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ayudaPotencia))
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(buttonCargar)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(textSuperValle, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(textValle, GroupLayout.Alignment.LEADING))
-                                                    .addGap(4, 4, 4))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(texPunta)
-                                                    .addGap(2, 2, 2)))
-                                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(labelKW2)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(ayudaSelConsumo1))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(labelKW3)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(ayudaSelConsumo2))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(labelKW1)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(ayudaSelConsumo))))))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(buttonAñadir)
-                                    .addComponent(ayudaTarifa, GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelDias)
-                                .addGap(18, 18, 18)
-                                .addComponent(textDias, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ayudaDias))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(labelTitulo)))
-                .addContainerGap(107, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelNombreçLayout = new javax.swing.GroupLayout(panelNombreç);
+        panelNombreç.setLayout(panelNombreçLayout);
+        panelNombreçLayout.setHorizontalGroup(
+            panelNombreçLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNombreçLayout.createSequentialGroup()
+                .addGap(349, 349, 349)
+                .addComponent(labelNombre)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(labelTitulo)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboCompañias, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonAñadir, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboTarifas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ayudaTarifa, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelCompañia)
+        panelNombreçLayout.setVerticalGroup(
+            panelNombreçLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNombreçLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelNombre)
+                .addContainerGap())
+        );
+
+        panelDatos.setBackground(new java.awt.Color(190, 191, 190));
+        panelDatos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        labelCompania.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelCompania.setForeground(new java.awt.Color(1, 1, 1));
+        labelCompania.setText("Compañía: ");
+
+        compania.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelTarifa.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelTarifa.setForeground(new java.awt.Color(1, 1, 1));
+        labelTarifa.setText("Tarifa: ");
+
+        tarifa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelPContratada.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelPContratada.setForeground(new java.awt.Color(1, 1, 1));
+        labelPContratada.setText("Potencia contratada: ");
+
+        txPotenciaContratada.setText("potenciaContratada");
+
+        labelConsumo.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelConsumo.setForeground(new java.awt.Color(1, 1, 1));
+        labelConsumo.setText("Consumo: ");
+
+        txPunta.setText("punta");
+        txPunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txPuntaActionPerformed(evt);
+            }
+        });
+
+        txValle.setText("valle");
+        txValle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txValleActionPerformed(evt);
+            }
+        });
+
+        txSuperValle.setText("superValle");
+
+        btCargar.setText("Cargar desde  histórico");
+
+        labelDias.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelDias.setForeground(new java.awt.Color(1, 1, 1));
+        labelDias.setText("Días: ");
+
+        txDias.setText("días");
+
+        btAyuda.setText("Ayuda");
+
+        btAnadir.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
+        btAnadir.setText("+");
+        btAnadir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
+        panelDatos.setLayout(panelDatosLayout);
+        panelDatosLayout.setHorizontalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(labelDias)
                         .addGap(18, 18, 18)
-                        .addComponent(labelTarifa)))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(textPotencia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPotenia)
-                    .addComponent(labelKW)
-                    .addComponent(ayudaPotencia, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelConsumo)
-                    .addComponent(buttonCargar))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPunta)
-                    .addComponent(texPunta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelKW1)
-                    .addComponent(ayudaSelConsumo, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelValle)
-                    .addComponent(textValle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelKW2)
-                    .addComponent(ayudaSelConsumo1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelSuperValle)
-                    .addComponent(textSuperValle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelKW3)
-                    .addComponent(ayudaSelConsumo2, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(textDias, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelDias)
-                    .addComponent(ayudaDias, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addComponent(txDias, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(labelPContratada)
+                        .addGap(18, 18, 18)
+                        .addComponent(txPotenciaContratada, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(labelConsumo)
+                        .addGap(18, 18, 18)
+                        .addComponent(txPunta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txValle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txSuperValle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                        .addComponent(labelCompania)
+                        .addGap(18, 18, 18)
+                        .addComponent(compania, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(labelTarifa)
+                        .addGap(18, 18, 18)
+                        .addComponent(tarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(btAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)))
+                .addGap(101, 101, 101))
         );
+        panelDatosLayout.setVerticalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCompania)
+                    .addComponent(compania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTarifa)
+                    .addComponent(tarifa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAnadir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPContratada)
+                    .addComponent(txPotenciaContratada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelConsumo)
+                    .addComponent(txPunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txValle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txSuperValle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCargar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDias)
+                    .addComponent(txDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAyuda))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        panelGrafico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout panelGraficoLayout = new javax.swing.GroupLayout(panelGrafico);
+        panelGrafico.setLayout(panelGraficoLayout);
+        panelGraficoLayout.setHorizontalGroup(
+            panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 411, Short.MAX_VALUE)
+        );
+        panelGraficoLayout.setVerticalGroup(
+            panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 287, Short.MAX_VALUE)
+        );
+
+        tablaFactura.setBackground(new java.awt.Color(190, 191, 190));
+        tablaFactura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tablaFactura.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        tablaFactura.setForeground(new java.awt.Color(1, 1, 1));
+        tablaFactura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"  Por energía utilizada", null},
+                {"  Por potencia contratada", null},
+                {"  Impuesto electricidad", null},
+                {"  Alquiler contador", null},
+                {"  Otros conceptos", null},
+                {"  IVA 21%", null},
+                {"  Total", null}
+            },
+            new String [] {
+                "Concepto", "Precio"
+            }
+        ));
+        tablaFactura.setRowHeight(37);
+        panelTabla.setViewportView(tablaFactura);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelNombreç, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(panelNombreç, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 905, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 577, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txPuntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txPuntaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txPuntaActionPerformed
+
+    private void txValleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txValleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txValleActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VistaSimulador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VistaSimulador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VistaSimulador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VistaSimulador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                VistaSimulador dialog = new VistaSimulador(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAnadir;
+    private javax.swing.JButton btAyuda;
+    private javax.swing.JButton btCargar;
+    private javax.swing.JComboBox<String> compania;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelCompania;
+    private javax.swing.JLabel labelConsumo;
+    private javax.swing.JLabel labelDias;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelPContratada;
+    private javax.swing.JLabel labelTarifa;
+    private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelGrafico;
+    private javax.swing.JPanel panelNombreç;
+    private javax.swing.JScrollPane panelTabla;
+    private javax.swing.JTable tablaFactura;
+    private javax.swing.JComboBox<String> tarifa;
+    private javax.swing.JTextField txDias;
+    private javax.swing.JTextField txPotenciaContratada;
+    private javax.swing.JTextField txPunta;
+    private javax.swing.JTextField txSuperValle;
+    private javax.swing.JTextField txValle;
     // End of variables declaration//GEN-END:variables
 }
