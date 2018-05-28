@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pobl4.anadirConsumo;
+package pobl4.presentacion;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,12 +24,12 @@ import javax.swing.border.BevelBorder;
  *
  * @author asier
  */
-public class AñadirConsumo extends javax.swing.JPanel {
+public class VistaAñadirConsumo extends javax.swing.JPanel {
 
     /**
      * Creates new form añadirConsumo
      */
-    public AñadirConsumo() {
+    public VistaAñadirConsumo() {
         initComponents();
     }
 

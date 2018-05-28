@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pobl4.anadirCompania;
+package pobl4.presentacion.anadirCompania;
 
 import java.awt.Color;
 import java.awt.Dimension;

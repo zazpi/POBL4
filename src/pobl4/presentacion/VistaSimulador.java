@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pobl4.simulador;
+package pobl4.presentacion;
 
 import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
@@ -18,12 +18,12 @@ import javax.swing.LayoutStyle;
  *
  * @author galaipa
  */
-public class PanelSimulador extends javax.swing.JPanel {
+public class VistaSimulador extends javax.swing.JPanel {
 
     /**
      * Creates new form Simulador
      */
-    public PanelSimulador() {
+    public VistaSimulador() {
         initComponents();
     }
 

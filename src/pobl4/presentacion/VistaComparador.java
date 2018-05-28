@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pobl4.comparadorTarifas;
+package pobl4.presentacion;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,12 +30,12 @@ import javax.swing.border.SoftBevelBorder;
  *
  * @author asier
  */
-public class CompararTarifas extends javax.swing.JPanel {
+public class VistaComparador extends javax.swing.JPanel {
 
     /**
      * Creates new form CompararTarifas
      */
-    public CompararTarifas() {
+    public VistaComparador() {
         initComponents();
     }
 
@@ -56,8 +56,8 @@ public class CompararTarifas extends javax.swing.JPanel {
         JButton btAno = new JButton();
         JPanel panelDerecha = new JPanel();
         JLabel periodoTiempo = new JLabel();
-        fechaInicio = new JComboBox<>();
-        fechaFin = new JComboBox<>();
+        JComboBox<String> fechaInicio = new JComboBox<>();
+        JComboBox<String> fechaFin = new JComboBox<>();
         JLabel tipoTarifa = new JLabel();
         JCheckBox sinDiscriminacion = new JCheckBox();
         JCheckBox discriminacion1 = new JCheckBox();
@@ -65,7 +65,7 @@ public class CompararTarifas extends javax.swing.JPanel {
         JLabel renovable = new JLabel();
         JCheckBox soloRenovable = new JCheckBox();
         JScrollPane panelIzquierda = new JScrollPane();
-        listaCompanias = new JList<>();
+        JList<String> listaCompanias = new JList<>();
         JPanel panelNombre = new JPanel();
         JLabel labelNombre = new JLabel();
 
@@ -306,8 +306,5 @@ public class CompararTarifas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JComboBox<String> fechaFin;
-    private JComboBox<String> fechaInicio;
-    private JList<String> listaCompanias;
     // End of variables declaration//GEN-END:variables
 }

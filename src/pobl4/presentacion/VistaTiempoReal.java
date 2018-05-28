@@ -1,4 +1,4 @@
-package pobl4.tiempoReal;
+package pobl4.presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,8 +26,11 @@ import org.jfree.data.general.DefaultValueDataset;
 
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import pobl4.tiempoReal.Controlador;
+import pobl4.tiempoReal.Serial;
+import pobl4.tiempoReal.SerialListener;
 
-public class TiempoReal extends JDialog implements SerialPortEventListener {
+public class VistaTiempoReal extends JDialog implements SerialPortEventListener {
 	Controlador controlador;
 	
 	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
@@ -44,7 +47,7 @@ public class TiempoReal extends JDialog implements SerialPortEventListener {
 	
 	double balioa;
 	
-	public TiempoReal (JFrame vista, Controlador control) {
+	public VistaTiempoReal (JFrame vista, Controlador control) {
 		super (vista, "Tiempo real", true);
 		
 		this.controlador = control;

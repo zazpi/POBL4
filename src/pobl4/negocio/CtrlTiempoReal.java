@@ -1,11 +1,13 @@
-package pobl4.tiempoReal;
+package pobl4.negocio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+import pobl4.tiempoReal.SerialListener;
+import pobl4.tiempoReal.TiempoReal;
 
-public class Controlador implements ActionListener, SerialListener {
+public class CtrlTiempoReal implements ActionListener, SerialListener {
 	double consumo;
 	int horas;
 	int minutos;
@@ -16,7 +18,7 @@ public class Controlador implements ActionListener, SerialListener {
 	
 	TiempoReal dialogo;
 		
-	public Controlador () {
+	public CtrlTiempoReal () {
 		this.consumo = 0;
 		this.horas = 0;
 		this.minutos = 0;

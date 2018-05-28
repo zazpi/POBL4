@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pobl4.generalobjectclasses;
+package pobl4.dominio;
 
 import java.io.Serializable;
 
