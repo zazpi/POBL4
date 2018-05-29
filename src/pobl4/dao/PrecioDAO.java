@@ -16,6 +16,6 @@ public interface PrecioDAO {
 	
 	public Precio find(Long id) throws DAOException;
 	public Precio findByTarifa(Long id) throws DAOException;
-	public List<Precio> find() throws DAOException;
+	public List<Precio> list(Long id) throws DAOException;
 	
 }

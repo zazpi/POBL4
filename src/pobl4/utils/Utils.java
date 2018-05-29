@@ -1,6 +1,7 @@
 package pobl4.utils;
 
 import pobl4.dao.UserDAO;
+import pobl4.dominio.User;
 
 /**
  * 
@@ -11,11 +12,12 @@ import pobl4.dao.UserDAO;
 public class Utils {
 
 	
-	public static boolean validateUser(UserDAO userDAO,String username,String password) {
-		if(userDAO.find(username, password)!=null)
-			return true;
+	public static User validateUser(UserDAO userDAO,String username,String password) {
+		User user = userDAO.find(username, password);
+		if(user!=null)
+			return user;
 		
-		return false;
+		return null;
 			
 	}
 	

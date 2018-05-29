@@ -111,5 +111,13 @@ public class User implements Serializable{ //Test class. Esta clase hay que camb
 	             : (obj == this);
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
+				+ ", password=" + password + ", potencia_contratada=" + potencia_contratada + ", tafiraID=" + tafiraID
+				+ "]";
+	}
+
+	
 	
 }

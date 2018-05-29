@@ -23,8 +23,8 @@ public class PrecioDAOJDBC implements PrecioDAO{
 			"SELECT precioID,hora_inicio,hora_fin,mes_inicio,mes_fin,precio,tarifaID FROM precio WHERE precioID = ?";
 	private static final String FIND_BY_TARIFA_ID = 
 			"SELECT precioID,hora_inicio,hora_fin,mes_inicio,mes_fin,precio,tarifaID FROM precio WHERE tarifaID = ?";
-	private static final String SQL_LIST_PRICES = 
-			"SELECT precioID,hora_inicio,hora_fin,mes_inicio,mes_fin,precio,tarifaID FROM precio";
+	private static final String SQL_LIST_PRICES_BY_TARIFA = 
+			"SELECT precioID,hora_inicio,hora_fin,mes_inicio,mes_fin,precio,tarifaID FROM precio WHERE tarifaID = ?";
 	
 	private DAOFactory daoFactory;
 	
@@ -38,8 +38,8 @@ public class PrecioDAOJDBC implements PrecioDAO{
 	}
 	
 	@Override
-	public List<Precio> find() throws DAOException {
-		return find(SQL_LIST_PRICES);
+	public List<Precio> list(Long id) throws DAOException {
+		return list(SQL_LIST_PRICES_BY_TARIFA,id);
 	}
 
 	@Override
@@ -66,12 +66,12 @@ public class PrecioDAOJDBC implements PrecioDAO{
         return precio;
 	}
 	
-	private List<Precio> find(String sql){
+	private List<Precio> list(String sql,Object...values){
 		List<Precio> precio = new ArrayList<>();
 		
 	    try (
 	            Connection connection = daoFactory.getConnection();
-	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_PRICES);
+	            PreparedStatement statement = DAOUtil.prepareStatement(connection,SQL_LIST_PRICES_BY_TARIFA,values);
 	            ResultSet resultSet = statement.executeQuery();
 	        ) {
 	            while (resultSet.next()) {
