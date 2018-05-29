@@ -4,6 +4,7 @@
 package pobl4.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Lucas
@@ -21,7 +22,14 @@ public class Tarifa implements Serializable{
 	private boolean renovable;
 	private int companiaID;
 	
+	private List<Precio> precios;
 
+	public List<Precio> getPrecios() {
+		return precios;
+	}
+	public void setPrecios(List<Precio> precios) {
+		this.precios = precios;
+	}
 	public int getTarifaID() {
 		return id;
 	}
@@ -59,4 +67,11 @@ public class Tarifa implements Serializable{
 	             ? (this.getClass().hashCode() + ((Integer)id).hashCode()) 
 	             : super.hashCode();
 	}
+	@Override
+	public String toString() {
+		return "Tarifa [id=" + id + ", descripcion=" + descripcion + ", renovable=" + renovable + ", companiaID="
+				+ companiaID + ", precios=" + precios + "]";
+	}
+	
+	
 }

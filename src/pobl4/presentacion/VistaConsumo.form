@@ -181,15 +181,13 @@
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A&#xf1;o"/>
+                <Property name="actionCommand" type="java.lang.String" value="Ano"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                     <BevelBorder/>
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAnoActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btHora">
               <Properties>
@@ -203,9 +201,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btHoraActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btDia">
               <Properties>
@@ -213,15 +208,13 @@
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="D&#xed;a"/>
+                <Property name="actionCommand" type="java.lang.String" value="Dia"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                     <BevelBorder/>
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDiaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btMes">
               <Properties>
@@ -235,9 +228,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMesActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btAnadir">
               <Properties>
@@ -245,6 +235,7 @@
                   <Font name="Ubuntu" size="20" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="+"/>
+                <Property name="actionCommand" type="java.lang.String" value="Anadir"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                     <BevelBorder/>
@@ -319,7 +310,7 @@
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="periodoTiempo1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="fechaInicio" min="-2" max="-2" attributes="0"/>
+                      <Component id="fechaInicio" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="fechaFin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -344,7 +335,7 @@
                           <Component id="labelMedia" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="mediaDia" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -390,9 +381,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fechaInicioActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
