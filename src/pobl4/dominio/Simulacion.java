@@ -26,13 +26,13 @@ public class Simulacion {
             resetCalculos();
             return;
         }
-        Consumo consumoPunta = new Consumo();
-        Consumo consumoValle = new Consumo();
-        Consumo consumoSuperValle = new Consumo();
+        Consumo consumoPunta = new Consumo(1,16,punta);
+        Consumo consumoValle = new Consumo(1,12,valle);
+        Consumo consumoSuperValle = new Consumo(1,3,supervalle);
         
-        porEnergia = punta * getPrecio(tarifa,consumoPunta).getPrecio();
-        porEnergia += valle * getPrecio(tarifa,consumoValle).getPrecio();
-        porEnergia += supervalle * getPrecio(tarifa,consumoSuperValle).getPrecio();
+        porEnergia = getCoste(tarifa,consumoPunta);
+        porEnergia += getCoste(tarifa,consumoValle);
+        porEnergia += getCoste(tarifa,consumoSuperValle);
         
         porPotencia = 38 * potencia;
         porImpuestos = porEnergia + porPotencia * 0.0511269;
@@ -46,15 +46,15 @@ public class Simulacion {
         porIva = 0;
     }
     
-    public Precio getPrecio(Tarifa tarifa, Consumo consumo){
-        List<Precio> precios = null;
+    public double getCoste(Tarifa tarifa, Consumo consumo){
+        List<Precio> precios = tarifa.getPrecios();
         Precio precio = null;
         for(Precio pr : precios){
             if(!checkPeriodo(consumo.getMes(),pr.getMes_inicio(),pr.getMes_fin())) continue;
             if(!checkPeriodo(consumo.getHora(),pr.getHora_inicio(),pr.getHora_fin())) continue;
             precio = pr;
         }
-        return precio;
+        return precio.getPrecio() * consumo.getConsumo();
     }
     
     public boolean checkPeriodo(int valor, int inicio, int fin){
