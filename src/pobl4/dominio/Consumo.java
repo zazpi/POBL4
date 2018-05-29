@@ -23,6 +23,15 @@ public class Consumo implements Serializable{
 	private int hora;
 	private double consumo;
 	private int usuarioID;
+        
+        public Consumo(){
+            
+        }
+        public Consumo(int mes, int hora, double consumo){
+            this.mes = mes;
+            this.hora = hora;
+            this.consumo = consumo;
+        }
 	
 
 	public int getConsumoID() {
