@@ -14,7 +14,7 @@ import pobl4.daoexception.DAOException;
  */
 public interface CompaniaDAO {
 	
-	public List<Compania> find() throws DAOException;
+	public List<Compania> list() throws DAOException;
 	public Compania find(Long id) throws DAOException;
 
 }

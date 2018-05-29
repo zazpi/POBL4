@@ -41,8 +41,8 @@ public class CompaniaDAOJDBC implements CompaniaDAO {
 	}
 
 	@Override
-	public List<Compania> find() throws DAOException {
-		return find(SQL_LIST_COMPANYS);
+	public List<Compania> list() throws DAOException {
+		return list(SQL_LIST_COMPANYS);
 	}
 	
 	private Compania find(String sql,Object...values) {
@@ -64,7 +64,7 @@ public class CompaniaDAOJDBC implements CompaniaDAO {
         return compañia;
 	}
 	
-	private List<Compania> find(String sql){
+	private List<Compania> list(String sql){
 		List<Compania> compañias = new ArrayList<>();
 		
 	    try (

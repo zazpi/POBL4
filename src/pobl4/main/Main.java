@@ -3,6 +3,8 @@
  */
 package pobl4.main;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
 import pobl4.dao.CompaniaDAO;
@@ -31,6 +33,8 @@ public class Main extends JFrame{
 	CompaniaDAO companiaDAO;
 	User user;
 	Tarifa tarifa;
+	List<Compania> listaCompania;
+	
 	Compania compania;
 	
 	Main(){
@@ -46,12 +50,17 @@ public class Main extends JFrame{
 			tarifa = user.getTarifa();
 			tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
 			compania = companiaDAO.find(new Long(tarifa.getCompaniaID()));
+			compania.setTarifas(tarifaDAO.list());
+			listaCompania = companiaDAO.list();
 		}
 		
 		System.err.println(user.toString());
 		System.err.println(tarifa.toString());
 		System.err.println(tarifa.getPrecios().toString());
 		System.err.println(compania.toString());
+		System.err.println(listaCompania.toString());
+		System.err.println(compania.getTarifas().toString());
+		
 	}
 	/**
 	 * @param args

@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import pobl4.daoexception.DAOException;
+import pobl4.dominio.Precio;
 import pobl4.dominio.Tarifa;
 
 /**
@@ -23,6 +26,8 @@ public class TarifaDAOJDBC implements TarifaDAO{
 			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa WHERE compañiaID = ?";
 	private static final String SQL_INSERT = 
 			"INSERT INTO tarifa(descripcion,renovable,compañia) VALUES(?,?,?)";
+	private static final String SQL_LIST_TARIFA =
+			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa";
 	
 	private DAOFactory daoFactory;
 	
@@ -39,6 +44,28 @@ public class TarifaDAOJDBC implements TarifaDAO{
 	@Override
 	public Tarifa findByCompany(Long id) throws DAOException {
 		return find(FIND_BY_COMPANY_ID,id);
+	}
+	
+	@Override
+	public List<Tarifa> list() {
+		return list(SQL_LIST_TARIFA);
+	}
+	
+	private List<Tarifa> list(String sql){
+		List<Tarifa> tarifa = new ArrayList<>();
+		
+	    try (
+	            Connection connection = daoFactory.getConnection();
+	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_TARIFA);
+	            ResultSet resultSet = statement.executeQuery();
+	        ) {
+	            while (resultSet.next()) {
+	                tarifa.add(map(resultSet));
+	            }
+	        } catch (SQLException e) {
+	            throw new DAOException(e);
+	        }
+	    return tarifa;
 	}
 	
 	private Tarifa find(String sql, Object...values) {
@@ -95,8 +122,5 @@ public class TarifaDAOJDBC implements TarifaDAO{
 		tarifa.setCompaniaID(resultSet.getInt("compañiaID"));
 		return tarifa;
 	}
-
-
-
 
 }
