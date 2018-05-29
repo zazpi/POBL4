@@ -5,18 +5,26 @@
  */
 package pobl4.presentacion;
 
+import java.util.List;
+import pobl4.dominio.Consumo;
+import pobl4.negocio.CtrlConsumo;
+
 /**
  *
  * @author asier
  */
 public class VistaConsumo extends javax.swing.JDialog {
-
+    
+    CtrlConsumo controlador;
     /**
      * Creates new form VistaConsumo
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo) {
         super(parent, modal);
         initComponents();
+        controlador = new CtrlConsumo(this,listConsumo);
+        addBtListeners();
+        
     }
 
     /**
@@ -85,42 +93,25 @@ public class VistaConsumo extends javax.swing.JDialog {
 
         btAno.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         btAno.setText("Año");
+        btAno.setActionCommand("Ano");
         btAno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAnoActionPerformed(evt);
-            }
-        });
 
         btHora.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         btHora.setText("Hora");
         btHora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btHora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btHoraActionPerformed(evt);
-            }
-        });
 
         btDia.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         btDia.setText("Día");
+        btDia.setActionCommand("Dia");
         btDia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDiaActionPerformed(evt);
-            }
-        });
 
         btMes.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         btMes.setText("Mes");
         btMes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMesActionPerformed(evt);
-            }
-        });
 
         btAnadir.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
         btAnadir.setText("+");
+        btAnadir.setActionCommand("Anadir");
         btAnadir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout panelArribaLayout = new javax.swing.GroupLayout(panelArriba);
@@ -168,11 +159,6 @@ public class VistaConsumo extends javax.swing.JDialog {
 
         fechaInicio.setMaximumRowCount(24);
         fechaInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        fechaInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaInicioActionPerformed(evt);
-            }
-        });
 
         fechaFin.setMaximumRowCount(24);
         fechaFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -247,7 +233,7 @@ public class VistaConsumo extends javax.swing.JDialog {
                 .addGap(53, 53, 53)
                 .addComponent(periodoTiempo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -268,7 +254,7 @@ public class VistaConsumo extends javax.swing.JDialog {
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMedia)
                     .addComponent(mediaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -329,68 +315,14 @@ public class VistaConsumo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAnoActionPerformed
-
-    private void btHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btHoraActionPerformed
-
-    private void btDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btDiaActionPerformed
-
-    private void btMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btMesActionPerformed
-
-    private void fechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VistaConsumo dialog = new VistaConsumo(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    public void addBtListeners(){
+        btAnadir.addActionListener(controlador);
+        btAno.addActionListener(controlador);
+        btDia.addActionListener(controlador);
+        btHora.addActionListener(controlador);
+        btMes.addActionListener(controlador);
+        
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
     private javax.swing.JButton btAno;

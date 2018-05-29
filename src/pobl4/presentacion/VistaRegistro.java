@@ -5,18 +5,28 @@
  */
 package pobl4.presentacion;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
+import pobl4.dao.UserDAO;
+import pobl4.negocio.CtrlRegistro;
+
 /**
  *
  * @author asier
  */
 public class VistaRegistro extends javax.swing.JDialog {
 
+	CtrlRegistro controlador;
     /**
      * Creates new form VistaRegistro
      */
-    public VistaRegistro(java.awt.Frame parent, boolean modal) {
+    public VistaRegistro(JDialog parent, boolean modal,UserDAO userDAO) {
         super(parent, modal);
         initComponents();
+        controlador = new CtrlRegistro(this, userDAO);
+        addListeners();
+        this.setVisible(true);
     }
 
     /**
@@ -118,8 +128,10 @@ public class VistaRegistro extends javax.swing.JDialog {
         });
 
         btRegistrarse.setText("Registrarse");
+        btRegistrarse.setActionCommand("registro");
 
         btCancelar.setText("Cancelar");
+        btCancelar.setActionCommand("cancel");
 
         labelNombre1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         labelNombre1.setText("Compañía: ");
@@ -213,7 +225,7 @@ public class VistaRegistro extends javax.swing.JDialog {
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btRegistrarse)
                     .addComponent(btCancelar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -265,49 +277,43 @@ public class VistaRegistro extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txRContrasenaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VistaRegistro dialog = new VistaRegistro(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void addListeners() {
+    	btRegistrarse.addActionListener(controlador);
+    	btCancelar.addActionListener(controlador);
     }
+    
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public String getjComboBox1() {
+		return jComboBox1.getSelectedItem().toString();
+	}
+
+	public String getjComboBox2() {
+		return jComboBox2.getSelectedItem().toString();
+	}
+
+	public javax.swing.JTextField getTxApellido() {
+		return txApellido;
+	}
+
+	public javax.swing.JPasswordField getTxContrasena() {
+		return txContrasena;
+	}
+
+	public javax.swing.JTextField getTxNombre() {
+		return txNombre;
+	}
+
+	public javax.swing.JTextField getTxNombreUsuario() {
+		return txNombreUsuario;
+	}
+
+	public javax.swing.JPasswordField getTxRContrasena() {
+		return txRContrasena;
+	}
+
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btRegistrarse;
     private javax.swing.JComboBox<String> jComboBox1;

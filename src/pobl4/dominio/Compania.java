@@ -41,6 +41,11 @@ public class Compania implements Serializable{
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
+	@Override
+	public String toString() {
+		return "Compania [id=" + id + ", nombre=" + nombre + "]";
+	}
+	
 	
 	
 

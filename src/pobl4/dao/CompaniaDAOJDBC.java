@@ -24,7 +24,7 @@ public class CompaniaDAOJDBC implements CompaniaDAO {
 	private static final String SQL_LIST_COMPANYS = 
 			"SELECT compañiaID,nombre FROM compañia";
 	private static final String FIND_BY_ID =
-			"SELECT compañiaID,nombre FROM compañia WHERE id = ?";
+			"SELECT compañiaID,nombre FROM compañia WHERE compañiaID = ?";
 	
 	private DAOFactory daoFactory;
 	
