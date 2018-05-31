@@ -2,42 +2,17 @@ package pobl4.dominio;
 
 import java.util.List;
 
-/**
- *
- * @author galaipa
- */
-public class Simulacion {
-    // Datos introducidos por el usuario
+public abstract class Simulacion {
+    // Datos del usuario
     Compania compania;
-    private Tarifa tarifa;
-    private double potencia;
-    double punta,valle,supervalle;
+    Tarifa tarifa;
+    double potencia;
     int dias;
     
     // Datos calculados
     double porEnergia, porPotencia, porImpuestos, porIva;
     
-    public Simulacion(){
-        
-    }
-    
-    public void actualizarCalculos(){
-        if(tarifa == null){
-            resetCalculos();
-            return;
-        }
-        Consumo consumoPunta = new Consumo(1,16,punta);
-        Consumo consumoValle = new Consumo(1,12,valle);
-        Consumo consumoSuperValle = new Consumo(1,3,supervalle);
-        
-        porEnergia = getCoste(tarifa,consumoPunta);
-        porEnergia += getCoste(tarifa,consumoValle);
-        porEnergia += getCoste(tarifa,consumoSuperValle);
-        
-        porPotencia = 38 * potencia;
-        porImpuestos = porEnergia + porPotencia * 0.0511269;
-        porIva = (porEnergia + porImpuestos + porPotencia) * 0.21;
-    }
+    public abstract void calcularCoste();
     
     public void resetCalculos(){
         porEnergia = 0;
@@ -71,7 +46,7 @@ public class Simulacion {
 
     public void setCompania(Compania compania) {
         this.compania = compania;
-        actualizarCalculos();
+        calcularCoste();
     }
 
     public Tarifa getTarifa() {
@@ -80,7 +55,7 @@ public class Simulacion {
 
     public void setTarifa(Tarifa tarifa) {
         this.tarifa = tarifa;
-        actualizarCalculos();
+        calcularCoste();
     }
 
     public double getPotencia() {
@@ -89,34 +64,7 @@ public class Simulacion {
 
     public void setPotencia(double potencia) {
         this.potencia = potencia;
-        actualizarCalculos();
-    }
-
-    public double getPunta() {
-        return punta;
-    }
-
-    public void setPunta(double punta) {
-        this.punta = punta;
-        actualizarCalculos();
-    }
-
-    public double getValle() {
-        return valle;
-    }
-
-    public void setValle(double valle) {
-        this.valle = valle;
-        actualizarCalculos();
-    }
-
-    public double getSupervalle() {
-        return supervalle;
-    }
-
-    public void setSupervalle(double supervalle) {
-        this.supervalle = supervalle;
-        actualizarCalculos();
+        calcularCoste();
     }
 
     public int getDias() {
@@ -125,7 +73,7 @@ public class Simulacion {
 
     public void setDias(int dias) {
         this.dias = dias;
-        actualizarCalculos();
+        calcularCoste();
     }
 
     public double getPorEnergia() {
@@ -143,8 +91,5 @@ public class Simulacion {
     public double getPorIva() {
         return porIva;
     }
-    
-    
-    
-    
+
 }
