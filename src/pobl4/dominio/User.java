@@ -10,7 +10,7 @@ import java.util.List;
  * @author Lucas Sousa
  *
  */
-public class User implements Serializable{ //Test class. Esta clase hay que cambiar.
+public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -110,14 +110,5 @@ public class User implements Serializable{ //Test class. Esta clase hay que camb
 	             ? ((Integer) id).equals(((User) obj).id)
 	             : (obj == this);
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
-				+ ", password=" + password + ", potencia_contratada=" + potencia_contratada + ", tafiraID=" + tafiraID
-				+ "]";
-	}
-
-	
 	
 }
