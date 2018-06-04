@@ -23,7 +23,14 @@ public class Tarifa implements Serializable{
 	private int companiaID;
 	
 	private List<Precio> precios;
+	private Compania compania;
 
+	public Compania getCompania() {
+		return compania;
+	}
+	public void setCompania(Compania compania) {
+		this.compania = compania;
+	}
 	public List<Precio> getPrecios() {
 		return precios;
 	}
@@ -69,8 +76,7 @@ public class Tarifa implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Tarifa [id=" + id + ", descripcion=" + descripcion + ", renovable=" + renovable + ", companiaID="
-				+ companiaID + ", precios=" + precios + "]";
+		return descripcion;
 	}
 	
 	
