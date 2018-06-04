@@ -17,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -26,9 +27,11 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import pobl4.dominio.Consumo;
 import pobl4.dominio.Simulacion;
 import pobl4.negocio.CtrlComparador;
-import popbl4.render.RenderComparador;
+import pobl4.render.RenderComparador;
+import pobl4.utils.Utils;
 
 /**
  *
@@ -42,12 +45,21 @@ public class VistaComparador extends javax.swing.JDialog {
     JList <Simulacion> listaSimulaciones;
     RenderComparador render;
     CtrlComparador controlador;
+    List<Consumo>listaConsumos;
     
-    public VistaComparador(java.awt.Frame parent, boolean modal) {
+    public VistaComparador(JFrame parent, boolean modal, CtrlComparador controlador, List<Consumo>listaConsumos) {
         super(parent, modal);
         render = new RenderComparador();
+        this.listaConsumos = listaConsumos;
+        this.controlador = controlador;
+        controlador.setVista(this);
         initComponents();
+        DefaultComboBoxModel modeloAno = new DefaultComboBoxModel(Utils.getListaAnos(listaConsumos).toArray(new Integer[0]));
+        fechaAño.setModel(modeloAno);
+        DefaultComboBoxModel modeloMes = new DefaultComboBoxModel(Utils.getListaMeses(listaConsumos).toArray(new String[0]));
+        fechaMes.setModel(modeloMes); 
         addListeners();
+        this.setVisible(true);
     }
     
     public void addListeners(){
@@ -66,7 +78,7 @@ public class VistaComparador extends javax.swing.JDialog {
         bt.setActionCommand(actionCommand);
     }
 
-    public JComboBox<String> getFechaAño() {
+    public JComboBox<Integer> getFechaAño() {
         return fechaAño;
     }
 
@@ -152,10 +164,8 @@ public class VistaComparador extends javax.swing.JDialog {
         lbTiempo.setText("Tiempo");
 
         fechaAño.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        fechaAño.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         fechaMes.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        fechaMes.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tipoTarifa.setBackground(new Color(1, 1, 1));
         tipoTarifa.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
@@ -295,8 +305,8 @@ public class VistaComparador extends javax.swing.JDialog {
     JButton btMes;
     JCheckBox discriminacion1;
     JCheckBox discriminacion2;
-    private JComboBox<String> fechaAño;
-    private JComboBox<String> fechaMes;
+    JComboBox<Integer> fechaAño;
+    JComboBox<String> fechaMes;
     JScrollPane panelLista;
     JCheckBox sinDiscriminacion;
     JCheckBox soloRenovable;

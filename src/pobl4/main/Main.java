@@ -17,6 +17,8 @@ import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
+import pobl4.negocio.CtrlComparador;
+import pobl4.presentacion.VistaComparador;
 import pobl4.presentacion.VistaConsumo;
 import pobl4.presentacion.VistaLogin;
 
@@ -89,7 +91,9 @@ public class Main extends JFrame{
 		this.setSize(1000,768);
 		this.setLocation(0, 0);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		VistaConsumo consumo = new VistaConsumo(this, true, user.getConsumos());
+                CtrlComparador controlador = new CtrlComparador(listaCompania, user.getConsumos());
+		VistaComparador vista = new VistaComparador(this, true,controlador, user.getConsumos());
+               
 	}
 	
 	public DAOFactory getDAO() {
@@ -106,6 +110,7 @@ public class Main extends JFrame{
 		main.loadUserData();
 		main.mainFrameSetup();
 		System.err.println("Everything ok chief!");
+                
 	}
 
 	

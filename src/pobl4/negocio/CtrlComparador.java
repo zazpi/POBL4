@@ -14,7 +14,7 @@ import java.util.List;
 import pobl4.dominio.Compania;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.Simulacion;
-import pobl4.dominio.SimulacionAño;
+import pobl4.dominio.SimulacionAno;
 import pobl4.dominio.SimulacionMes;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
@@ -31,8 +31,7 @@ public class CtrlComparador implements ItemListener, ActionListener{
     List<Compania> listaCompanias;
     List<Consumo> listaConsumos;
     
-    public CtrlComparador(VistaComparador vista, List<Compania> listaCompanias, List<Consumo> listaConsumos){
-        this.vista = vista;
+    public CtrlComparador( List<Compania> listaCompanias, List<Consumo> listaConsumos){
         this.listaCompanias = listaCompanias;
         this.listaConsumos = listaConsumos;
     }
@@ -43,9 +42,9 @@ public class CtrlComparador implements ItemListener, ActionListener{
         for(Compania c : listaCompanias){
             for(Tarifa t : c.getTarifas()){
                 if(vista.getFechaMes().isEnabled()){
-                    listaSimulaciones.add(new SimulacionMes(listaConsumos, t, 2017, 6));
+                    listaSimulaciones.add(new SimulacionMes(listaConsumos,c, t, 2017, 6));
                 }else{
-                    listaSimulaciones.add(new SimulacionAño(listaConsumos, t, 2017));
+                    listaSimulaciones.add(new SimulacionAno(listaConsumos,c, t, 2017));
                 }
             }
         }
@@ -65,15 +64,20 @@ public class CtrlComparador implements ItemListener, ActionListener{
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case VistaComparador.BT_ANO:
-                vista.getFechaMes().setEnabled(true);
+                vista.getFechaMes().setEnabled(false);
                 break;
             case VistaComparador.BT_MES:
-                vista.getFechaMes().setEnabled(false);
+                vista.getFechaMes().setEnabled(true);
                 break;
             default:
                 break;
         }
+        generarSimulaciones();
        
+    }
+
+    public void setVista(VistaComparador vista) {
+        this.vista = vista;
     }
     
     

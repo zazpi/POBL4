@@ -1,6 +1,9 @@
 package pobl4.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import pobl4.dao.UserDAO;
+import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
 
 /**
@@ -51,5 +54,33 @@ public class Utils {
 			return "Not assigned";
 		}
 	}
+        
+        public static List<Integer>getListaAnos(List<Consumo>listaConsumos){
+            
+            List<Integer>listaAnos;
+            listaAnos = new ArrayList<>();
+            
+            for(Consumo c : listaConsumos){
+                if(!listaAnos.contains(c.getAño())){
+                    listaAnos.add(c.getAño());
+                }
+            }
+            return listaAnos;
+        }
+        
+        public static List<String>getListaMeses(List<Consumo>listaConsumos){
+            
+            List<String>listaMeses;
+            listaMeses = new ArrayList<>();
+            
+            for(Consumo c : listaConsumos){
+                if(!listaMeses.contains(translateMonthToString(c.getMes()))){
+                    listaMeses.add(translateMonthToString(c.getMes()));
+                }
+            }
+            return listaMeses;
+        }
+        
+        
 	
 }
