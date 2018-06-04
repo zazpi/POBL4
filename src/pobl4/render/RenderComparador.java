@@ -31,7 +31,7 @@ public class RenderComparador implements ListCellRenderer<Simulacion>{
     @Override
     public Component getListCellRendererComponent(JList<? extends Simulacion> list, Simulacion value, int index, boolean isSelected, boolean cellHasFocus) {
         JPanel panel = new JPanel(new BorderLayout(10,10));
-		panel.add(new JLabel(new ImageIcon("Companias/iberdrola.png")),BorderLayout.WEST);
+		panel.add(new JLabel(new ImageIcon("Companias/gasnatural.png")),BorderLayout.WEST);
 		panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.red),
 				BorderFactory.createEmptyBorder(10,10,10,10)));
 
