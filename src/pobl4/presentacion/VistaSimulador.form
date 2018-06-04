@@ -236,7 +236,7 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="compania">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;(companias.toArray(new Compania[0]))"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Compania&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
@@ -275,9 +275,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txPotenciaContratada">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="potenciaContratada"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
@@ -294,25 +291,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txPunta">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="punta"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txValle">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="valle"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txSuperValle">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="superValle"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
@@ -334,9 +322,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txDias">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="d&#xed;as"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
@@ -345,6 +330,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ayuda"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="btAnadir">
               <Properties>
