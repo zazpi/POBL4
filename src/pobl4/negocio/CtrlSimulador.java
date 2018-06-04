@@ -45,13 +45,13 @@ public class CtrlSimulador implements ItemListener, ActionListener{
                 modelo.setDias(vista.getDias());
                 break;
             case VistaSimulador.TXT_VALLE:
-                modelo.setValle(vista.getValle());
+               // modelo.setValle(vista.getValle());
                 break;
             case VistaSimulador.TXT_SUPERVALLE:
-                modelo.setSupervalle(vista.getSuperValle());
+               // modelo.setSupervalle(vista.getSuperValle());
                 break;
             case VistaSimulador.TXT_PUNTA:
-                modelo.setPunta(vista.getPunta());
+              //  modelo.setPunta(vista.getPunta());
                 break;
             default:
                 break;

@@ -3,6 +3,7 @@ package pobl4.presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -33,21 +34,25 @@ public class VistaSimulador extends javax.swing.JDialog {
     
     CtrlSimulador controlador;
     User usuario;
+    List<Compania> companias;
     Simulacion modelo;
     
-    public VistaSimulador(JFrame parent, boolean modal,CtrlSimulador controlador,User usuario,Simulacion modelo) {
+    public VistaSimulador(JFrame parent, boolean modal,CtrlSimulador controlador,User usuario,Simulacion modelo,List<Compania> companias) {
         super(parent, modal);
         this.controlador = controlador;
         this.usuario = usuario;
         this.modelo = modelo;
+        this.companias = companias;
         initComponents();
+        addListeners();
+        llenarDatos();
     }
     
     public void llenarDatos(){
-        
+
     }
     
-    public void addControllers(){
+    public void addListeners(){
         compania.addItemListener(controlador);
         tarifa.addItemListener(controlador);
         addListener(txValle,TXT_VALLE);
