@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -313,6 +314,7 @@ public class VistaComparador extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void actualizarLista(List<Simulacion> listaSimulacion) {
+        Collections.sort(listaSimulacion);
         listaSimulaciones = new JList(listaSimulacion.toArray(new Simulacion[0]));
         listaSimulaciones.setCellRenderer(render);
         panelLista.setViewportView(listaSimulaciones);

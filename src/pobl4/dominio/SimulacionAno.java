@@ -17,6 +17,7 @@ public class SimulacionAno extends Simulacion{
         this.tarifa = tarifa;
         this.compania = compania;
         this.año = año;
+        calcularCoste();
     }
 
     @Override
@@ -24,9 +25,10 @@ public class SimulacionAno extends Simulacion{
        
         for (Consumo consumo : listaConsumos){
             if(consumo.getAño() == año){
-                porEnergia = porEnergia + getCoste(tarifa, consumo);
+                porEnergia += getCoste(tarifa, consumo);
             }
         }
+        total = porEnergia;
         
     }
     

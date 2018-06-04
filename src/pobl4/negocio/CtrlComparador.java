@@ -19,6 +19,7 @@ import pobl4.dominio.SimulacionMes;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
 import pobl4.presentacion.VistaComparador;
+import pobl4.utils.Utils;
 
 /**
  *
@@ -42,9 +43,10 @@ public class CtrlComparador implements ItemListener, ActionListener{
         for(Compania c : listaCompanias){
             for(Tarifa t : c.getTarifas()){
                 if(vista.getFechaMes().isEnabled()){
-                    listaSimulaciones.add(new SimulacionMes(listaConsumos,c, t, 2017, 6));
+                    listaSimulaciones.add(new SimulacionMes(listaConsumos,c, t, (Integer)vista.getFechaAño().getSelectedItem(), 
+                                                            Utils.translateStringToMonth((String)vista.getFechaMes().getSelectedItem())));
                 }else{
-                    listaSimulaciones.add(new SimulacionAno(listaConsumos,c, t, 2017));
+                    listaSimulaciones.add(new SimulacionAno(listaConsumos,c, t,(Integer)vista.getFechaAño().getSelectedItem()));
                 }
             }
         }
@@ -53,11 +55,7 @@ public class CtrlComparador implements ItemListener, ActionListener{
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-       if(e.getStateChange() == ItemEvent.SELECTED){
-            Object item = e.getItem();
-            
-                
-        }
+      generarSimulaciones();
     }
 
     @Override

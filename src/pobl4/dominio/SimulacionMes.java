@@ -14,6 +14,7 @@ public class SimulacionMes extends Simulacion{
         this.compania = compania;
         this.año = año;
         this.mes = mes;
+        calcularCoste();
     }
 
     @Override
@@ -21,10 +22,10 @@ public class SimulacionMes extends Simulacion{
         
         for (Consumo consumo : listaConsumos){
             if(consumo.getAño() == año && consumo.getMes() == mes){
-                porEnergia = porEnergia + getCoste(tarifa, consumo);
+                porEnergia += getCoste(tarifa, consumo);
             }
         }
-       
+        total = porEnergia; 
     }
     
 }
