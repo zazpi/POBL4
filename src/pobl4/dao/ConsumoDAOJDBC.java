@@ -28,6 +28,8 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			"INSERT INTO consumo (año,mes,dia,hora,consumo,usuarioID) VALUES(?,?,?,?,?)";
 	private static final String SQL_LIST_CONSUMES =
 			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo";
+	private static final String SQL_LIST_CONSUMES_BY_USER_ID =
+			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ?";
 
 	private DAOFactory daoFactory;
 	
@@ -46,8 +48,8 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	}
 	
 	@Override
-	public List<Consumo> find() throws DAOException {
-		return find(SQL_LIST_CONSUMES);
+	public List<Consumo> list(Long id) throws DAOException {
+		return list(SQL_LIST_CONSUMES_BY_USER_ID,id);
 	}
 
 	@Override
@@ -95,12 +97,12 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
         return consumo;
 	}
 	
-	private List<Consumo> find(String sql){
+	private List<Consumo> list(String sql,Object...values){
 		List<Consumo> consumo = new ArrayList<>();
 		
 	    try (
 	            Connection connection = daoFactory.getConnection();
-	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_CONSUMES);
+	            PreparedStatement statement = DAOUtil.prepareStatement(connection,SQL_LIST_CONSUMES_BY_USER_ID,values);
 	            ResultSet resultSet = statement.executeQuery();
 	        ) {
 	            while (resultSet.next()) {
@@ -111,6 +113,8 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	        }
 	    return consumo;
 	}
+	
+	
 
 	private Consumo map(ResultSet resultSet) throws SQLException {
 		Consumo consumo = new Consumo();

@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import pobl4.dao.UserDAO;
+import pobl4.dominio.Compania;
+import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
 import pobl4.presentacion.VistaRegistro;
 
@@ -15,6 +17,7 @@ public class CtrlRegistro implements ActionListener{
 	
 	VistaRegistro vista;
 	UserDAO userDAO;
+	
 	public CtrlRegistro(VistaRegistro vista, UserDAO userDAO) {
 		this.vista = vista;
 		this.userDAO = userDAO;
@@ -50,8 +53,8 @@ public class CtrlRegistro implements ActionListener{
 				user.setApellido(vista.getTxApellido().getText());
 				user.setUsername(vista.getTxNombreUsuario().getText());
 				user.setPassword(new String(vista.getTxRContrasena().getPassword()));
-				user.setPotencia_contratada(20.3);
-				user.setTafiraID(1);
+				user.setPotencia_contratada(vista.getPotenciaContrata());
+				user.setTafiraID(vista.getSelectedTarifa());
 				
 				userDAO.create(user);
 				JOptionPane.showMessageDialog(vista, "Registration Complete!", "Registration Success", JOptionPane.INFORMATION_MESSAGE);

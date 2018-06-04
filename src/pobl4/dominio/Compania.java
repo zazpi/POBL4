@@ -52,7 +52,7 @@ public class Compania implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Compania [id=" + id + ", nombre=" + nombre + "]";
+		return nombre;
 	}
 	
 	
