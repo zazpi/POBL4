@@ -3,6 +3,7 @@
  */
 package pobl4.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -14,9 +15,13 @@ import pobl4.dao.PrecioDAO;
 import pobl4.dao.TarifaDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
+import pobl4.dominio.Precio;
+import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
+import pobl4.negocio.CtrlSimulador;
 import pobl4.presentacion.VistaLogin;
+import pobl4.presentacion.VistaSimulador;
 
 /**
  * @author Lucas
@@ -34,6 +39,7 @@ public class Main extends JFrame{
 	User user;
 	Tarifa tarifa;
 	List<Compania> listaCompania;
+    List<Tarifa> listaTarifas;
 	
 	Compania compania;
 	
@@ -52,6 +58,21 @@ public class Main extends JFrame{
 			compania = companiaDAO.find(new Long(tarifa.getCompaniaID()));
 			compania.setTarifas(tarifaDAO.list());
 			listaCompania = companiaDAO.list();
+            listaTarifas = tarifaDAO.list();
+                        for(Compania comp : listaCompania){
+                            List<Tarifa> tarifas = new ArrayList<>();
+                            for(Tarifa tarifa : listaTarifas){
+                                if(tarifa.getCompaniaID() == comp.getId())
+                                    tarifas.add(tarifa);
+                                tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
+                            }
+                            comp.setTarifas(tarifas);
+                            
+                        }
+                        
+                        SimulacionEstatica modelo = new SimulacionEstatica();
+                        CtrlSimulador controlador = new CtrlSimulador(modelo);     
+                        VistaSimulador vista = new VistaSimulador(this,true,controlador,user,modelo,listaCompania);
 		}
 		
 		System.err.println(user.toString());
