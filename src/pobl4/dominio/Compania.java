@@ -4,6 +4,7 @@
 package pobl4.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author root
@@ -19,6 +20,14 @@ public class Compania implements Serializable{
 	private int id;
 	private String nombre;
 	
+	private List<Tarifa> tarifas;
+	
+	public List<Tarifa> getTarifas() {
+		return tarifas;
+	}
+	public void setTarifas(List<Tarifa> tarifas) {
+		this.tarifas = tarifas;
+	}
 	public int getId() {
 		return id;
 	}
@@ -41,6 +50,11 @@ public class Compania implements Serializable{
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
+	@Override
+	public String toString() {
+		return "Compania [id=" + id + ", nombre=" + nombre + "]";
+	}
+	
 	
 	
 

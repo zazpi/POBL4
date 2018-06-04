@@ -246,7 +246,7 @@
                           <Component id="btRegistrarse" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -348,11 +348,13 @@
             <Component class="javax.swing.JButton" name="btRegistrarse">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrarse"/>
+                <Property name="actionCommand" type="java.lang.String" value="registro"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btCancelar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
+                <Property name="actionCommand" type="java.lang.String" value="cancel"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelNombre1">

@@ -75,5 +75,12 @@ public class Precio implements Serializable{
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
+	@Override
+	public String toString() {
+		return "Precio [id=" + id + ", hora_inicio=" + hora_inicio + ", hora_fin=" + hora_fin + ", mes_inicio="
+				+ mes_inicio + ", mes_fin=" + mes_fin + ", precio=" + precio + ", tarifaID=" + tarifaID + "]";
+	}
+	
+	
 
 }
