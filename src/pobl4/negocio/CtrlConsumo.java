@@ -19,24 +19,25 @@ public class CtrlConsumo implements ActionListener{
     
     List<Consumo> listConsumo;
     VistaConsumo vista;
+    Estados estado;
     
     public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo){
         this.vista = vista;
         this.listConsumo = listConsumo;
     }
     
-    
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){
-            case "Ano":
-            case "Mes":
-            case "Dia":
-            case "Hora":
-            case "Anadir":
-            default:
-                break;
-        }
+    	if(e.getActionCommand().equals("Ano")) {
+    		estado = new EstadoAño();
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));
+    	}
+    	
+    	else if (e.getActionCommand().equals("Mes")) {
+    		estado = new EstadoMes();
+    		int [] params = {2010,1};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo,params));
+    	}
     }
     
 }

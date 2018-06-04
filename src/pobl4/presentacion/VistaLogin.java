@@ -8,6 +8,7 @@ package pobl4.presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -21,6 +22,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 
 import pobl4.dao.UserDAO;
+import pobl4.dominio.Compania;
+import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
 import pobl4.negocio.CtrlLogin;
 
@@ -31,15 +34,27 @@ import pobl4.negocio.CtrlLogin;
 public class VistaLogin extends javax.swing.JDialog {
     CtrlLogin controlador;
     User user;
+    List<Compania> listaCompania;
+    List<Tarifa> listaTarifas;
     /**
      * Creates new form VistaLogin1
      */
-    public VistaLogin(java.awt.Frame parent, boolean modal,UserDAO userDAO) {
+    public VistaLogin(java.awt.Frame parent, boolean modal,UserDAO userDAO,List<Compania> listaCompania,List<Tarifa> listaTarifas) {
         super(parent, modal);
         initComponents();
+        this.listaCompania = listaCompania;
+        this.listaTarifas = listaTarifas;
         controlador = new CtrlLogin(this,userDAO);
         addListeners();
         this.setVisible(true);
+    }
+    
+    public List<Compania> getListCompanias(){
+    	return listaCompania;
+    }
+    
+    public List<Tarifa> getListTarifas(){
+    	return listaTarifas;
     }
 
     /**
@@ -226,7 +241,7 @@ public class VistaLogin extends javax.swing.JDialog {
         this.dispose();
     }
     
-    public User getSuccess (){
+    public User getUser (){
         return user;
     }
         

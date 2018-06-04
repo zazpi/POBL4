@@ -5,9 +5,15 @@
  */
 package pobl4.presentacion;
 
+import java.awt.BorderLayout;
 import java.util.List;
+import java.util.Map;
+
+import org.jfree.chart.ChartPanel;
+
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
+import pobl4.negocio.GraficoFactory;
 
 /**
  *
@@ -16,17 +22,23 @@ import pobl4.negocio.CtrlConsumo;
 public class VistaConsumo extends javax.swing.JDialog {
     
     CtrlConsumo controlador;
+    List<Consumo> listaConsumos;
     /**
      * Creates new form VistaConsumo
      */
     public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo) {
         super(parent, modal);
         initComponents();
+        this.listaConsumos = listConsumo;
         controlador = new CtrlConsumo(this,listConsumo);
         addBtListeners();
+        this.setVisible(true);
         
     }
 
+    public List<Consumo> getConsumos(){
+    	return listaConsumos;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -323,6 +335,14 @@ public class VistaConsumo extends javax.swing.JDialog {
         btMes.addActionListener(controlador);
         
     }
+    
+    public void setGrafico(Map<String, Double> map) {
+    	ChartPanel chartPanel = GraficoFactory.getGraficoBarras(map);
+    	chartPanel.setSize(jPanel2.getSize());
+    	jPanel2.add(chartPanel,BorderLayout.CENTER);
+    	this.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
     private javax.swing.JButton btAno;
