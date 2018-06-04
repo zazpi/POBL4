@@ -15,12 +15,22 @@ import pobl4.dao.PrecioDAO;
 import pobl4.dao.TarifaDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
+import pobl4.dominio.Precio;
+import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
+<<<<<<< HEAD
 import pobl4.negocio.CtrlComparador;
 import pobl4.presentacion.VistaComparador;
+=======
+<<<<<<< HEAD
+import pobl4.negocio.CtrlSimulador;
+=======
+>>>>>>> master
 import pobl4.presentacion.VistaConsumo;
+>>>>>>> master
 import pobl4.presentacion.VistaLogin;
+import pobl4.presentacion.VistaSimulador;
 
 /**
  * @author Lucas
@@ -40,7 +50,11 @@ public class Main extends JFrame{
 	User user;
 	Tarifa tarifa;
 	List<Compania> listaCompania;
+<<<<<<< HEAD
+    List<Tarifa> listaTarifas;
+=======
 	List<Tarifa> listaTarifas;
+>>>>>>> master
 	
 	Compania compania;
 	
@@ -84,6 +98,41 @@ public class Main extends JFrame{
 		tarifaDAO = dbInstance.getTarifaDAO();
 		companiaDAO = dbInstance.getCompaniaDAO();
 		precioDAO = dbInstance.getPrecioDAO();
+<<<<<<< HEAD
+		VistaLogin login = new VistaLogin(this, true, userDAO);
+		user = login.getSuccess();
+		if(user != null) {
+			user.setTarifa(tarifaDAO.find(new Long(user.getTafiraID())));
+			tarifa = user.getTarifa();
+			tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
+			compania = companiaDAO.find(new Long(tarifa.getCompaniaID()));
+			compania.setTarifas(tarifaDAO.list());
+			listaCompania = companiaDAO.list();
+            listaTarifas = tarifaDAO.list();
+                        for(Compania comp : listaCompania){
+                            List<Tarifa> tarifas = new ArrayList<>();
+                            for(Tarifa tarifa : listaTarifas){
+                                if(tarifa.getCompaniaID() == comp.getId())
+                                    tarifas.add(tarifa);
+                                tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
+                            }
+                            comp.setTarifas(tarifas);
+                            
+                        }
+                        
+                        SimulacionEstatica modelo = new SimulacionEstatica();
+                        CtrlSimulador controlador = new CtrlSimulador(modelo);     
+                        VistaSimulador vista = new VistaSimulador(this,true,controlador,user,modelo,listaCompania);
+		}
+		
+		System.err.println(user.toString());
+		System.err.println(tarifa.toString());
+		System.err.println(tarifa.getPrecios().toString());
+		System.err.println(compania.toString());
+		System.err.println(listaCompania.toString());
+		System.err.println(compania.getTarifas().toString());
+		
+=======
 	}
 	
 	private void mainFrameSetup() {
@@ -98,6 +147,7 @@ public class Main extends JFrame{
 	
 	public DAOFactory getDAO() {
 		return dbInstance;
+>>>>>>> master
 	}
 	/**
 	 * @param args
@@ -113,5 +163,9 @@ public class Main extends JFrame{
                 
 	}
 
+<<<<<<< HEAD
+}
+=======
 	
 }
+>>>>>>> master

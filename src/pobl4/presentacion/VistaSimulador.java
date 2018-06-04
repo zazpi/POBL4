@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -43,35 +44,32 @@ public class VistaSimulador extends javax.swing.JDialog {
         this.usuario = usuario;
         this.modelo = modelo;
         this.companias = companias;
+        
+        controlador.setVista(this);
         initComponents();
         addListeners();
-        llenarDatos();
-    }
-    
-    public void llenarDatos(){
-
+        actualizarComboBox();
+        
+        this.setVisible(true);
     }
     
     public void addListeners(){
         compania.addItemListener(controlador);
-        tarifa.addItemListener(controlador);
-        addListener(txValle,TXT_VALLE);
-        addListener(txSuperValle,TXT_SUPERVALLE);
-        addListener(txPunta,TXT_PUNTA);
-        addListener(txDias,TXT_DIAS);
-        addListener(txPotenciaContratada,TXT_POTENCIA);
-    }
-    
-    public void addListener(JTextField txt, String actionCommand){
-        txt.addActionListener(controlador);
-        txt.setActionCommand(actionCommand);
+        btAyuda.addActionListener(controlador);
+        btAyuda.setActionCommand("ayuda");
     }
     
     public void actualizarTabla(){
         tablaFactura.getModel().setValueAt(modelo.getPorEnergia(), 0, 1);
         tablaFactura.getModel().setValueAt(modelo.getPorPotencia(), 1, 1);
         tablaFactura.getModel().setValueAt(modelo.getPorImpuestos(), 2, 1);
-        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 4, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 5, 1);
+        tablaFactura.getModel().setValueAt(modelo.getTotal(), 6, 1);
+    }
+    
+    public void actualizarComboBox(){
+        DefaultComboBoxModel model = new DefaultComboBoxModel(((Compania)compania.getSelectedItem()).getTarifas().toArray(new Tarifa[0]) );
+        tarifa.setModel(model);  
     }
     
     public double getPotencia(){
@@ -88,8 +86,14 @@ public class VistaSimulador extends javax.swing.JDialog {
     }   
     public int getDias(){
         return Integer.parseInt(txDias.getText());
-    }   
-
+    }
+    public Tarifa getTarifa(){
+        return (Tarifa) tarifa.getSelectedItem();
+    }
+    public Compania getCompania(){
+        return (Compania) compania.getSelectedItem();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,7 +108,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         JLabel labelNombre = new JLabel();
         JPanel panelDatos = new JPanel();
         JLabel labelCompania = new JLabel();
-        compania = new JComboBox<>();
+        compania = new JComboBox<>(companias.toArray(new Compania[0]));
         JLabel labelTarifa = new JLabel();
         tarifa = new JComboBox<>();
         JLabel labelPContratada = new JLabel();
@@ -116,7 +120,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         JButton btCargar = new JButton();
         JLabel labelDias = new JLabel();
         txDias = new JTextField();
-        JButton btAyuda = new JButton();
+        btAyuda = new JButton();
         JButton btAnadir = new JButton();
         JPanel panelGrafico = new JPanel();
         JScrollPane panelTabla = new JScrollPane();
@@ -163,25 +167,15 @@ public class VistaSimulador extends javax.swing.JDialog {
         labelPContratada.setForeground(new Color(1, 1, 1));
         labelPContratada.setText("Potencia contratada: ");
 
-        txPotenciaContratada.setText("potenciaContratada");
-
         labelConsumo.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
         labelConsumo.setForeground(new Color(1, 1, 1));
         labelConsumo.setText("Consumo: ");
-
-        txPunta.setText("punta");
-
-        txValle.setText("valle");
-
-        txSuperValle.setText("superValle");
 
         btCargar.setText("Cargar desde  histórico");
 
         labelDias.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
         labelDias.setForeground(new Color(1, 1, 1));
         labelDias.setText("Días: ");
-
-        txDias.setText("días");
 
         btAyuda.setText("Ayuda");
 
@@ -349,6 +343,7 @@ public class VistaSimulador extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    JButton btAyuda;
     JComboBox<Compania> compania;
     JTable tablaFactura;
     JComboBox<Tarifa> tarifa;
