@@ -46,7 +46,6 @@ public abstract class Simulacion {
 
     public void setCompania(Compania compania) {
         this.compania = compania;
-        calcularCoste();
     }
 
     public Tarifa getTarifa() {
@@ -55,7 +54,6 @@ public abstract class Simulacion {
 
     public void setTarifa(Tarifa tarifa) {
         this.tarifa = tarifa;
-        calcularCoste();
     }
 
     public double getPotencia() {
@@ -64,7 +62,6 @@ public abstract class Simulacion {
 
     public void setPotencia(double potencia) {
         this.potencia = potencia;
-        calcularCoste();
     }
 
     public int getDias() {
@@ -73,7 +70,6 @@ public abstract class Simulacion {
 
     public void setDias(int dias) {
         this.dias = dias;
-        calcularCoste();
     }
 
     public double getPorEnergia() {

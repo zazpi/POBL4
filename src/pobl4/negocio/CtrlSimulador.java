@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import pobl4.dominio.Compania;
-import pobl4.dominio.Simulacion;
+import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.presentacion.VistaSimulador;
 
@@ -15,50 +15,38 @@ import pobl4.presentacion.VistaSimulador;
  */
 public class CtrlSimulador implements ItemListener, ActionListener{
     VistaSimulador vista;
-    Simulacion modelo;
+    SimulacionEstatica modelo;
     
-    public CtrlSimulador(VistaSimulador vista, Simulacion modelo){
-        this.vista = vista;
+    public CtrlSimulador(SimulacionEstatica modelo){
         this.modelo = modelo;
         
+    }
+    
+    public void setVista(VistaSimulador vista){
+        this.vista = vista;
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if(e.getStateChange() == ItemEvent.SELECTED){
-            Object item = e.getItem();
-            if(item instanceof Tarifa)
-                modelo.setTarifa((Tarifa)item);
-            else if(item instanceof Compania)
-                modelo.setCompania((Compania) item);
-        }
-        vista.actualizarTabla();
+        Compania compania = (Compania) e.getItem();
+        modelo.setCompania(compania);
+        vista.actualizarComboBox();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case VistaSimulador.TXT_POTENCIA:
-                modelo.setPotencia(vista.getPotencia());
-                break;
-            case VistaSimulador.TXT_DIAS:
-                modelo.setDias(vista.getDias());
-                break;
-            case VistaSimulador.TXT_VALLE:
-               // modelo.setValle(vista.getValle());
-                break;
-            case VistaSimulador.TXT_SUPERVALLE:
-               // modelo.setSupervalle(vista.getSuperValle());
-                break;
-            case VistaSimulador.TXT_PUNTA:
-              //  modelo.setPunta(vista.getPunta());
-                break;
-            default:
-                break;
+        String actionCommand = e.getActionCommand();
+        if(actionCommand.equals("ayuda")){
+            modelo.setValle(vista.getValle());
+            modelo.setSupervalle(vista.getSuperValle());
+            modelo.setPunta(vista.getPunta());
+            modelo.setPotencia(vista.getPotencia());
+            modelo.setTarifa(vista.getTarifa());
+            modelo.setDias(vista.getDias());
+            modelo.setCompania(vista.getCompania());
+            modelo.calcularCoste();
+            vista.actualizarTabla();
         }
-        vista.actualizarTabla();
     }
-    
-    
     
 }
