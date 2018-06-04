@@ -3,6 +3,8 @@ package pobl4.presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -48,9 +50,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         controlador.setVista(this);
         initComponents();
         addListeners();
-        
-      /*  modelo.setCompania(companias.get(0));
-        actualizarComboBox();*/
+        actualizarComboBox();
         
         this.setVisible(true);
     }
@@ -65,11 +65,12 @@ public class VistaSimulador extends javax.swing.JDialog {
         tablaFactura.getModel().setValueAt(modelo.getPorEnergia(), 0, 1);
         tablaFactura.getModel().setValueAt(modelo.getPorPotencia(), 1, 1);
         tablaFactura.getModel().setValueAt(modelo.getPorImpuestos(), 2, 1);
-        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 4, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 5, 1);
+        tablaFactura.getModel().setValueAt(modelo.getTotal(), 6, 1);
     }
     
     public void actualizarComboBox(){
-        DefaultComboBoxModel model = new DefaultComboBoxModel(modelo.getCompania().getTarifas().toArray(new Tarifa[0]) );
+        DefaultComboBoxModel model = new DefaultComboBoxModel(((Compania)compania.getSelectedItem()).getTarifas().toArray(new Tarifa[0]) );
         tarifa.setModel(model);  
     }
     

@@ -10,7 +10,7 @@ public abstract class Simulacion {
     int dias;
     
     // Datos calculados
-    double porEnergia, porPotencia, porImpuestos, porIva;
+    double porEnergia, porPotencia, porImpuestos, porIva, total;
     
     public abstract void calcularCoste();
     
@@ -86,6 +86,10 @@ public abstract class Simulacion {
 
     public double getPorIva() {
         return porIva;
+    }
+    
+    public double getTotal() {
+    	return total;
     }
 
 }

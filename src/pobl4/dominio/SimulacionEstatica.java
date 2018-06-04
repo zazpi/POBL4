@@ -14,17 +14,18 @@ public class SimulacionEstatica extends Simulacion {
             resetCalculos();
             return;
         }
-        Consumo consumoPunta = new Consumo(1,16, punta);
-        Consumo consumoValle = new Consumo(1,12, valle);
-        Consumo consumoSuperValle = new Consumo(1,3, supervalle);
+        Consumo consumoPunta = new Consumo(7,16, punta);
+        Consumo consumoValle = new Consumo(7,12, valle);
+        Consumo consumoSuperValle = new Consumo(7,3, supervalle);
         
         porEnergia = getCoste(tarifa,consumoPunta);
         porEnergia += getCoste(tarifa,consumoValle);
         porEnergia += getCoste(tarifa,consumoSuperValle);
         
-        porPotencia = 38 * potencia;
-        porImpuestos = porEnergia + porPotencia * 0.0511269;
+        porPotencia = 38 * potencia * ((double)dias/365);
+        porImpuestos = (porEnergia + porPotencia) * 0.0511269 ;
         porIva = (porEnergia + porImpuestos + porPotencia) * 0.21;
+        total = porEnergia + porPotencia + porImpuestos + porIva;
     }
 
 
