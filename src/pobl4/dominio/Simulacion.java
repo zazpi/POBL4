@@ -91,5 +91,10 @@ public abstract class Simulacion {
     public double getTotal() {
     	return total;
     }
+    
+    public int compareTo(Simulacion simu) {
+    	
+    	return ((Double) total).compareTo(simu.getTotal());
+    }
 
 }
