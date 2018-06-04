@@ -68,7 +68,8 @@ public class RenderComparador implements ListCellRenderer<Simulacion>{
     private Component crearPanelPrecio(Simulacion value) {
         JPanel panelInfo = new JPanel(new BorderLayout(0,10));
 		
-		JLabel nombre = new JLabel("0");
+		JLabel nombre = new JLabel(String.format ("%.2f", value.getTotal()));
+                
 		nombre.setFont(new Font("arial",Font.BOLD,30));
 		nombre.setForeground(Color.BLACK);
 		panelInfo.add(nombre);
