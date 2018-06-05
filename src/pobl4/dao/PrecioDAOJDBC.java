@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pobl4.daoexception.DAOException;
-import pobl4.dominio.Consumo;
 import pobl4.dominio.Precio;
 /**
  * @author Lucas

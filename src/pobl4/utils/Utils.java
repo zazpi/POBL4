@@ -1,6 +1,9 @@
 package pobl4.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import pobl4.dao.UserDAO;
+import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
 
 /**
@@ -51,5 +54,64 @@ public class Utils {
 			return "Not assigned";
 		}
 	}
+        
+        public static int translateStringToMonth(String mes) {
+		switch(mes) {
+		case "Enero":
+			return 1;
+		case "Febrero":
+			return 2;
+		case "Marzo":
+			return 3;
+		case "Abril":
+			return 4;
+		case "Mayo":
+			return 5;
+		case "Junio":
+			return 6;
+		case "Julio":
+			return 7;
+		case "Agosto":
+			return 8;
+		case "Septiembre":
+			return 9;
+		case "Octubre":
+			return 10;
+		case "Noviembre":
+			return 11;
+		case "Deciembre":
+			return 12;
+		default:
+			return 0;
+		}
+	}
+        
+        public static List<Integer>getListaAnos(List<Consumo>listaConsumos){
+            
+            List<Integer>listaAnos;
+            listaAnos = new ArrayList<>();
+            
+            for(Consumo c : listaConsumos){
+                if(!listaAnos.contains(c.getAño())){
+                    listaAnos.add(c.getAño());
+                }
+            }
+            return listaAnos;
+        }
+        
+        public static List<String>getListaMeses(List<Consumo>listaConsumos){
+            
+            List<String>listaMeses;
+            listaMeses = new ArrayList<>();
+            
+            for(Consumo c : listaConsumos){
+                if(!listaMeses.contains(translateMonthToString(c.getMes()))){
+                    listaMeses.add(translateMonthToString(c.getMes()));
+                }
+            }
+            return listaMeses;
+        }
+        
+        
 	
 }

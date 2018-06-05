@@ -122,6 +122,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         txDias = new JTextField();
         btAyuda = new JButton();
         JButton btAnadir = new JButton();
+        JButton btSimularFactura = new JButton();
         JPanel panelGrafico = new JPanel();
         JScrollPane panelTabla = new JScrollPane();
         tablaFactura = new JTable();
@@ -183,32 +184,14 @@ public class VistaSimulador extends javax.swing.JDialog {
         btAnadir.setText("+");
         btAnadir.setBorder(new SoftBevelBorder(BevelBorder.RAISED));
 
+        btSimularFactura.setText("Simular Factura");
+
         GroupLayout panelDatosLayout = new GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(labelDias)
-                        .addGap(18, 18, 18)
-                        .addComponent(txDias, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAyuda, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(labelPContratada)
-                        .addGap(18, 18, 18)
-                        .addComponent(txPotenciaContratada, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(labelConsumo)
-                        .addGap(18, 18, 18)
-                        .addComponent(txPunta, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txValle, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txSuperValle, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btCargar, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
                     .addGroup(GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
                         .addComponent(labelCompania)
                         .addGap(18, 18, 18)
@@ -217,10 +200,38 @@ public class VistaSimulador extends javax.swing.JDialog {
                         .addComponent(labelTarifa)
                         .addGap(18, 18, 18)
                         .addComponent(tarifa, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(31, 31, 31)
                         .addComponent(btAnadir, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)))
-                .addGap(101, 101, 101))
+                        .addGap(143, 143, 143))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(labelPContratada)
+                                .addGap(18, 18, 18)
+                                .addComponent(txPotenciaContratada, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(labelDias)
+                                .addGap(31, 31, 31)
+                                .addComponent(txDias, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelDatosLayout.createSequentialGroup()
+                                        .addComponent(labelConsumo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txPunta, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txValle, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                                        .addComponent(btSimularFactura, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38)))
+                                .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(btAyuda, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelDatosLayout.createSequentialGroup()
+                                        .addComponent(txSuperValle, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(btCargar, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(92, 92, 92))))
         );
         panelDatosLayout.setVerticalGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosLayout.createSequentialGroup()
@@ -234,7 +245,10 @@ public class VistaSimulador extends javax.swing.JDialog {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(labelPContratada)
-                    .addComponent(txPotenciaContratada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(txPotenciaContratada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelDias)
+                        .addComponent(txDias, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(labelConsumo)
@@ -242,12 +256,11 @@ public class VistaSimulador extends javax.swing.JDialog {
                     .addComponent(txValle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(txSuperValle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCargar))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(panelDatosLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelDias)
-                    .addComponent(txDias, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSimularFactura)
                     .addComponent(btAyuda))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         panelGrafico.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
@@ -255,7 +268,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         GroupLayout panelGraficoLayout = new GroupLayout(panelGrafico);
         panelGrafico.setLayout(panelGraficoLayout);
         panelGraficoLayout.setHorizontalGroup(panelGraficoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addGap(0, 459, Short.MAX_VALUE)
         );
         panelGraficoLayout.setVerticalGroup(panelGraficoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 287, Short.MAX_VALUE)
@@ -268,10 +281,11 @@ public class VistaSimulador extends javax.swing.JDialog {
         tablaFactura.setModel(new DefaultTableModel(
             new Object [][] {
                 {"  Por energía utilizada", null},
+                {"  Valle", null},
+                {"  Punta", null},
+                {"  Supervalle    ", null},
                 {"  Por potencia contratada", null},
                 {"  Impuesto electricidad", null},
-                {"  Alquiler contador", null},
-                {"  Otros conceptos", null},
                 {"  IVA 21%", null},
                 {"  Total", null}
             },
@@ -294,7 +308,7 @@ public class VistaSimulador extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tablaFactura.setRowHeight(37);
+        tablaFactura.setRowHeight(33);
         panelTabla.setViewportView(tablaFactura);
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -303,7 +317,8 @@ public class VistaSimulador extends javax.swing.JDialog {
             .addComponent(panelNombreç, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDatos, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(panelTabla, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelTabla, GroupLayout.PREFERRED_SIZE, 436, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelGrafico, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
@@ -330,7 +345,7 @@ public class VistaSimulador extends javax.swing.JDialog {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGap(0, 578, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

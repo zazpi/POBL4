@@ -2,7 +2,7 @@ package pobl4.dominio;
 
 import java.util.List;
 
-public abstract class Simulacion {
+public abstract class Simulacion implements Comparable{
     // Datos del usuario
     Compania compania;
     Tarifa tarifa;
@@ -91,10 +91,9 @@ public abstract class Simulacion {
     public double getTotal() {
     	return total;
     }
-    
-    public int compareTo(Simulacion simu) {
-    	
-    	return ((Double) total).compareTo(simu.getTotal());
-    }
 
+    @Override
+    public int compareTo(Object simu) {
+        return ((Double) total).compareTo(((Simulacion)simu).getTotal());
+    }
 }
