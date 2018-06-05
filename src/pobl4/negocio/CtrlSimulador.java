@@ -2,23 +2,22 @@ package pobl4.negocio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.List;
+
 import pobl4.dominio.Compania;
 import pobl4.dominio.SimulacionEstatica;
+import pobl4.dominio.Tarifa;
 import pobl4.presentacion.VistaSimulador;
+import pobl4.presentacion.anadirCompania.VistaAnadirTarifa;
 
-/**
- *
- * @author galaipa
- */
-public class CtrlSimulador implements ItemListener, ActionListener{
+public class CtrlSimulador implements ActionListener{
     VistaSimulador vista;
-    SimulacionEstatica modelo;
+    SimulacionEstatica modeloSimulacion;
+    List<Compania> listaCompanias;
     
-    public CtrlSimulador(SimulacionEstatica modelo){
-        this.modelo = modelo;
-        
+    public CtrlSimulador(SimulacionEstatica modeloSimulacion, List<Compania> listaCompanias){
+        this.modeloSimulacion = modeloSimulacion;
+        this.listaCompanias = listaCompanias;
     }
     
     public void setVista(VistaSimulador vista){
@@ -26,30 +25,30 @@ public class CtrlSimulador implements ItemListener, ActionListener{
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
-        Compania compania = (Compania) e.getItem();
-        modelo.setCompania(compania);
-        vista.actualizarComboBox();
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
-        if(actionCommand.equals("ayuda")){
+        if(actionCommand.equals("simular")){
         	try {
-                modelo.setValle(vista.getValle());
-                modelo.setSupervalle(vista.getSuperValle());
-                modelo.setPunta(vista.getPunta());
-                modelo.setPotencia(vista.getPotencia());
-                modelo.setTarifa(vista.getTarifa());
-                modelo.setDias(vista.getDias());
-                modelo.setCompania(vista.getCompania());
-                modelo.calcularCoste();
-                vista.actualizarTabla();
+                    modeloSimulacion.setValle(vista.getValle());
+                    modeloSimulacion.setSupervalle(vista.getSuperValle());
+                    modeloSimulacion.setPunta(vista.getPunta());
+                    modeloSimulacion.setPotencia(vista.getPotencia());
+                    modeloSimulacion.setTarifa(vista.getTarifa());
+                    modeloSimulacion.setDias(vista.getDias());
+                    modeloSimulacion.setCompania(vista.getCompania());
+                    modeloSimulacion.calcularCoste();
+                    vista.actualizarTabla();
         	}catch (NumberFormatException ex) {
         		System.out.println("INPUT ERROR");
         	}
 
+        }else if(actionCommand.equals("anadir")) {
+        	Tarifa tarifa = new Tarifa();
+        	CtrlAnadirTarifa controlTarifa = new CtrlAnadirTarifa(tarifa);
+        	VistaAnadirTarifa añadirTarifa = new VistaAnadirTarifa(vista,true,controlTarifa,tarifa); 
+        	if(tarifa.isValid())
+        		listaCompanias.get(0).getTarifas().add(tarifa);
+        	vista.actualizarComboBox();
         }
     }
     
