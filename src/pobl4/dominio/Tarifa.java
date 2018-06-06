@@ -4,6 +4,7 @@
 package pobl4.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,10 @@ public class Tarifa implements Serializable{
 	
 	private List<Precio> precios;
 	private Compania compania;
+	
+	public Tarifa() {
+		precios = new ArrayList<>();
+	}
 
 	public Compania getCompania() {
 		return compania;
@@ -77,6 +82,11 @@ public class Tarifa implements Serializable{
 	@Override
 	public String toString() {
 		return descripcion;
+	}
+
+	public boolean isValid() {
+		
+		return !precios.isEmpty();
 	}
 	
 	
