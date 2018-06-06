@@ -6,11 +6,17 @@
 package pobl4.presentacion;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.DefaultComboBoxModel;
+
 import org.jfree.chart.ChartPanel;
 
+import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
 import pobl4.negocio.GraficoFactory;
@@ -23,15 +29,19 @@ public class VistaConsumo extends javax.swing.JDialog {
     
     CtrlConsumo controlador;
     List<Consumo> listaConsumos;
+    DefaultComboBoxModel<String> model1;
+    DefaultComboBoxModel<String> model2;
     /**
      * Creates new form VistaConsumo
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO) {
         super(parent, modal);
         initComponents();
         this.listaConsumos = listConsumo;
-        controlador = new CtrlConsumo(this,listConsumo);
+        controlador = new CtrlConsumo(this,listConsumo,consumoDAO);
+        initFiltros();
         addBtListeners();
+        
         this.setVisible(true);
         
     }
@@ -70,6 +80,8 @@ public class VistaConsumo extends javax.swing.JDialog {
         punta = new javax.swing.JLabel();
         valle = new javax.swing.JLabel();
         mediaDia = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -203,6 +215,10 @@ public class VistaConsumo extends javax.swing.JDialog {
         mediaDia.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         mediaDia.setText("0");
 
+        jLabel1.setText("Año");
+
+        jLabel2.setText("Mes");
+
         javax.swing.GroupLayout panelDerechaLayout = new javax.swing.GroupLayout(panelDerecha);
         panelDerecha.setLayout(panelDerechaLayout);
         panelDerechaLayout.setHorizontalGroup(
@@ -228,26 +244,39 @@ public class VistaConsumo extends javax.swing.JDialog {
                                 .addComponent(consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(punta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(periodoTiempo1)
-                            .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelDerechaLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(datosEstadisticos)))
+                        .addGap(33, 33, 33)
+                        .addComponent(datosEstadisticos)
                         .addGap(11, 11, 11)))
                 .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelDerechaLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDerechaLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDerechaLayout.createSequentialGroup()
+                        .addComponent(periodoTiempo1)
+                        .addGap(56, 56, 56)))
+                .addGap(29, 29, 29))
         );
         panelDerechaLayout.setVerticalGroup(
             panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechaLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(47, 47, 47)
                 .addComponent(periodoTiempo1)
+                .addGap(18, 18, 18)
+                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(datosEstadisticos)
                 .addGap(23, 23, 23)
@@ -333,6 +362,8 @@ public class VistaConsumo extends javax.swing.JDialog {
         btDia.addActionListener(controlador);
         btHora.addActionListener(controlador);
         btMes.addActionListener(controlador);
+        fechaInicio.setModel(model1);
+        fechaFin.setModel(model2);
         
     }
     
@@ -341,6 +372,66 @@ public class VistaConsumo extends javax.swing.JDialog {
     	chartPanel.setSize(jPanel2.getSize());
     	jPanel2.add(chartPanel,BorderLayout.CENTER);
     	this.repaint();
+    }
+    
+    public void disbaleFiltro(String filtro) {
+    	
+    	if(filtro.equals("año")) {
+    		fechaInicio.setEnabled(false);
+    		fechaFin.setEnabled(false);
+    	}
+    	if(filtro.equals("mes"))
+    		fechaFin.setEnabled(false);
+    }
+    
+    public void enableBoxes() {
+    	fechaInicio.setEnabled(true);
+    	fechaFin.setEnabled(true);
+    }
+    
+    public int getAño() {
+    	return Integer.valueOf(fechaInicio.getSelectedItem().toString());
+    }
+    
+    public void initFiltros() {
+    	model1 = new DefaultComboBoxModel<>(getFechasInicio());
+    	model2 = new DefaultComboBoxModel<>(getFechasFin());
+    }
+    
+    public String [] getFechasInicio() {
+    	List<String> fechasInicio = new ArrayList<>();
+    	
+    	for(Consumo c: listaConsumos) {
+    		if(!fechasInicio.contains(String.valueOf(c.getAño())))
+    			fechasInicio.add(String.valueOf(c.getAño()));
+    	}
+    	Collections.sort(fechasInicio, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasInicio.toArray(new String [0]);
+    }
+    
+    public String [] getFechasFin() {
+    	List<String> fechasFin = new ArrayList<>();
+    	for(Consumo c: listaConsumos) {
+    		if(!fechasFin.contains(String.valueOf(c.getMes())))
+    			fechasFin.add(String.valueOf(c.getMes()));
+    	}
+    	
+    	Collections.sort(fechasFin, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasFin.toArray(new String [0]);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -353,6 +444,8 @@ public class VistaConsumo extends javax.swing.JDialog {
     private javax.swing.JLabel datosEstadisticos;
     private javax.swing.JComboBox<String> fechaFin;
     private javax.swing.JComboBox<String> fechaInicio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelConsumo;

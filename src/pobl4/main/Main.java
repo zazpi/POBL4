@@ -19,16 +19,9 @@ import pobl4.dominio.Precio;
 import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
-<<<<<<< HEAD
 import pobl4.negocio.CtrlComparador;
 import pobl4.presentacion.VistaComparador;
-=======
-<<<<<<< HEAD
-import pobl4.negocio.CtrlSimulador;
-=======
->>>>>>> master
 import pobl4.presentacion.VistaConsumo;
->>>>>>> master
 import pobl4.presentacion.VistaLogin;
 import pobl4.presentacion.VistaSimulador;
 
@@ -38,7 +31,7 @@ import pobl4.presentacion.VistaSimulador;
  */
 public class Main extends JFrame{
 	
-	private static int USERID = 0;
+	public static int USERID = 0;
 	
 	DAOFactory dbInstance;
 	UserDAO userDAO;
@@ -140,9 +133,13 @@ public class Main extends JFrame{
 		this.setSize(1000,768);
 		this.setLocation(0, 0);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+<<<<<<< HEAD
+		VistaConsumo consumo = new VistaConsumo(this, true, user.getConsumos(),consumoDAO);
+=======
                 CtrlComparador controlador = new CtrlComparador(listaCompania, user.getConsumos());
 		VistaComparador vista = new VistaComparador(this, true,controlador, user.getConsumos());
                
+>>>>>>> master
 	}
 	
 	public DAOFactory getDAO() {

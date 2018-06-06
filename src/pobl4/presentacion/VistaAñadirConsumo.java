@@ -5,18 +5,28 @@
  */
 package pobl4.presentacion;
 
+import pobl4.dao.ConsumoDAO;
+import pobl4.dominio.Consumo;
+import pobl4.negocio.CtrlAnadirConsumo;
+
 /**
  *
  * @author asier
  */
 public class VistaAñadirConsumo extends javax.swing.JDialog {
-
+ 
+	
+	Consumo consumo;
+	CtrlAnadirConsumo controlador;
     /**
      * Creates new form VistaAñadirConsumo2
      */
-    public VistaAñadirConsumo(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VistaAñadirConsumo(VistaConsumo vista, boolean modal,ConsumoDAO consumoDAO) {
+        super(vista, modal);
         initComponents();
+        controlador = new CtrlAnadirConsumo(this,consumoDAO);
+        addListeners();
+        this.setVisible(true);
     }
 
     /**
@@ -187,48 +197,19 @@ public class VistaAñadirConsumo extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaAñadirConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaAñadirConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaAñadirConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaAñadirConsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VistaAñadirConsumo dialog = new VistaAñadirConsumo(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    
+    public Consumo getConsumo() {
+    	return consumo;
+    }
+    
+    public void addListeners() {
+    	jButton1.setActionCommand("examinar");
+    	jButton2.setActionCommand("eliminar");
+    	jButton3.setActionCommand("aceptar");
+    	
+    	jButton1.addActionListener(controlador);
+    	jButton2.addActionListener(controlador);
+    	jButton3.addActionListener(controlador);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

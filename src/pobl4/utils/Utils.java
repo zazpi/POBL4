@@ -1,7 +1,9 @@
 package pobl4.utils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import pobl4.dao.ConsumoDAO;
+import java.util.ArrayList;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
@@ -22,6 +24,12 @@ public class Utils {
 		
 		return null;
 			
+	}
+	
+	public static void createConsumes(ConsumoDAO consumoDAO, List<Consumo> consumos) {
+		if(consumoDAO != null) {
+			consumoDAO.create(consumos);
+		}
 	}
 	
 	public static String translateMonthToString(int mes) {
