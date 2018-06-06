@@ -26,7 +26,7 @@ import pobl4.presentacion.VistaLogin;
  */
 public class Main extends JFrame{
 	
-	private static int USERID = 0;
+	public static int USERID = 0;
 	
 	DAOFactory dbInstance;
 	UserDAO userDAO;
@@ -89,7 +89,7 @@ public class Main extends JFrame{
 		this.setSize(1000,768);
 		this.setLocation(0, 0);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		VistaConsumo consumo = new VistaConsumo(this, true, user.getConsumos());
+		VistaConsumo consumo = new VistaConsumo(this, true, user.getConsumos(),consumoDAO);
 	}
 	
 	public DAOFactory getDAO() {
