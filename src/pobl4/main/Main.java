@@ -43,11 +43,7 @@ public class Main extends JFrame{
 	User user;
 	Tarifa tarifa;
 	List<Compania> listaCompania;
-<<<<<<< HEAD
-    List<Tarifa> listaTarifas;
-=======
 	List<Tarifa> listaTarifas;
->>>>>>> master
 	
 	Compania compania;
 	
@@ -91,41 +87,6 @@ public class Main extends JFrame{
 		tarifaDAO = dbInstance.getTarifaDAO();
 		companiaDAO = dbInstance.getCompaniaDAO();
 		precioDAO = dbInstance.getPrecioDAO();
-<<<<<<< HEAD
-		VistaLogin login = new VistaLogin(this, true, userDAO);
-		user = login.getSuccess();
-		if(user != null) {
-			user.setTarifa(tarifaDAO.find(new Long(user.getTafiraID())));
-			tarifa = user.getTarifa();
-			tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-			compania = companiaDAO.find(new Long(tarifa.getCompaniaID()));
-			compania.setTarifas(tarifaDAO.list());
-			listaCompania = companiaDAO.list();
-            listaTarifas = tarifaDAO.list();
-                        for(Compania comp : listaCompania){
-                            List<Tarifa> tarifas = new ArrayList<>();
-                            for(Tarifa tarifa : listaTarifas){
-                                if(tarifa.getCompaniaID() == comp.getId())
-                                    tarifas.add(tarifa);
-                                tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-                            }
-                            comp.setTarifas(tarifas);
-                            
-                        }
-                        
-                        SimulacionEstatica modelo = new SimulacionEstatica();
-                        CtrlSimulador controlador = new CtrlSimulador(modelo);     
-                        VistaSimulador vista = new VistaSimulador(this,true,controlador,user,modelo,listaCompania);
-		}
-		
-		System.err.println(user.toString());
-		System.err.println(tarifa.toString());
-		System.err.println(tarifa.getPrecios().toString());
-		System.err.println(compania.toString());
-		System.err.println(listaCompania.toString());
-		System.err.println(compania.getTarifas().toString());
-		
-=======
 	}
 	
 	private void mainFrameSetup() {
@@ -133,19 +94,8 @@ public class Main extends JFrame{
 		this.setSize(1000,768);
 		this.setLocation(0, 0);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-<<<<<<< HEAD
-		VistaConsumo consumo = new VistaConsumo(this, true, user.getConsumos(),consumoDAO);
-=======
-                CtrlComparador controlador = new CtrlComparador(listaCompania, user.getConsumos());
-		VistaComparador vista = new VistaComparador(this, true,controlador, user.getConsumos());
-               
->>>>>>> master
 	}
 	
-	public DAOFactory getDAO() {
-		return dbInstance;
->>>>>>> master
-	}
 	/**
 	 * @param args
 	 */
@@ -159,10 +109,5 @@ public class Main extends JFrame{
 		System.err.println("Everything ok chief!");
                 
 	}
-
-<<<<<<< HEAD
 }
-=======
 	
-}
->>>>>>> master
