@@ -11,7 +11,7 @@ import java.util.List;
 
 import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
-import pobl4.presentacion.VistaAñadirConsumo;
+import pobl4.presentacion.VistaAnadirConsumo;
 import pobl4.presentacion.VistaConsumo;
 
 /**
@@ -46,7 +46,7 @@ public class CtrlConsumo implements ActionListener{
     		vista.setGrafico(estado.getDatosGraficos(listConsumo,params));
     	}
     	if(e.getActionCommand().equals("Anadir")) {
-    		VistaAñadirConsumo vistaAñadirConsumo = new VistaAñadirConsumo(vista, true,consumoDAO);
+    		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO);
     	}
     }
     

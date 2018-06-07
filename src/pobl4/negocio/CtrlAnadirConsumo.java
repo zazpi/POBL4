@@ -18,8 +18,7 @@ import javax.swing.JFileChooser;
 import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
 import pobl4.main.Main;
-import pobl4.presentacion.VistaAñadirConsumo;
-import pobl4.utils.Utils;
+import pobl4.presentacion.VistaAnadirConsumo;
 
 /**
  * @author Lucas
@@ -27,9 +26,9 @@ import pobl4.utils.Utils;
  */
 public class CtrlAnadirConsumo implements ActionListener{
 
-	VistaAñadirConsumo vista;
+	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
-	public CtrlAnadirConsumo(VistaAñadirConsumo vista,ConsumoDAO consumoDAO) {
+	public CtrlAnadirConsumo(VistaAnadirConsumo vista,ConsumoDAO consumoDAO) {
 		this.vista = vista;
 		this.consumoDAO = consumoDAO;
 	}
@@ -46,7 +45,6 @@ public class CtrlAnadirConsumo implements ActionListener{
 		     if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File [] files = fc.getSelectedFiles();
 		            System.out.println(files.length);
-		            Utils.createConsumes(consumoDAO, leerFicheros(files));
 		        }
 		     
 		}
@@ -59,7 +57,6 @@ public class CtrlAnadirConsumo implements ActionListener{
 			try(BufferedReader in = new BufferedReader(new FileReader(f.getAbsolutePath()))){
 				String line;
 				in.readLine();
-				int i = 0;
 				while((line = in.readLine())!=null) {
 					Consumo consumo = new Consumo();
 					String data [] = line.split(";");

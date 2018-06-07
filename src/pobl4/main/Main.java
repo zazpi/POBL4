@@ -15,16 +15,9 @@ import pobl4.dao.PrecioDAO;
 import pobl4.dao.TarifaDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
-import pobl4.dominio.Precio;
-import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
-import pobl4.negocio.CtrlComparador;
-import pobl4.presentacion.VistaComparador;
-import pobl4.presentacion.VistaConsumo;
 import pobl4.presentacion.VistaLogin;
-import pobl4.presentacion.VistaSimulador;
-
 /**
  * @author Lucas
  *
@@ -32,6 +25,8 @@ import pobl4.presentacion.VistaSimulador;
 public class Main extends JFrame{
 	
 	public static int USERID = 0;
+
+	public static final long serialVersionUID = 1L;
 	
 	DAOFactory dbInstance;
 	UserDAO userDAO;
