@@ -3,10 +3,14 @@
  */
 package pobl4.main;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import pobl4.dao.CompaniaDAO;
 import pobl4.dao.ConsumoDAO;
@@ -15,16 +19,10 @@ import pobl4.dao.PrecioDAO;
 import pobl4.dao.TarifaDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
-import pobl4.dominio.Precio;
-import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
-import pobl4.negocio.CtrlComparador;
-import pobl4.presentacion.VistaComparador;
-import pobl4.presentacion.VistaConsumo;
+import pobl4.negocio.CtrlMain;
 import pobl4.presentacion.VistaLogin;
-import pobl4.presentacion.VistaSimulador;
-
 /**
  * @author Lucas
  *
@@ -32,6 +30,8 @@ import pobl4.presentacion.VistaSimulador;
 public class Main extends JFrame{
 	
 	public static int USERID = 0;
+
+	public static final long serialVersionUID = 1L;
 	
 	DAOFactory dbInstance;
 	UserDAO userDAO;
@@ -44,7 +44,7 @@ public class Main extends JFrame{
 	Tarifa tarifa;
 	List<Compania> listaCompania;
 	List<Tarifa> listaTarifas;
-	
+	CtrlMain controlador;
 	Compania compania;
 	
 	public Main(){
@@ -90,10 +90,13 @@ public class Main extends JFrame{
 	}
 	
 	private void mainFrameSetup() {
+		controlador = new CtrlMain(this, user.getConsumos(), consumoDAO);
 		this.setTitle("Zazpi");
 		this.setSize(1000,768);
-		this.setLocation(0, 0);
+		this.setLocation(500, 500);
+		this.setContentPane(mainPane());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	/**
@@ -108,6 +111,17 @@ public class Main extends JFrame{
 		main.mainFrameSetup();
 		System.err.println("Everything ok chief!");
                 
+	}
+	
+	public Container mainPane() {
+		JPanel pane = new JPanel(new BorderLayout());
+		JButton consumo = new JButton("Mi Consumo");
+		consumo.setActionCommand("consumo");
+		consumo.addActionListener(controlador);
+		pane.add(consumo, BorderLayout.CENTER);
+		
+		
+		return pane;
 	}
 }
 	
