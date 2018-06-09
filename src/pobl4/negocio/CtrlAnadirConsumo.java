@@ -19,6 +19,7 @@ import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
 import pobl4.main.Main;
 import pobl4.presentacion.VistaAnadirConsumo;
+import pobl4.utils.Utils;
 
 /**
  * @author Lucas
@@ -28,13 +29,14 @@ public class CtrlAnadirConsumo implements ActionListener{
 
 	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
+	List<File> files;
 	public CtrlAnadirConsumo(VistaAnadirConsumo vista,ConsumoDAO consumoDAO) {
 		this.vista = vista;
 		this.consumoDAO = consumoDAO;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("examinar")) {
+		if(e.getActionCommand().equals("Examinar")) {
 			JFileChooser fc = new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			fc.setMultiSelectionEnabled(true);
@@ -43,15 +45,38 @@ public class CtrlAnadirConsumo implements ActionListener{
 			int returnVal = fc.showOpenDialog(vista);
 			
 		     if (returnVal == JFileChooser.APPROVE_OPTION) {
-		            File [] files = fc.getSelectedFiles();
-		            System.out.println(files.length);
+		            File [] selectedFiles = fc.getSelectedFiles();
+		            setFileList(selectedFiles);
+		            List<String> lista = new ArrayList<>();
+		            for(File f: files)
+		            	lista.add(f.getName());
+		            vista.setList(lista);
 		        }
 		     
 		}
 		
+		if(e.getActionCommand().equals("Eliminar")) {
+			String selectedItem = vista.getSelectedItem();
+			if(selectedItem != null)
+				for(int i = 0; i< files.size(); i++)
+					if(files.get(i).getName().equals(selectedItem))
+						files.remove(i);
+			
+			vista.removeSelectedItem();
+		}
+		
+		if(e.getActionCommand().equals("Aceptar")) {
+			if(files != null) {
+				Utils.createConsumes(consumoDAO, leerFicheros());
+			}
+			
+			vista.dispose();
+			
+		}
+		
 	}
 	
-	public List<Consumo> leerFicheros(File...files){
+	public List<Consumo> leerFicheros(){
 		List<Consumo> list = new ArrayList<>();
 		for(File f: files) {
 			try(BufferedReader in = new BufferedReader(new FileReader(f.getAbsolutePath()))){
@@ -86,6 +111,12 @@ public class CtrlAnadirConsumo implements ActionListener{
 		
 		return list;
 		
+	}
+	
+	private void setFileList(File...selectedFiles) {
+		files = new ArrayList<>();
+		for(int i = 0;i< selectedFiles.length;i++)
+			files.add(selectedFiles[i]);
 	}
 	
 

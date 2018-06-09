@@ -3,11 +3,15 @@
  */
 package pobl4.negocio;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import pobl4.dominio.Consumo;
+import pobl4.utils.Utils;
 
 /**
  * @author Lucas
@@ -25,8 +29,7 @@ public class EstadoAño implements Estados {
 		for(Consumo c: listaConsumos) {
 			datosGrafico.put(String.valueOf(c.getAño()), c.getConsumo());
 		}
-		
-		return datosGrafico;
+		return Utils.sortByValue(datosGrafico,false);
 	}
 
 	/* (non-Javadoc)

@@ -5,7 +5,9 @@
  */
 package pobl4.presentacion;
 
-import javax.swing.JList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
 
 import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
@@ -15,11 +17,12 @@ import pobl4.negocio.CtrlAnadirConsumo;
  *
  * @author asier
  */
-public class VistaAnadirConsumo extends javax.swing.JDialog {
+public class VistaAnadirConsumo extends javax.swing.JDialog{
  
 	
 	Consumo consumo;
 	CtrlAnadirConsumo controlador;
+	DefaultListModel<String> fileListModel;
     /**
      * Creates new form VistaAñadirConsumo2
      */
@@ -87,7 +90,7 @@ public class VistaAnadirConsumo extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLabel1.setText("Texto de ayuda.");
+        jLabel1.setText("NOTA: el programa solo acepta archivos con la extensión \".csv\". ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -205,19 +208,33 @@ public class VistaAnadirConsumo extends javax.swing.JDialog {
     }
     
     public void addListeners() {
-    	jButton1.setActionCommand("examinar");
-    	jButton2.setActionCommand("eliminar");
-    	jButton3.setActionCommand("aceptar");
     	
     	jButton1.addActionListener(controlador);
     	jButton2.addActionListener(controlador);
     	jButton3.addActionListener(controlador);
+    	fileListModel = new DefaultListModel<>();
+    	jList1.setModel(fileListModel);
     }
     
-    public void setJList(JList<String> lista) {
-    	jList1 = lista;
+    
+    public void setList(List<String> lista) {
+    	for(String s: lista)
+    		fileListModel.addElement(s);
+    }
+    
+    public String getSelectedItem() {
+    	String selectedItem = null;
+    	if(jList1.getSelectedValue() != null) {
+    		selectedItem = jList1.getSelectedValue();
+    	}
+    	
+    	return selectedItem;
     }
 
+    public void removeSelectedItem() {
+    	if(jList1.getSelectedIndex() != -1)
+    		fileListModel.removeElementAt(jList1.getSelectedIndex());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
