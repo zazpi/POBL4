@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -48,12 +49,15 @@ public class VistaSimulador extends JDialog implements ItemListener{
     
     public void addListeners(){
         compania.addItemListener(this);
-        btAyuda.addActionListener(controlador);
-        btAyuda.setActionCommand("ayuda");
-        btAnadir.addActionListener(controlador);
-        btAnadir.setActionCommand("anadir");
-        btSimularFactura.addActionListener(controlador);
-        btSimularFactura.setActionCommand("simular");
+        setListener(btAyuda,"ayuda");
+        setListener(btAnadir,"anadir");
+        setListener(btSimularFactura,"simular");
+        setListener(btCargar,"cargar");
+    }
+    
+    public void setListener(JButton boton, String actionCommand) {
+    	boton.setActionCommand(actionCommand);
+    	boton.addActionListener(controlador);
     }
     
     public void actualizarTabla(){
@@ -99,6 +103,10 @@ public class VistaSimulador extends JDialog implements ItemListener{
         return (Compania) compania.getSelectedItem();
     }
     
+	public void mostrarError() {
+		JOptionPane.showMessageDialog(this, "Debes introducir todos los valores correctamente","ERROR",JOptionPane.WARNING_MESSAGE);
+	}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,7 +130,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
         txPunta = new JTextField();
         txValle = new JTextField();
         txSuperValle = new JTextField();
-        JButton btCargar = new JButton();
+        btCargar = new JButton();
         JLabel labelDias = new JLabel();
         txDias = new JTextField();
         btAyuda = new JButton();
@@ -365,6 +373,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     JButton btAnadir;
     JButton btAyuda;
+    JButton btCargar;
     JButton btSimularFactura;
     JComboBox<Compania> compania;
     JTable tablaFactura;
@@ -375,5 +384,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
     JTextField txSuperValle;
     JTextField txValle;
     // End of variables declaration//GEN-END:variables
+
+
 
 }
