@@ -1,9 +1,15 @@
 package pobl4.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import pobl4.dao.ConsumoDAO;
-import java.util.ArrayList;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
@@ -120,6 +126,35 @@ public class Utils {
             return listaMeses;
         }
         
-        
-	
+
+        public static Map<String, Double> sortByValue(Map<String, Double> unsortMap, boolean mes) {
+
+            // 1. Convert Map to List of Map
+            List<Map.Entry<String, Double>> list =
+                    new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
+
+            // 2. Sort list with Collections.sort(), provide a custom Comparator
+            //    Try switch the o1 o2 position for a different order
+            Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+                public int compare(Map.Entry<String, Double> o1,
+                                   Map.Entry<String, Double> o2) {
+                    return Integer.valueOf(o1.getKey()).compareTo(Integer.valueOf(o2.getKey()));
+                }
+            });
+            
+            Map<String, Double> sortedMap = new LinkedHashMap<String, Double>();
+            if(!mes)
+            	for (Map.Entry<String, Double> entry : list) {
+            		sortedMap.put(entry.getKey(), entry.getValue());
+            	}
+            else
+            	for (Map.Entry<String, Double> entry : list) {
+            		sortedMap.put(translateMonthToString(Integer.valueOf(entry.getKey())), entry.getValue());
+            	}
+
+
+            return sortedMap;
+            
+        }
+       
 }

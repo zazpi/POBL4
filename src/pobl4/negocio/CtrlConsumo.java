@@ -8,11 +8,13 @@ package pobl4.negocio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 
 import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
-import pobl4.presentacion.VistaAñadirConsumo;
+import pobl4.presentacion.VistaAnadirConsumo;
 import pobl4.presentacion.VistaConsumo;
+import pobl4.utils.Utils;
 
 /**
  *
@@ -22,7 +24,6 @@ public class CtrlConsumo implements ActionListener{
     
     List<Consumo> listConsumo;
     VistaConsumo vista;
-    Estados estado;
     ConsumoDAO consumoDAO;
     
     public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo, ConsumoDAO consumoDAO){
@@ -34,20 +35,20 @@ public class CtrlConsumo implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("Ano")) {
-    		estado = new EstadoAño();
-    		vista.disbaleFiltro("año");
+    		Estados estado = new EstadoAño();
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));
     	}
     	
     	if (e.getActionCommand().equals("Mes")) {
-    		estado = new EstadoMes();
+    		Estados estado = new EstadoMes();
     		int params [] = {vista.getAño()};
-    		vista.disbaleFiltro("mes");
-    		vista.setGrafico(estado.getDatosGraficos(listConsumo,params));
+    		Map<String,Double> datosGrafico = estado.getDatosGraficos(listConsumo, params);
+    		vista.setGrafico(datosGrafico);
     	}
     	if(e.getActionCommand().equals("Anadir")) {
-    		VistaAñadirConsumo vistaAñadirConsumo = new VistaAñadirConsumo(vista, true,consumoDAO);
+    		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO);
     	}
     }
+    
     
 }

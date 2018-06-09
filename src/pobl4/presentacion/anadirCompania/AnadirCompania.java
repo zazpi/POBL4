@@ -9,12 +9,12 @@ package pobl4.presentacion.anadirCompania;
  *
  * @author asier
  */
-public class AñadirCompañia extends javax.swing.JDialog {
+public class AnadirCompania extends javax.swing.JDialog {
 
     /**
      * Creates new form AñadirCompañia2
      */
-    public AñadirCompañia(java.awt.Frame parent, boolean modal) {
+    public AnadirCompania(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -205,13 +205,13 @@ public class AñadirCompañia extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AñadirCompañia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnadirCompania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AñadirCompañia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnadirCompania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AñadirCompañia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnadirCompania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AñadirCompañia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnadirCompania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -219,7 +219,7 @@ public class AñadirCompañia extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AñadirCompañia dialog = new AñadirCompañia(new javax.swing.JFrame(), true);
+                AnadirCompania dialog = new AnadirCompania(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

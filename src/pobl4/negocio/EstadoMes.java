@@ -3,9 +3,12 @@
  */
 package pobl4.negocio;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import pobl4.dominio.Consumo;
 import pobl4.utils.Utils;
@@ -25,10 +28,10 @@ public class EstadoMes implements Estados {
 		int año = params [0];		
 		for(Consumo c: listaConsumos) {
 			if(c.getAño() == año)
-				datosGrafico.put(String.valueOf(Utils.translateMonthToString(c.getMes())), c.getConsumo());
+				datosGrafico.put(String.valueOf(String.valueOf((c.getMes()))), c.getConsumo());
 		}
 		
-		return datosGrafico;
+		return Utils.sortByValue(datosGrafico,true);
 	}
 
 	/* (non-Javadoc)
