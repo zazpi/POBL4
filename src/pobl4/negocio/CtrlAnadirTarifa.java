@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pobl4.negocio;
 
 import java.awt.event.ActionEvent;
@@ -11,10 +9,6 @@ import pobl4.dominio.Tarifa;
 import pobl4.presentacion.anadirCompania.VistaAnadirTarifa;
 import pobl4.presentacion.anadirCompania.VistaAnadirTramo;
 
-/**
- * @author root
- *
- */
 public class CtrlAnadirTarifa implements ActionListener {
 
 	VistaAnadirTarifa vista;
@@ -36,9 +30,9 @@ public class CtrlAnadirTarifa implements ActionListener {
                 vista.dispose();
                 break;
             case "anadir":
-            	Precio precio = new Precio();
-            	CtrlAnadirPrecio ctrl = new CtrlAnadirPrecio(precio);
+            	CtrlAnadirPrecio ctrl = new CtrlAnadirPrecio();
             	VistaAnadirTramo vis = new VistaAnadirTramo(vista,true,ctrl);
+            	Precio precio = ctrl.getPrecio();
             	if(precio!= null)
             		tarifa.getPrecios().add(precio);
             	vista.actualizarListaPrecios();
