@@ -20,6 +20,7 @@ import pobl4.dominio.SimulacionMes;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
 import pobl4.presentacion.VistaComparador;
+import pobl4.presentacion.anadirCompania.VistaAnadirTarifa;
 import pobl4.utils.Utils;
 
 /**
@@ -82,6 +83,22 @@ public class CtrlComparador implements ItemListener, ActionListener{
                 break;
             case VistaComparador.BT_MES:
                 vista.getFechaMes().setEnabled(true);
+                break;
+            case VistaComparador.BT_ANADIR:
+                Tarifa tarifa = new Tarifa();
+        	CtrlAnadirTarifa controlTarifa = new CtrlAnadirTarifa(tarifa);
+        	VistaAnadirTarifa añadirTarifa = new VistaAnadirTarifa(vista,true,controlTarifa,tarifa); 
+        	if(tarifa.isValid()){
+                    Compania personalizado = new Compania();
+                    personalizado.setId(-1);
+                    personalizado.setNombre("Personalizado");
+                    List<Tarifa> listaTarifas = new ArrayList<>();
+                    listaTarifas.add(tarifa);
+                    personalizado.setTarifas(listaTarifas);
+                    listaCompanias.add(personalizado);
+                    
+                }                
+        	vista.actualizarComboBox();
                 break;
             default:
                 break;
