@@ -132,7 +132,7 @@ public class Utils {
             listaMeses = new ArrayList<>();
             
             for(Consumo c : listaConsumos){
-                if(!listaMeses.contains(translateMonthToString(c.getMes()))){
+                if((!listaMeses.contains(translateMonthToString(c.getMes())) && (c.getAño() == año))){
                     listaMeses.add(translateMonthToString(c.getMes()));
                 }
             }

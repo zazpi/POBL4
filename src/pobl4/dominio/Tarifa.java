@@ -20,7 +20,7 @@ public class Tarifa implements Serializable{
 	
 	private int id;
 	private String descripcion;
-	private boolean renovable;
+	private boolean renovable = true;
 	private int companiaID;
 	
 	private List<Precio> precios;
