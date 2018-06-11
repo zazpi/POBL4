@@ -8,32 +8,40 @@ package pobl4.presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
+
+import org.jdesktop.xswingx.PromptSupport;
 
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
 import pobl4.negocio.CtrlLogin;
+import pobl4.utils.Utils;
 
 /**
  *
  * @author galaipa
  */
-public class VistaLogin extends javax.swing.JDialog {
+public class VistaLogin extends javax.swing.JDialog{
     CtrlLogin controlador;
     User user;
+    UserDAO userDAO;
     List<Compania> listaCompania;
     List<Tarifa> listaTarifas;
     /**
@@ -44,7 +52,9 @@ public class VistaLogin extends javax.swing.JDialog {
         initComponents();
         this.listaCompania = listaCompania;
         this.listaTarifas = listaTarifas;
+        this.userDAO = userDAO;
         controlador = new CtrlLogin(this,userDAO);
+        addPromptText();
         addListeners();
         this.setVisible(true);
     }
@@ -116,10 +126,6 @@ public class VistaLogin extends javax.swing.JDialog {
         labelContrasena.setFont(new Font("DialogInput", 1, 16)); // NOI18N
         labelContrasena.setText("Contraseña: ");
         labelContrasena.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-
-        txContraseña.setText("contraseña");
-
-        txUsuario.setText("NombreUsuario");
 
         btEntrar.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
         btEntrar.setForeground(new Color(1, 1, 1));
@@ -225,6 +231,8 @@ public class VistaLogin extends javax.swing.JDialog {
     private void addListeners(){
         btEntrar.addActionListener(controlador);
         btRegistrarse.addActionListener(controlador);
+        btEntrar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),"enter_pressed");
+        btEntrar.getActionMap().put("enter_pressed", Utils.getHandlerLoginKeyEvent(userDAO, this));
     }
 
     public String getTxContraseña() {
@@ -244,6 +252,12 @@ public class VistaLogin extends javax.swing.JDialog {
     public User getUser (){
         return user;
     }
+    
+    public void addPromptText() {
+    	PromptSupport.setPrompt("password", txContraseña);
+    	PromptSupport.setPrompt("username", txUsuario);
+    	
+    }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     JButton btEntrar;
@@ -251,4 +265,5 @@ public class VistaLogin extends javax.swing.JDialog {
     JPasswordField txContraseña;
     JTextField txUsuario;
     // End of variables declaration//GEN-END:variables
+
 }
