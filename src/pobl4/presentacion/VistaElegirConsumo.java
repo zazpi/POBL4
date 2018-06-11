@@ -71,7 +71,8 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
 		consumoPunta = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroPunta());
 		consumoValle = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroValle());
 		consumoSuperValle = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroSuperValle());
-		numDias = consumosElegidos.size();
+		numDias = consumosElegidos.size() / 24;
+		this.dispose();
 	}
 
     @SuppressWarnings("unchecked")
