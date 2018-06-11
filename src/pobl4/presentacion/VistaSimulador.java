@@ -3,14 +3,18 @@ package pobl4.presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,29 +26,19 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import pobl4.dominio.Compania;
 import pobl4.negocio.CtrlSimulador;
-import pobl4.dominio.User;
-import pobl4.dominio.Simulacion;
+import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 
-public class VistaSimulador extends javax.swing.JDialog {
-    final static public String TXT_DIAS = "txtDias";
-    final static public String TXT_VALLE = "txtValle";
-    final static public String TXT_PUNTA = "txtPunta";
-    final static public String TXT_SUPERVALLE = "txtSuperValle";
-    final static public String TXT_POTENCIA = "txtPotencia";
-    
+public class VistaSimulador extends JDialog implements ItemListener{
     CtrlSimulador controlador;
-    User usuario;
-    List<Compania> companias;
-    Simulacion modelo;
+    List<Compania> listaCompanias;
+    SimulacionEstatica modelo;
     
-    public VistaSimulador(JFrame parent, boolean modal,CtrlSimulador controlador,User usuario,Simulacion modelo,List<Compania> companias) {
+    public VistaSimulador(JFrame parent, boolean modal,CtrlSimulador controlador,SimulacionEstatica modelo,List<Compania> listaCompanias) {
         super(parent, modal);
         this.controlador = controlador;
-        this.usuario = usuario;
         this.modelo = modelo;
-        this.companias = companias;
-        
+        this.listaCompanias = listaCompanias;   
         controlador.setVista(this);
         initComponents();
         addListeners();
@@ -54,22 +48,37 @@ public class VistaSimulador extends javax.swing.JDialog {
     }
     
     public void addListeners(){
-        compania.addItemListener(controlador);
-        btAyuda.addActionListener(controlador);
-        btAyuda.setActionCommand("ayuda");
+        compania.addItemListener(this);
+        setListener(btAyuda,"ayuda");
+        setListener(btAnadir,"anadir");
+        setListener(btSimularFactura,"simular");
+        setListener(btCargar,"cargar");
+    }
+    
+    public void setListener(JButton boton, String actionCommand) {
+    	boton.setActionCommand(actionCommand);
+    	boton.addActionListener(controlador);
     }
     
     public void actualizarTabla(){
         tablaFactura.getModel().setValueAt(modelo.getPorEnergia(), 0, 1);
-        tablaFactura.getModel().setValueAt(modelo.getPorPotencia(), 1, 1);
-        tablaFactura.getModel().setValueAt(modelo.getPorImpuestos(), 2, 1);
-        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 5, 1);
-        tablaFactura.getModel().setValueAt(modelo.getTotal(), 6, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorPunta(), 1, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorValle(), 2, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorSuperValle(), 3, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorPotencia(), 4, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorImpuestos(), 5, 1);
+        tablaFactura.getModel().setValueAt(modelo.getPorIva(), 6, 1);
+        tablaFactura.getModel().setValueAt(modelo.getTotal(), 7, 1);
     }
     
+	@Override // ACTUALIZAR COMBO BOX
+	public void itemStateChanged(ItemEvent e) {
+		actualizarComboBox();
+	}
+	
     public void actualizarComboBox(){
         DefaultComboBoxModel model = new DefaultComboBoxModel(((Compania)compania.getSelectedItem()).getTarifas().toArray(new Tarifa[0]) );
-        tarifa.setModel(model);  
+        tarifa.setModel(model); 
     }
     
     public double getPotencia(){
@@ -94,6 +103,10 @@ public class VistaSimulador extends javax.swing.JDialog {
         return (Compania) compania.getSelectedItem();
     }
     
+	public void mostrarError() {
+		JOptionPane.showMessageDialog(this, "Debes introducir todos los valores correctamente","ERROR",JOptionPane.WARNING_MESSAGE);
+	}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,7 +121,7 @@ public class VistaSimulador extends javax.swing.JDialog {
         JLabel labelNombre = new JLabel();
         JPanel panelDatos = new JPanel();
         JLabel labelCompania = new JLabel();
-        compania = new JComboBox<>(companias.toArray(new Compania[0]));
+        compania = new JComboBox<>(listaCompanias.toArray(new Compania[0]));
         JLabel labelTarifa = new JLabel();
         tarifa = new JComboBox<>();
         JLabel labelPContratada = new JLabel();
@@ -117,12 +130,12 @@ public class VistaSimulador extends javax.swing.JDialog {
         txPunta = new JTextField();
         txValle = new JTextField();
         txSuperValle = new JTextField();
-        JButton btCargar = new JButton();
+        btCargar = new JButton();
         JLabel labelDias = new JLabel();
         txDias = new JTextField();
         btAyuda = new JButton();
-        JButton btAnadir = new JButton();
-        JButton btSimularFactura = new JButton();
+        btAnadir = new JButton();
+        btSimularFactura = new JButton();
         JPanel panelGrafico = new JPanel();
         JScrollPane panelTabla = new JScrollPane();
         tablaFactura = new JTable();
@@ -281,9 +294,9 @@ public class VistaSimulador extends javax.swing.JDialog {
         tablaFactura.setModel(new DefaultTableModel(
             new Object [][] {
                 {"  Por energía utilizada", null},
-                {"  Valle", null},
-                {"  Punta", null},
-                {"  Supervalle    ", null},
+                {"  -  Valle  ", null},
+                {"  -  Punta", null},
+                {"  -  Supervalle    ", null},
                 {"  Por potencia contratada", null},
                 {"  Impuesto electricidad", null},
                 {"  IVA 21%", null},
@@ -358,7 +371,10 @@ public class VistaSimulador extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    JButton btAnadir;
     JButton btAyuda;
+    JButton btCargar;
+    JButton btSimularFactura;
     JComboBox<Compania> compania;
     JTable tablaFactura;
     JComboBox<Tarifa> tarifa;
@@ -368,4 +384,7 @@ public class VistaSimulador extends javax.swing.JDialog {
     JTextField txSuperValle;
     JTextField txValle;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

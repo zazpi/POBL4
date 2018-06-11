@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -24,14 +25,13 @@ import org.jfree.chart.plot.dial.StandardDialRange;
 import org.jfree.chart.plot.dial.StandardDialScale;
 import org.jfree.data.general.DefaultValueDataset;
 
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
+import pobl4.dominio.TiempoReal;
 import pobl4.negocio.CtrlTiempoReal;
 import pobl4.serial.Serial;
-import pobl4.serial.SerialListener;
 
-public class VistaTiempoReal extends JDialog implements SerialPortEventListener {
+public class VistaTiempoReal extends JDialog {
 	CtrlTiempoReal controlador;
+	TiempoReal modelo;
 	
 	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
 	int minimumValue = 0;
@@ -43,21 +43,20 @@ public class VistaTiempoReal extends JDialog implements SerialPortEventListener 
 	JLabel lvalorMaxConsumo;
 	
 	Serial seriala;
-	SerialListener listener;
 	
-	double balioa;
-	
-	public VistaTiempoReal (JFrame vista, CtrlTiempoReal control) {
+	public VistaTiempoReal (JFrame vista) {
 		super (vista, "Tiempo real", true);
 		
-		this.controlador = control;
-		//controlador.setDialogo(this);
-	
-		/*cargarSerial();
-		if (seriala != null) {
-			seriala.addListener(this);		
-		}
-		addListener(controlador);*/
+		modelo = new TiempoReal();
+		
+		//cargarSerial();
+		
+		controlador = new CtrlTiempoReal(modelo, seriala);
+		this.controlador.setDialogo(this);
+		
+		/*if (seriala != null) {
+			seriala.addListener(controlador);		
+		}*/	
 		
 		this.add(crearPanelDialogo());
 		this.setLocation(485, 252);
@@ -75,11 +74,6 @@ public class VistaTiempoReal extends JDialog implements SerialPortEventListener 
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-	}
-	
-	public void addListener(SerialListener listener) {
-		this.listener = null;
-		this.listener = listener;		
 	}
 
 	private Component crearPanelDialogo() {
@@ -183,24 +177,25 @@ public class VistaTiempoReal extends JDialog implements SerialPortEventListener 
 		return panel;
 	}
 	
-	@Override
-	public void serialEvent(SerialPortEvent arg0) {		
-		balioa = (double) seriala.leer();
-		
-		controlador.recibirConsumo(balioa);	
-	}
-	
 	public void setVelocimetro (double consumo) {
 		dataset.setValue(consumo);
 	}
 	
-	public void consumo (double consumo, double consumoTotal, double maxConsumo) {
+	public void consumo (double consumo, double consumoTotal, double maxConsumo) {		
+		DecimalFormat formato = new DecimalFormat("#.00");
+		
 		setVelocimetro(consumo);
-		lvalorConsumo.setText(consumoTotal + " kW");
-		lvalorMaxConsumo.setText(maxConsumo + " kW");
+		lvalorConsumo.setText(formato.format(consumoTotal) + " kW");
+		lvalorMaxConsumo.setText(formato.format(maxConsumo) + " kW");
 	}
 	
 	public void tiempo (int horas, int minutos, int segundos) {
 		lvalorTiempo.setText(horas + "h " + minutos + "m " + segundos + "s");
+	}
+	
+	public void inicializar () {
+		lvalorConsumo.setText(0 + " kW");
+		lvalorMaxConsumo.setText(0 + " kW");
+		lvalorTiempo.setText(0 + "h " + 0 + "m " + 0 + "s");
 	}
 }

@@ -30,12 +30,18 @@ public class GraficoFactory {
 			dataset.addValue(e.getValue(), "Row 1", e.getKey());
 		}
 		
-		//Opts
-		chart.setBackgroundPaint(Color.white);
-		CategoryPlot plot = (CategoryPlot) chart.getPlot();
-		plot.setBackgroundPaint(Color.lightGray);
-		plot.setRangeGridlinePaint(Color.white);
+		//render
 		
+		//Opts
+		chart.setBackgroundPaint(Color.LIGHT_GRAY);
+		CategoryPlot plot = (CategoryPlot) chart.getPlot();
+		plot.setBackgroundPaint(Color.white);
+		plot.setRangeGridlinePaint(Color.green);
+		
+		BarRenderer renderer = (BarRenderer) plot.getRenderer();
+		renderer.setSeriesPaint(0, Color.DARK_GRAY);
+		renderer.setDrawBarOutline(false);
+		renderer.setItemMargin(0.0);
 		ChartPanel panel = new ChartPanel(chart,true);
 		
 		return panel;

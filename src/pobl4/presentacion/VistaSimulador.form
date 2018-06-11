@@ -254,7 +254,7 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="compania">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;(companias.toArray(new Compania[0]))"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;(modeloCompanias.toArray(new Compania[0]))"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Compania&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
@@ -327,6 +327,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cargar desde  hist&#xf3;rico"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelDias">
               <Properties>
@@ -364,11 +367,17 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="btSimularFactura">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Simular Factura"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -421,9 +430,9 @@
                   <Table columnCount="2" rowCount="8">
                     <Column editable="false" title="Concepto" type="java.lang.Object">
                       <Data value="  Por energ&#xed;a utilizada"/>
-                      <Data value="  Valle"/>
-                      <Data value="  Punta"/>
-                      <Data value="  Supervalle    "/>
+                      <Data value="  -  Valle  "/>
+                      <Data value="  -  Punta"/>
+                      <Data value="  -  Supervalle    "/>
                       <Data value="  Por potencia contratada"/>
                       <Data value="  Impuesto electricidad"/>
                       <Data value="  IVA 21%"/>
