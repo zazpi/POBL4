@@ -34,70 +34,15 @@ public class Main extends JFrame{
 	public static int USERID = 0;
 
 	public static final long serialVersionUID = 1L;
-	
-	DAOFactory dbInstance;
-	UserDAO userDAO;
-	TarifaDAO tarifaDAO;
-	ConsumoDAO consumoDAO;
-	PrecioDAO precioDAO;
-	CompaniaDAO companiaDAO;
-	VistaLogin login;
-	User user;
-	Tarifa tarifa;
-	List<Compania> listaCompania;
-	List<Tarifa> listaTarifas;
 	CtrlMain controlador;
-	Compania compania;
 	
-	public Main(){
-	}
-	
-	private void login() {
-		login = new VistaLogin(this, true, userDAO,listaCompania,listaTarifas);
-		user = login.getUser();
-	}
-	
-	private void loadUserData() {
-		user.setConsumos(consumoDAO.list(new Long(user.getId())));
-		user.setTarifa(tarifaDAO.find(new Long(user.getTafiraID())));
-		tarifa = user.getTarifa();
-		tarifa.setCompania(companiaDAO.find(new Long(tarifa.getCompaniaID())));
-		tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-		USERID = user.getId();
-	}
-	
-	private void loadAppData() {
-		listaCompania = companiaDAO.list();
-		listaTarifas = tarifaDAO.list();
-		
-		
-		for(Compania c : listaCompania) {
-			List<Tarifa> tList = new ArrayList<>();
-			for(Tarifa t : listaTarifas) {
-				if(t.getCompaniaID() == c.getId())
-					tList.add(t);
-			}
-			
-			c.setTarifas(tList);
-		}
-	}
-	
-	private void setupDBConnAndDAOs() {
-		dbInstance = DAOFactory.getInstance("Consumo.jdbc");
-		userDAO = dbInstance.getUserDAO();
-		consumoDAO = dbInstance.getConsumoDAO();
-		tarifaDAO = dbInstance.getTarifaDAO();
-		companiaDAO = dbInstance.getCompaniaDAO();
-		precioDAO = dbInstance.getPrecioDAO();
-	}
-	
-	private void mainFrameSetup() {
-		controlador = new CtrlMain(this, user.getConsumos(), consumoDAO);
+	public Main() {
+		controlador = new CtrlMain(this);
 		this.setTitle("Zazpi");
-		this.setSize(1000,768);
-		this.setLocation(500, 500);
+		this.setSize(1280, 768);
+		this.setLocation(500, 0);
 		this.setContentPane(mainPane());
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 	
@@ -115,11 +60,6 @@ public class Main extends JFrame{
 		}
 		
 		Main main = new Main();
-		main.setupDBConnAndDAOs();
-		main.loadAppData();
-		main.login();
-		main.loadUserData();
-		main.mainFrameSetup();
 		System.err.println("Everything ok chief!");
                 
 	}
