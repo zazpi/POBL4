@@ -42,8 +42,19 @@ public class CtrlConsumo implements ActionListener{
     	if (e.getActionCommand().equals("Mes")) {
     		Estados estado = new EstadoMes();
     		int params [] = {vista.getAño()};
-    		Map<String,Double> datosGrafico = estado.getDatosGraficos(listConsumo, params);
-    		vista.setGrafico(datosGrafico);
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
+    	
+    	if(e.getActionCommand().equals("Dia")) {
+    		Estados estado = new EstadoDia();
+    		int params [] = {vista.getAño(),vista.getMes()};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
+    	
+    	if(e.getActionCommand().equals("Hora")) {
+    		Estados estado = new EstadoHora();
+    		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
     	}
     	if(e.getActionCommand().equals("Anadir")) {
     		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO);

@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
 import pobl4.dominio.Tarifa;
@@ -38,6 +40,7 @@ public class VistaRegistro extends javax.swing.JDialog implements ItemListener {
         initComponents();
         controlador = new CtrlRegistro(this, userDAO);
         setDefaultComboBoxItems();
+        addPromptText();
         addListeners();
         this.setVisible(true);
     }
@@ -127,16 +130,6 @@ public class VistaRegistro extends javax.swing.JDialog implements ItemListener {
         labelRepetirContrasena.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         labelRepetirContrasena.setText("Repetir contraseña:");
         labelRepetirContrasena.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txNombre.setText("nombre");
-
-        txApellido.setText("apellido");
-
-        txNombreUsuario.setText("nombreUsuario");
-
-        txContrasena.setText("contraseña");
-
-        txRContrasena.setText("contraseña");
         txRContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txRContrasenaActionPerformed(evt);
@@ -165,7 +158,6 @@ public class VistaRegistro extends javax.swing.JDialog implements ItemListener {
         labelNombreUsuario1.setText("Potencia contratada:");
         labelNombreUsuario1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setText("potencia contratada");
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField1.setSelectedTextColor(new java.awt.Color(0, 51, 51));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +373,14 @@ public class VistaRegistro extends javax.swing.JDialog implements ItemListener {
 			}
 	}
 
+	public void addPromptText() {
+		PromptSupport.setPrompt("password", txContrasena);
+		PromptSupport.setPrompt("username", txNombreUsuario);
+		PromptSupport.setPrompt("nombre", txNombre);
+		PromptSupport.setPrompt("apellido", txApellido);
+		PromptSupport.setPrompt("password", txRContrasena);
+		PromptSupport.setPrompt("potencia contratada", jTextField1);
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btRegistrarse;
