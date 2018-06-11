@@ -1,5 +1,6 @@
 package pobl4.utils;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,10 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.AbstractAction;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import pobl4.dao.ConsumoDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
+import pobl4.presentacion.VistaLogin;
 
 /**
  * 
@@ -129,12 +135,9 @@ public class Utils {
 
         public static Map<String, Double> sortByValue(Map<String, Double> unsortMap, boolean mes) {
 
-            // 1. Convert Map to List of Map
             List<Map.Entry<String, Double>> list =
                     new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
 
-            // 2. Sort list with Collections.sort(), provide a custom Comparator
-            //    Try switch the o1 o2 position for a different order
             Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
                 public int compare(Map.Entry<String, Double> o1,
                                    Map.Entry<String, Double> o2) {
@@ -155,6 +158,26 @@ public class Utils {
 
             return sortedMap;
             
+        }
+        public static AbstractAction getHandlerLoginKeyEvent(UserDAO userDAO, VistaLogin login) {
+            AbstractAction buttonPressed = new AbstractAction() {
+            	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+			           User user = Utils.validateUser(userDAO, login.getTxUsuario(), login.getTxContraseña());
+			            if(user != null){
+			                JOptionPane.showMessageDialog(login, "Welcome, "+login.getTxUsuario()+"!", "Login Success", JOptionPane.INFORMATION_MESSAGE);
+			                login.closeDialog(user);
+			            }
+			            else{
+			                JOptionPane.showMessageDialog(login, "ERROR: user doesn't exists!", "ERROR 404", JOptionPane.ERROR_MESSAGE);
+			            }
+			                
+			        
+				}
+            };
+            return buttonPressed;
         }
        
 }
