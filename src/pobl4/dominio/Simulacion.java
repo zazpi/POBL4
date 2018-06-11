@@ -29,14 +29,16 @@ public abstract class Simulacion implements Comparable{
             if(!checkPeriodo(consumo.getHora(),pr.getHora_inicio(),pr.getHora_fin())) continue;
             precio = pr;
         }
+        if(precio == null)
+            System.out.println("a");
         return precio.getPrecio() * consumo.getConsumo();
     }
     
     public boolean checkPeriodo(int valor, int inicio, int fin){
         if(fin > inicio){
-            return (valor > inicio && valor < fin);
+            return (valor > inicio && valor <= fin);
         }else{
-            return (valor > inicio || valor < fin);
+            return (valor > inicio || valor <= fin);
         }
     }
 

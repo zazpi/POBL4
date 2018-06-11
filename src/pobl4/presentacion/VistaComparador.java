@@ -42,6 +42,7 @@ public class VistaComparador extends javax.swing.JDialog {
 
     final static public String BT_ANO = "btAno";
     final static public String BT_MES = "btMes";
+        final static public String BT_ANADIR = "btAnadir";
     
     JList <Simulacion> listaSimulaciones;
     RenderComparador render;
@@ -73,6 +74,7 @@ public class VistaComparador extends javax.swing.JDialog {
         soloRenovable.addItemListener(controlador);
         addListener(btAno,BT_ANO);
         addListener(btMes,BT_MES);
+        addListener(btAnadir,BT_ANADIR);
     }
     
     public void addListener(JButton bt, String actionCommand){
@@ -100,7 +102,7 @@ public class VistaComparador extends javax.swing.JDialog {
         JPanel jPanel1 = new JPanel();
         JPanel panelArriba = new JPanel();
         btMes = new JButton();
-        JButton btAnadir = new JButton();
+        btAnadir = new JButton();
         btAno = new JButton();
         JPanel panelDerecha = new JPanel();
         JLabel lbTiempo = new JLabel();
@@ -228,12 +230,16 @@ public class VistaComparador extends javax.swing.JDialog {
         );
 
         panelLista.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
+        panelLista.setMaximumSize(new Dimension(400, 400));
+        panelLista.setMinimumSize(new Dimension(400, 400));
+        panelLista.setName(""); // NOI18N
+        panelLista.setPreferredSize(new Dimension(400, 400));
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(panelLista)
+                .addComponent(panelLista, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDerecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addComponent(panelArriba, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -247,7 +253,7 @@ public class VistaComparador extends javax.swing.JDialog {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(panelDerecha, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelLista)))
+                    .addComponent(panelLista, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -274,6 +280,7 @@ public class VistaComparador extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    JButton btAnadir;
     JButton btAno;
     JButton btMes;
     JComboBox<Integer> fechaAño;

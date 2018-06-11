@@ -117,13 +117,13 @@ public class Utils {
             return listaAnos;
         }
         
-        public static List<String>getListaMeses(List<Consumo>listaConsumos){
+        public static List<String>getListaMeses(List<Consumo>listaConsumos, int año){
             
             List<String>listaMeses;
             listaMeses = new ArrayList<>();
             
             for(Consumo c : listaConsumos){
-                if(!listaMeses.contains(translateMonthToString(c.getMes()))){
+                if((!listaMeses.contains(translateMonthToString(c.getMes())) && (c.getAño() == año))){
                     listaMeses.add(translateMonthToString(c.getMes()));
                 }
             }
