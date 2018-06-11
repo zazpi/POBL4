@@ -57,18 +57,19 @@ public class VistaComparador extends javax.swing.JDialog {
         initComponents();
         DefaultComboBoxModel modeloAno = new DefaultComboBoxModel(Utils.getListaAnos(listaConsumos).toArray(new Integer[0]));
         fechaAño.setModel(modeloAno);
-        DefaultComboBoxModel modeloMes = new DefaultComboBoxModel(Utils.getListaMeses(listaConsumos).toArray(new String[0]));
-        fechaMes.setModel(modeloMes); 
+        actualizarComboBox();
         addListeners();
         this.setVisible(true);
+    }
+    
+    public void actualizarComboBox(){
+        DefaultComboBoxModel modeloMes = new DefaultComboBoxModel(Utils.getListaMeses(listaConsumos, (int)fechaAño.getSelectedItem()).toArray(new String[0]));
+        fechaMes.setModel(modeloMes); 
     }
     
     public void addListeners(){
         fechaAño.addItemListener(controlador);
         fechaMes.addItemListener(controlador);
-        sinDiscriminacion.addItemListener(controlador);
-        discriminacion1.addItemListener(controlador);  
-        discriminacion2.addItemListener(controlador);
         soloRenovable.addItemListener(controlador);
         addListener(btAno,BT_ANO);
         addListener(btMes,BT_MES);
@@ -87,6 +88,10 @@ public class VistaComparador extends javax.swing.JDialog {
         return fechaMes;
     }
 
+    public JCheckBox getSoloRenovable() {
+        return soloRenovable;
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,10 +106,6 @@ public class VistaComparador extends javax.swing.JDialog {
         JLabel lbTiempo = new JLabel();
         fechaAño = new JComboBox<>();
         fechaMes = new JComboBox<>();
-        JLabel tipoTarifa = new JLabel();
-        sinDiscriminacion = new JCheckBox();
-        discriminacion1 = new JCheckBox();
-        discriminacion2 = new JCheckBox();
         JLabel renovable = new JLabel();
         soloRenovable = new JCheckBox();
         JPanel panelNombre = new JPanel();
@@ -168,20 +169,6 @@ public class VistaComparador extends javax.swing.JDialog {
 
         fechaMes.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
 
-        tipoTarifa.setBackground(new Color(1, 1, 1));
-        tipoTarifa.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
-        tipoTarifa.setForeground(new Color(1, 1, 1));
-        tipoTarifa.setText("Tipo de tarifa");
-
-        sinDiscriminacion.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        sinDiscriminacion.setText("Sin discriminación");
-
-        discriminacion1.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        discriminacion1.setText("Discriminación 2");
-
-        discriminacion2.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
-        discriminacion2.setText("Discriminación 1");
-
         renovable.setBackground(new Color(1, 1, 1));
         renovable.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
         renovable.setForeground(new Color(1, 1, 1));
@@ -196,43 +183,26 @@ public class VistaComparador extends javax.swing.JDialog {
             .addGroup(panelDerechaLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(soloRenovable)
                     .addComponent(renovable)
-                    .addComponent(tipoTarifa)
                     .addComponent(lbTiempo)
                     .addComponent(fechaMes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaAño, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelDerechaLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(sinDiscriminacion)
-                            .addComponent(discriminacion2, GroupLayout.Alignment.LEADING)
-                            .addGroup(GroupLayout.Alignment.LEADING, panelDerechaLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(soloRenovable))
-                            .addComponent(discriminacion1, GroupLayout.Alignment.LEADING))))
+                    .addComponent(fechaAño, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         panelDerechaLayout.setVerticalGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechaLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(81, 81, 81)
                 .addComponent(lbTiempo)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaAño, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tipoTarifa)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sinDiscriminacion)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(discriminacion2)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(discriminacion1)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(57, 57, 57)
                 .addComponent(renovable)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(soloRenovable)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         panelNombre.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
@@ -256,6 +226,8 @@ public class VistaComparador extends javax.swing.JDialog {
                 .addComponent(labelNombre)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        panelLista.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -304,12 +276,9 @@ public class VistaComparador extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     JButton btAno;
     JButton btMes;
-    JCheckBox discriminacion1;
-    JCheckBox discriminacion2;
     JComboBox<Integer> fechaAño;
     JComboBox<String> fechaMes;
     JScrollPane panelLista;
-    JCheckBox sinDiscriminacion;
     JCheckBox soloRenovable;
     // End of variables declaration//GEN-END:variables
 

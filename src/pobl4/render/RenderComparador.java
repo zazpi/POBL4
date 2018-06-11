@@ -31,35 +31,32 @@ public class RenderComparador implements ListCellRenderer<Simulacion>{
     @Override
     public Component getListCellRendererComponent(JList<? extends Simulacion> list, Simulacion value, int index, boolean isSelected, boolean cellHasFocus) {
         JPanel panel = new JPanel(new BorderLayout(10,10));
-		panel.add(new JLabel(new ImageIcon("Companias/gasnatural.png")),BorderLayout.WEST);
-		panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.red),
-				BorderFactory.createEmptyBorder(10,10,10,10)));
-
+        
+		panel.add(new JLabel(new ImageIcon("Companias/"+ value.getCompania().getNombre().toLowerCase()+".png")),BorderLayout.WEST);
+		panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(10,10,10,10),BorderFactory.createLoweredBevelBorder()));
+                
 		panel.add(crearPanelInfo(value),BorderLayout.CENTER);
                 panel.add(crearPanelPrecio(value),BorderLayout.EAST);
-		
-		if(isSelected) {
-			panel.setBackground(Color.blue);
-			panel.setOpaque(true);
-		}
-		
+             
 		return panel;
     }
     
     private Component crearPanelInfo(Simulacion value) {
-		JPanel panelInfo = new JPanel(new GridLayout(5,1));
+		JPanel panelInfo = new JPanel(new GridLayout(3,1));
 		
 		JLabel nombre = new JLabel(value.getCompania().getNombre());
-		nombre.setFont(new Font("arial",Font.BOLD,15));
-		nombre.setForeground(Color.PINK);
+		nombre.setFont(new Font("arial",Font.BOLD,20));
+		nombre.setForeground(Color.BLACK);
 		panelInfo.add(nombre);
-		
-		JLabel tarifa = new JLabel(value.getTarifa().getDescripcion());
-		tarifa.setFont(new Font("arial",Font.PLAIN,10));
+                
+    
+		JLabel tarifa = new JLabel("Tarifa:  " + value.getTarifa().getDescripcion());
+		tarifa.setFont(new Font("arial",Font.PLAIN,15));
 		panelInfo.add(tarifa);	
+                
 		
-		JLabel renovable = new JLabel("Si");
-		renovable.setFont(new Font("arial",Font.ITALIC,10));
+		JLabel renovable = new JLabel("Renovable:  " + (value.getTarifa().isRenovable()?"Si":"No"));
+		renovable.setFont(new Font("arial",Font.ITALIC,15));
 		panelInfo.add(renovable);	
 
 		return panelInfo;
@@ -68,15 +65,16 @@ public class RenderComparador implements ListCellRenderer<Simulacion>{
     private Component crearPanelPrecio(Simulacion value) {
         JPanel panelInfo = new JPanel(new BorderLayout(0,10));
 		
-		JLabel nombre = new JLabel(String.format ("%.2f", value.getTotal()));
+		JLabel precio = new JLabel(String.format ("%.5f", value.getTotal()));
                 
-		nombre.setFont(new Font("arial",Font.BOLD,30));
-		nombre.setForeground(Color.BLACK);
-		panelInfo.add(nombre);
+                precio.setBorder(BorderFactory.createEmptyBorder(0,0,0,30));
+                
+		precio.setFont(new Font("arial",Font.BOLD,30));
+		precio.setForeground(Color.BLACK);
+		panelInfo.add(precio);
                 
                return panelInfo;
 
     }
    
-	
 }
