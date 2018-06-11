@@ -1,11 +1,16 @@
 package pobl4.presentacion;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -24,8 +29,12 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.chart.ChartPanel;
+
 import pobl4.dominio.Compania;
 import pobl4.negocio.CtrlSimulador;
+import pobl4.negocio.GraficoFactory;
 import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 
@@ -69,6 +78,25 @@ public class VistaSimulador extends JDialog implements ItemListener{
         tablaFactura.getModel().setValueAt(modelo.getPorImpuestos(), 5, 1);
         tablaFactura.getModel().setValueAt(modelo.getPorIva(), 6, 1);
         tablaFactura.getModel().setValueAt(modelo.getTotal(), 7, 1);
+        actualizarGrafico();
+    }
+    
+    public void actualizarGrafico() {
+    	ChartPanel chartPanel = GraficoFactory.getGraficoTarta(mapear());
+    	chartPanel.setSize(panelGrafico.getSize());
+    	panelGrafico.removeAll();
+    	panelGrafico.add(chartPanel,BorderLayout.CENTER);
+    	this.repaint();
+    }
+    public Map<String, Double> mapear(){
+    	Map<String,Double> map = new LinkedHashMap<>();
+    	map.put("Consumo Valle", modelo.getPorValle());
+    	map.put("Consumo Punta", modelo.getPorPunta());
+    	map.put("Consumo SuperValle", modelo.getPorSuperValle());
+    	map.put("Potencia", modelo.getPorPotencia());
+    	map.put("Impuesto eléctrico", modelo.getPorImpuestos());
+    	map.put("IVA", modelo.getPorIva());
+    	return map;
     }
     
 	@Override // ACTUALIZAR COMBO BOX
@@ -106,6 +134,19 @@ public class VistaSimulador extends JDialog implements ItemListener{
 	public void mostrarError() {
 		JOptionPane.showMessageDialog(this, "Debes introducir todos los valores correctamente","ERROR",JOptionPane.WARNING_MESSAGE);
 	}
+	
+	public void setValle(int val) {
+		txValle.setText(String.valueOf(val));
+	}
+	public void setPunta(int val) {
+		txPunta.setText(String.valueOf(val));
+	}
+	public void setSuperValle(int val) {
+		txSuperValle.setText(String.valueOf(val));
+	}
+	public void setDias(int val) {
+		txDias.setText(String.valueOf(val));
+	}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,7 +177,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
         btAyuda = new JButton();
         btAnadir = new JButton();
         btSimularFactura = new JButton();
-        JPanel panelGrafico = new JPanel();
+        panelGrafico = new JPanel();
         JScrollPane panelTabla = new JScrollPane();
         tablaFactura = new JTable();
 
@@ -376,6 +417,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
     JButton btCargar;
     JButton btSimularFactura;
     JComboBox<Compania> compania;
+    JPanel panelGrafico;
     JTable tablaFactura;
     JComboBox<Tarifa> tarifa;
     JTextField txDias;

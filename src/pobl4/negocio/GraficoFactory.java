@@ -15,6 +15,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  * @author Lucas
@@ -46,6 +47,16 @@ public class GraficoFactory {
 		
 		return panel;
 		
+	}
+	
+	public static ChartPanel getGraficoTarta(Map<String,Double> valores) {
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		for(Entry<String, Double> e: valores.entrySet()) {
+			dataset.setValue(e.getKey(),e.getValue());
+		}
+		JFreeChart chart = ChartFactory.createPieChart("",dataset,false,true,false);
+		ChartPanel panel = new ChartPanel(chart,true);
+		return panel;
 	}
 
 }

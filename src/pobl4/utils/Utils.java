@@ -27,15 +27,6 @@ import pobl4.presentacion.VistaLogin;
  */
 
 public class Utils {
-	public final static int PUNTA_INICIO = 13;
-	public final static int PUNTA_FIN= 23;
-	public final static int VALLE_1_INICIO = 7;
-	public final static int VALLE_1_FIN= 13;
-	public final static int VALLE_2_INICIO = 11;
-	public final static int VALLE_2_FIN= 12;
-	public final static int SUPERVALLE_INICIO= 1;
-	public final static int SUPERVALLE_FIN= 7;
-	
 	public static User validateUser(UserDAO userDAO,String username,String password) {
 		User user = userDAO.find(username, password);
 		if(user!=null)
@@ -132,7 +123,7 @@ public class Utils {
             listaMeses = new ArrayList<>();
             
             for(Consumo c : listaConsumos){
-                if(!listaMeses.contains(translateMonthToString(c.getMes()))){
+                if((!listaMeses.contains(translateMonthToString(c.getMes())) && (c.getAño() == año))){
                     listaMeses.add(translateMonthToString(c.getMes()));
                 }
             }
@@ -167,7 +158,6 @@ public class Utils {
             
         }
 
-        
     	public static double calcularConsumoPeriodo(List<Consumo> consumos,Filtro filtro){
     		double consumo = 0;
     		for(Consumo c : consumos) {

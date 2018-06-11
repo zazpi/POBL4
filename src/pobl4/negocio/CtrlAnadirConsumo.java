@@ -111,7 +111,7 @@ public class CtrlAnadirConsumo implements ActionListener{
 				e.printStackTrace();
 			}
 		}
-		
+		          System.out.println("bukatuta");
 		return list;
 		
 	}
