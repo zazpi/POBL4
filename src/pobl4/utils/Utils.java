@@ -1,10 +1,24 @@
 package pobl4.utils;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.AbstractAction;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
+import pobl4.dao.ConsumoDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.User;
+import pobl4.presentacion.VistaLogin;
 
 /**
  * 
@@ -22,6 +36,12 @@ public class Utils {
 		
 		return null;
 			
+	}
+	
+	public static void createConsumes(ConsumoDAO consumoDAO, List<Consumo> consumos) {
+		if(consumoDAO != null) {
+			consumoDAO.create(consumos);
+		}
 	}
 	
 	public static String translateMonthToString(int mes) {
@@ -112,6 +132,52 @@ public class Utils {
             return listaMeses;
         }
         
-        
-	
+
+        public static Map<String, Double> sortByValue(Map<String, Double> unsortMap, boolean mes) {
+
+            List<Map.Entry<String, Double>> list =
+                    new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
+
+            Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+                public int compare(Map.Entry<String, Double> o1,
+                                   Map.Entry<String, Double> o2) {
+                    return Integer.valueOf(o1.getKey()).compareTo(Integer.valueOf(o2.getKey()));
+                }
+            });
+            
+            Map<String, Double> sortedMap = new LinkedHashMap<String, Double>();
+            if(!mes)
+            	for (Map.Entry<String, Double> entry : list) {
+            		sortedMap.put(entry.getKey(), entry.getValue());
+            	}
+            else
+            	for (Map.Entry<String, Double> entry : list) {
+            		sortedMap.put(translateMonthToString(Integer.valueOf(entry.getKey())), entry.getValue());
+            	}
+
+
+            return sortedMap;
+            
+        }
+        public static AbstractAction getHandlerLoginKeyEvent(UserDAO userDAO, VistaLogin login) {
+            AbstractAction buttonPressed = new AbstractAction() {
+            	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+			           User user = Utils.validateUser(userDAO, login.getTxUsuario(), login.getTxContraseña());
+			            if(user != null){
+			                JOptionPane.showMessageDialog(login, "Welcome, "+login.getTxUsuario()+"!", "Login Success", JOptionPane.INFORMATION_MESSAGE);
+			                login.closeDialog(user);
+			            }
+			            else{
+			                JOptionPane.showMessageDialog(login, "ERROR: user doesn't exists!", "ERROR 404", JOptionPane.ERROR_MESSAGE);
+			            }
+			                
+			        
+				}
+            };
+            return buttonPressed;
+        }
+       
 }

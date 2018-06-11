@@ -1,26 +1,23 @@
 package pobl4.dominio;
 
-/**
- *
- * @author galaipa
- */
 
 public class SimulacionEstatica extends Simulacion {
     double punta, valle, supervalle;
-    
-    @Override
+    double porPunta, porValle, porSuperValle;
+
+	@Override
     public void calcularCoste() {
         if(tarifa == null){
-            resetCalculos();
             return;
         }
         Consumo consumoPunta = new Consumo(7,16, punta);
         Consumo consumoValle = new Consumo(7,12, valle);
         Consumo consumoSuperValle = new Consumo(7,3, supervalle);
         
-        porEnergia = getCoste(tarifa,consumoPunta);
-        porEnergia += getCoste(tarifa,consumoValle);
-        porEnergia += getCoste(tarifa,consumoSuperValle);
+        porPunta = getCoste(tarifa,consumoPunta);
+        porValle = getCoste(tarifa,consumoValle);
+        porSuperValle = getCoste(tarifa,consumoSuperValle);
+        porEnergia = porPunta + porValle + porSuperValle;
         
         porPotencia = 38 * potencia * ((double)dias/365);
         porImpuestos = (porEnergia + porPotencia) * 0.0511269 ;
@@ -40,5 +37,17 @@ public class SimulacionEstatica extends Simulacion {
     public void setSupervalle(double supervalle) {
         this.supervalle = supervalle;
     }
+    
+    public double getPorPunta() {
+		return porPunta;
+	}
+
+	public double getPorValle() {
+		return porValle;
+	}
+
+	public double getPorSuperValle() {
+		return porSuperValle;
+	}
     
 }

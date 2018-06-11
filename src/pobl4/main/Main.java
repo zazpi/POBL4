@@ -3,10 +3,16 @@
  */
 package pobl4.main;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import pobl4.dao.CompaniaDAO;
 import pobl4.dao.ConsumoDAO;
@@ -15,30 +21,19 @@ import pobl4.dao.PrecioDAO;
 import pobl4.dao.TarifaDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Compania;
-import pobl4.dominio.Precio;
-import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
-<<<<<<< HEAD
-import pobl4.negocio.CtrlComparador;
-import pobl4.presentacion.VistaComparador;
-=======
-<<<<<<< HEAD
-import pobl4.negocio.CtrlSimulador;
-=======
->>>>>>> master
-import pobl4.presentacion.VistaConsumo;
->>>>>>> master
+import pobl4.negocio.CtrlMain;
 import pobl4.presentacion.VistaLogin;
-import pobl4.presentacion.VistaSimulador;
-
 /**
  * @author Lucas
  *
  */
 public class Main extends JFrame{
 	
-	private static int USERID = 0;
+	public static int USERID = 0;
+
+	public static final long serialVersionUID = 1L;
 	
 	DAOFactory dbInstance;
 	UserDAO userDAO;
@@ -50,12 +45,8 @@ public class Main extends JFrame{
 	User user;
 	Tarifa tarifa;
 	List<Compania> listaCompania;
-<<<<<<< HEAD
-    List<Tarifa> listaTarifas;
-=======
 	List<Tarifa> listaTarifas;
->>>>>>> master
-	
+	CtrlMain controlador;
 	Compania compania;
 	
 	public Main(){
@@ -98,61 +89,31 @@ public class Main extends JFrame{
 		tarifaDAO = dbInstance.getTarifaDAO();
 		companiaDAO = dbInstance.getCompaniaDAO();
 		precioDAO = dbInstance.getPrecioDAO();
-<<<<<<< HEAD
-		VistaLogin login = new VistaLogin(this, true, userDAO);
-		user = login.getSuccess();
-		if(user != null) {
-			user.setTarifa(tarifaDAO.find(new Long(user.getTafiraID())));
-			tarifa = user.getTarifa();
-			tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-			compania = companiaDAO.find(new Long(tarifa.getCompaniaID()));
-			compania.setTarifas(tarifaDAO.list());
-			listaCompania = companiaDAO.list();
-            listaTarifas = tarifaDAO.list();
-                        for(Compania comp : listaCompania){
-                            List<Tarifa> tarifas = new ArrayList<>();
-                            for(Tarifa tarifa : listaTarifas){
-                                if(tarifa.getCompaniaID() == comp.getId())
-                                    tarifas.add(tarifa);
-                                tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-                            }
-                            comp.setTarifas(tarifas);
-                            
-                        }
-                        
-                        SimulacionEstatica modelo = new SimulacionEstatica();
-                        CtrlSimulador controlador = new CtrlSimulador(modelo);     
-                        VistaSimulador vista = new VistaSimulador(this,true,controlador,user,modelo,listaCompania);
-		}
-		
-		System.err.println(user.toString());
-		System.err.println(tarifa.toString());
-		System.err.println(tarifa.getPrecios().toString());
-		System.err.println(compania.toString());
-		System.err.println(listaCompania.toString());
-		System.err.println(compania.getTarifas().toString());
-		
-=======
 	}
 	
 	private void mainFrameSetup() {
+		controlador = new CtrlMain(this, user.getConsumos(), consumoDAO);
 		this.setTitle("Zazpi");
 		this.setSize(1000,768);
-		this.setLocation(0, 0);
+		this.setLocation(500, 500);
+		this.setContentPane(mainPane());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                CtrlComparador controlador = new CtrlComparador(listaCompania, user.getConsumos());
-		VistaComparador vista = new VistaComparador(this, true,controlador, user.getConsumos());
-               
+		this.setVisible(true);
 	}
 	
-	public DAOFactory getDAO() {
-		return dbInstance;
->>>>>>> master
-	}
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Main main = new Main();
 		main.setupDBConnAndDAOs();
 		main.loadAppData();
@@ -162,10 +123,16 @@ public class Main extends JFrame{
 		System.err.println("Everything ok chief!");
                 
 	}
-
-<<<<<<< HEAD
-}
-=======
 	
+	public Container mainPane() {
+		JPanel pane = new JPanel(new BorderLayout());
+		JButton consumo = new JButton("Mi Consumo");
+		consumo.setActionCommand("consumo");
+		consumo.addActionListener(controlador);
+		pane.add(consumo, BorderLayout.CENTER);
+		
+		
+		return pane;
+	}
 }
->>>>>>> master
+	

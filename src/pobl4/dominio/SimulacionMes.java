@@ -20,6 +20,8 @@ public class SimulacionMes extends Simulacion{
     @Override
     public void calcularCoste() {
         
+        porEnergia = 0;
+        
         for (Consumo consumo : listaConsumos){
             if(consumo.getAño() == año && consumo.getMes() == mes){
                 porEnergia += getCoste(tarifa, consumo);

@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import pobl4.dominio.Compania;
 import pobl4.dominio.Consumo;
 import pobl4.dominio.Simulacion;
@@ -40,14 +41,26 @@ public class CtrlComparador implements ItemListener, ActionListener{
     
     public void generarSimulaciones(){
         listaSimulaciones = new ArrayList<>();
+        boolean renovable = vista.getSoloRenovable().isSelected();
         for(Compania c : listaCompanias){
             for(Tarifa t : c.getTarifas()){
-                if(vista.getFechaMes().isEnabled()){
+                
+                if(renovable){
+                    if((vista.getFechaMes().isEnabled())&&(t.isRenovable())){
                     listaSimulaciones.add(new SimulacionMes(listaConsumos,c, t, (Integer)vista.getFechaAño().getSelectedItem(), 
                                                             Utils.translateStringToMonth((String)vista.getFechaMes().getSelectedItem())));
-                }else{
+                    }else if ((!vista.getFechaMes().isEnabled())&&(t.isRenovable())){
                     listaSimulaciones.add(new SimulacionAno(listaConsumos,c, t,(Integer)vista.getFechaAño().getSelectedItem()));
+                    }
+                }else{
+                    if(vista.getFechaMes().isEnabled()){
+                    listaSimulaciones.add(new SimulacionMes(listaConsumos,c, t, (Integer)vista.getFechaAño().getSelectedItem(), 
+                                                            Utils.translateStringToMonth((String)vista.getFechaMes().getSelectedItem())));
+                    }else{
+                    listaSimulaciones.add(new SimulacionAno(listaConsumos,c, t,(Integer)vista.getFechaAño().getSelectedItem()));
+                    }
                 }
+                
             }
         }
         vista.actualizarLista(listaSimulaciones);
@@ -55,7 +68,10 @@ public class CtrlComparador implements ItemListener, ActionListener{
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-      generarSimulaciones();
+         if(e.getSource().equals(vista.getFechaAño())){
+            vista.actualizarComboBox();
+         }
+         generarSimulaciones();
     }
 
     @Override

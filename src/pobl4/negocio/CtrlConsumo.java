@@ -8,8 +8,13 @@ package pobl4.negocio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
+
+import pobl4.dao.ConsumoDAO;
 import pobl4.dominio.Consumo;
+import pobl4.presentacion.VistaAnadirConsumo;
 import pobl4.presentacion.VistaConsumo;
+import pobl4.utils.Utils;
 
 /**
  *
@@ -19,25 +24,42 @@ public class CtrlConsumo implements ActionListener{
     
     List<Consumo> listConsumo;
     VistaConsumo vista;
-    Estados estado;
+    ConsumoDAO consumoDAO;
     
-    public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo){
+    public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo, ConsumoDAO consumoDAO){
         this.vista = vista;
         this.listConsumo = listConsumo;
+        this.consumoDAO = consumoDAO;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("Ano")) {
-    		estado = new EstadoAño();
+    		Estados estado = new EstadoAño();
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));
     	}
     	
-    	else if (e.getActionCommand().equals("Mes")) {
-    		estado = new EstadoMes();
-    		int [] params = {2010,1};
-    		vista.setGrafico(estado.getDatosGraficos(listConsumo,params));
+    	if (e.getActionCommand().equals("Mes")) {
+    		Estados estado = new EstadoMes();
+    		int params [] = {vista.getAño()};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
+    	
+    	if(e.getActionCommand().equals("Dia")) {
+    		Estados estado = new EstadoDia();
+    		int params [] = {vista.getAño(),vista.getMes()};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
+    	
+    	if(e.getActionCommand().equals("Hora")) {
+    		Estados estado = new EstadoHora();
+    		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
+    	if(e.getActionCommand().equals("Anadir")) {
+    		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO);
     	}
     }
+    
     
 }
