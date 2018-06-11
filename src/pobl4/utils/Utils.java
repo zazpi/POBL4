@@ -21,7 +21,14 @@ import pobl4.dominio.User;
  */
 
 public class Utils {
-
+	public final static int PUNTA_INICIO = 13;
+	public final static int PUNTA_FIN= 23;
+	public final static int VALLE_1_INICIO = 7;
+	public final static int VALLE_1_FIN= 13;
+	public final static int VALLE_2_INICIO = 11;
+	public final static int VALLE_2_FIN= 12;
+	public final static int SUPERVALLE_INICIO= 1;
+	public final static int SUPERVALLE_FIN= 7;
 	
 	public static User validateUser(UserDAO userDAO,String username,String password) {
 		User user = userDAO.find(username, password);
@@ -156,5 +163,23 @@ public class Utils {
             return sortedMap;
             
         }
+        
+    	public static double calcularConsumoPeriodo(List<Consumo> consumos,Filtro filtro){
+    		double consumo = 0;
+    		for(Consumo c : consumos) {
+    			if(filtro.filtrar(c))
+    				consumo += c.getConsumo();
+    		}
+    		return consumo;
+    	}
+    	
+    	public static List<Consumo> filtrarConsumo(List<Consumo> consumos,int año, int mes){
+    		List<Consumo> consumoFiltrado = new ArrayList<>();
+    		for(Consumo c : consumos) {
+    			if(c.getAño() == año && c.getMes() == mes)
+    				consumoFiltrado.add(c);
+    		}
+    		return consumoFiltrado;
+    	}
        
 }
