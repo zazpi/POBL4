@@ -17,12 +17,14 @@ import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
 import pobl4.dominio.Consumo;
+import pobl4.utils.ConsumoFactory;
 import pobl4.utils.Utils;
 
 
 public class VistaElegirConsumo extends JDialog implements ActionListener {
 	List<Consumo> consumos;
-	int consumoPunta, consumoValle, consumoSuperValle, numDias;
+	double consumoPunta, consumoValle, consumoSuperValle;
+	int numDias;
 	
     public VistaElegirConsumo(JDialog parent, boolean modal, List<Consumo> consumos) {
         super(parent, modal);
@@ -45,15 +47,15 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
         comboMes.setModel(modeloMes); 
     }
     
-    public int getPunta() { 
+    public double getPunta() { 
     	return consumoPunta;
     }
     
-    public int getValle() { 
+    public double getValle() { 
     	return consumoValle;
     }
     
-    public int getSuperValle() { 
+    public double getSuperValle() { 
     	return consumoSuperValle;
     }
     
@@ -62,8 +64,14 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
     }
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		int año = (int) comboAño.getSelectedItem();
+		int mes = Utils.translateStringToMonth((String)comboMes.getSelectedItem());
+		List<Consumo>  consumosElegidos = Utils.filtrarConsumo(consumos,año, mes);
 		
-		
+		consumoPunta = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroPunta());
+		consumoValle = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroValle());
+		consumoSuperValle = Utils.calcularConsumoPeriodo(consumosElegidos,ConsumoFactory.getFiltroSuperValle());
+		numDias = consumosElegidos.size();
 	}
 
     @SuppressWarnings("unchecked")
