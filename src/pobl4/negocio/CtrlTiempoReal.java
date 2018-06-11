@@ -19,10 +19,14 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 	TiempoReal modelo;
 	
 	Serial seriala;
+	int byteKopurua;
+	byte [] bytes;
 		
 	public CtrlTiempoReal (TiempoReal modelo, Serial seriala) {
 		this.modelo = modelo;
 		//this.seriala = seriala;
+		byteKopurua = 0;
+		bytes = new byte[] {0, 0};
 	}
 	
 	public void setDialogo (VistaTiempoReal dialogo) {
@@ -32,8 +36,17 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 	@Override
 	public void serialEvent(SerialPortEvent arg0) {		
 		double balioa = (double) seriala.leer();
+		bytes[byteKopurua] = (byte) balioa;
 		
-		recibirConsumo(balioa);
+		if (byteKopurua == 1) {
+			int temp = ((int)bytes[1] << 8) + ((int)bytes[0]);
+			
+			System.out.println(temp);
+			recibirConsumo(temp);
+			byteKopurua = 0;
+		}else {
+			byteKopurua++;
+		}
 	}
 
 	@Override
@@ -57,14 +70,12 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 				dialogo.inicializar();
 				timer = new Timer (1000, this);
 				timer.start();
-				//byte bytes = (byte) 255;
-				//seriala.escribir(bytes);
+				seriala.escribir((byte) 255);
 			} else {
 				dialogo.setVelocimetro(0.0);
 				timer.stop();
 				timer = null;
-				//byte bytes = (byte) 0;
-				//seriala.escribir(bytes);
+				seriala.escribir((byte) 0);
 			}
 		}
 	}
