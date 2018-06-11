@@ -2,14 +2,11 @@ package pobl4.dominio;
 
 
 public class SimulacionEstatica extends Simulacion {
-    double punta, valle, supervalle;
-    double porPunta, porValle, porSuperValle;
+    double punta, valle, supervalle; // Consumos
+    double porPunta, porValle, porSuperValle; // Coste
 
 	@Override
     public void calcularCoste() {
-        if(tarifa == null){
-            return;
-        }
         Consumo consumoPunta = new Consumo(7,16, punta);
         Consumo consumoValle = new Consumo(7,12, valle);
         Consumo consumoSuperValle = new Consumo(7,3, supervalle);
@@ -17,6 +14,7 @@ public class SimulacionEstatica extends Simulacion {
         porPunta = getCoste(tarifa,consumoPunta);
         porValle = getCoste(tarifa,consumoValle);
         porSuperValle = getCoste(tarifa,consumoSuperValle);
+        
         porEnergia = porPunta + porValle + porSuperValle;
         
         porPotencia = 38 * potencia * ((double)dias/365);

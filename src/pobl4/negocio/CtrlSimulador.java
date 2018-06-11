@@ -21,6 +21,7 @@ public class CtrlSimulador implements ActionListener{
     public CtrlSimulador(SimulacionEstatica modeloSimulacion, List<Compania> listaCompanias,List<Consumo> listaConsumos){
         this.modeloSimulacion = modeloSimulacion;
         this.listaCompanias = listaCompanias;
+        this.listaConsumos = listaConsumos;
     }
     
     public void setVista(VistaSimulador vista){
@@ -55,11 +56,10 @@ public class CtrlSimulador implements ActionListener{
         	vista.actualizarComboBox();
         }else if(actionCommand.equals("cargar")) {
         	VistaElegirConsumo elegir = new VistaElegirConsumo(vista,true,listaConsumos);
-            modeloSimulacion.setValle(elegir.getValle());
-            modeloSimulacion.setSupervalle(elegir.getSuperValle());
-            modeloSimulacion.setPunta(elegir.getPunta());
-            modeloSimulacion.setDias(elegir.getDias());
-            vista.actualizarTabla();
+            vista.setValle((int) Math.round(elegir.getValle()));
+            vista.setPunta((int) Math.round(elegir.getPunta()));
+            vista.setSuperValle((int) Math.round(elegir.getSuperValle()));
+            vista.setDias(elegir.getDias());
         }
     }
     
