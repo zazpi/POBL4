@@ -19,7 +19,7 @@ import pobl4.utils.Utils;
 
 /**
  *
- * @author root
+ * @author Lucas
  */
 public class CtrlLogin implements ActionListener{
     UserDAO userDAO;
@@ -38,13 +38,13 @@ public class CtrlLogin implements ActionListener{
                 login.closeDialog(user);
             }
             else{
-                JOptionPane.showMessageDialog(login, "ERROR: user not found!", "ERROR 404", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(login, "ERROR: user doesn't exists!", "ERROR 404", JOptionPane.ERROR_MESSAGE);
             }
                 
         }
         
         if(e.getActionCommand().equals("registro")) {
-        	VistaRegistro registro = new VistaRegistro(login, true,userDAO);
+        	VistaRegistro registro = new VistaRegistro(login, true,userDAO,login.getListCompanias(),login.getListTarifas());
         }
     }
     

@@ -2,63 +2,66 @@ package pobl4.negocio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.List;
+
 import pobl4.dominio.Compania;
-import pobl4.dominio.Simulacion;
+import pobl4.dominio.Consumo;
+import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
+import pobl4.presentacion.VistaElegirConsumo;
 import pobl4.presentacion.VistaSimulador;
+import pobl4.presentacion.anadirCompania.VistaAnadirTarifa;
 
-/**
- *
- * @author galaipa
- */
-public class CtrlSimulador implements ItemListener, ActionListener{
+public class CtrlSimulador implements ActionListener{
     VistaSimulador vista;
-    Simulacion modelo;
+    SimulacionEstatica modeloSimulacion;
+    List<Compania> listaCompanias;
+    List<Consumo> listaConsumos;
     
-    public CtrlSimulador(VistaSimulador vista, Simulacion modelo){
-        this.vista = vista;
-        this.modelo = modelo;
-        
+    public CtrlSimulador(SimulacionEstatica modeloSimulacion, List<Compania> listaCompanias,List<Consumo> listaConsumos){
+        this.modeloSimulacion = modeloSimulacion;
+        this.listaCompanias = listaCompanias;
     }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        if(e.getStateChange() == ItemEvent.SELECTED){
-            Object item = e.getItem();
-            if(item instanceof Tarifa)
-                modelo.setTarifa((Tarifa)item);
-            else if(item instanceof Compania)
-                modelo.setCompania((Compania) item);
-        }
-        vista.actualizarTabla();
+    
+    public void setVista(VistaSimulador vista){
+        this.vista = vista;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case VistaSimulador.TXT_POTENCIA:
-                modelo.setPotencia(vista.getPotencia());
-                break;
-            case VistaSimulador.TXT_DIAS:
-                modelo.setDias(vista.getDias());
-                break;
-            case VistaSimulador.TXT_VALLE:
-               // modelo.setValle(vista.getValle());
-                break;
-            case VistaSimulador.TXT_SUPERVALLE:
-               // modelo.setSupervalle(vista.getSuperValle());
-                break;
-            case VistaSimulador.TXT_PUNTA:
-              //  modelo.setPunta(vista.getPunta());
-                break;
-            default:
-                break;
+        String actionCommand = e.getActionCommand();
+        if(actionCommand.equals("simular")){
+        	try {
+                    modeloSimulacion.setValle(vista.getValle());
+                    modeloSimulacion.setSupervalle(vista.getSuperValle());
+                    modeloSimulacion.setPunta(vista.getPunta());
+                    modeloSimulacion.setPotencia(vista.getPotencia());
+                    modeloSimulacion.setTarifa(vista.getTarifa());
+                    modeloSimulacion.setDias(vista.getDias());
+                    modeloSimulacion.setCompania(vista.getCompania());
+                    modeloSimulacion.calcularCoste();
+                    vista.actualizarTabla();
+        	}catch (NumberFormatException ex) {
+        		System.out.println("INPUT ERROR");
+        		vista.mostrarError();
+        	}
+
+        }else if(actionCommand.equals("anadir")) {
+        	Tarifa tarifa = new Tarifa();
+        	CtrlAnadirTarifa controlTarifa = new CtrlAnadirTarifa(tarifa);
+        	VistaAnadirTarifa añadirTarifa = new VistaAnadirTarifa(vista,true,controlTarifa,tarifa); 
+        	if(tarifa.isValid())
+        		vista.getCompania().getTarifas().add(tarifa);
+        	vista.actualizarComboBox();
+        }else if(actionCommand.equals("cargar")) {
+        	VistaElegirConsumo elegir = new VistaElegirConsumo(vista,true,listaConsumos);
+            modeloSimulacion.setValle(elegir.getValle());
+            modeloSimulacion.setSupervalle(elegir.getSuperValle());
+            modeloSimulacion.setPunta(elegir.getPunta());
+            modeloSimulacion.setDias(elegir.getDias());
+            vista.actualizarTabla();
         }
-        vista.actualizarTabla();
     }
-    
     
     
 }

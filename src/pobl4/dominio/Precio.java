@@ -81,6 +81,10 @@ public class Precio implements Serializable{
 				+ mes_inicio + ", mes_fin=" + mes_fin + ", precio=" + precio + ", tarifaID=" + tarifaID + "]";
 	}
 	
+	public boolean isValid() {
+		return (precio != 0); // egiteke
+	}
+	
 	
 
 }

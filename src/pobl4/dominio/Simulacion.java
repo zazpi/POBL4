@@ -2,7 +2,7 @@ package pobl4.dominio;
 
 import java.util.List;
 
-public abstract class Simulacion {
+public abstract class Simulacion implements Comparable{
     // Datos del usuario
     Compania compania;
     Tarifa tarifa;
@@ -10,7 +10,7 @@ public abstract class Simulacion {
     int dias;
     
     // Datos calculados
-    double porEnergia, porPotencia, porImpuestos, porIva;
+    double porEnergia, porPotencia, porImpuestos, porIva, total;
     
     public abstract void calcularCoste();
     
@@ -46,7 +46,6 @@ public abstract class Simulacion {
 
     public void setCompania(Compania compania) {
         this.compania = compania;
-        calcularCoste();
     }
 
     public Tarifa getTarifa() {
@@ -55,7 +54,6 @@ public abstract class Simulacion {
 
     public void setTarifa(Tarifa tarifa) {
         this.tarifa = tarifa;
-        calcularCoste();
     }
 
     public double getPotencia() {
@@ -64,7 +62,6 @@ public abstract class Simulacion {
 
     public void setPotencia(double potencia) {
         this.potencia = potencia;
-        calcularCoste();
     }
 
     public int getDias() {
@@ -73,7 +70,6 @@ public abstract class Simulacion {
 
     public void setDias(int dias) {
         this.dias = dias;
-        calcularCoste();
     }
 
     public double getPorEnergia() {
@@ -91,5 +87,13 @@ public abstract class Simulacion {
     public double getPorIva() {
         return porIva;
     }
+    
+    public double getTotal() {
+    	return total;
+    }
 
+    @Override
+    public int compareTo(Object simu) {
+        return ((Double) total).compareTo(((Simulacion)simu).getTotal());
+    }
 }

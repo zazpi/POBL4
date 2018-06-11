@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pobl4.daoexception.DAOException;
-import pobl4.dominio.Compania;
 import pobl4.dominio.Consumo;
 
 /**
@@ -25,9 +24,11 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	private static final String FIND_BY_USER_ID = 
 			"SELECT SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ?";
 	private static final String SQL_INSERT = 
-			"INSERT INTO consumo (año,mes,dia,hora,consumo,usuarioID) VALUES(?,?,?,?,?)";
+			"INSERT INTO consumo (año,mes,dia,hora,consumo,usuarioID) VALUES(?,?,?,?,?,?)";
 	private static final String SQL_LIST_CONSUMES =
 			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo";
+	private static final String SQL_LIST_CONSUMES_BY_USER_ID =
+			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ?";
 
 	private DAOFactory daoFactory;
 	
@@ -46,16 +47,16 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	}
 	
 	@Override
-	public List<Consumo> find() throws DAOException {
-		return find(SQL_LIST_CONSUMES);
+	public List<Consumo> list(Long id) throws DAOException {
+		return list(SQL_LIST_CONSUMES_BY_USER_ID,id);
 	}
+	
 
 	@Override
 	public void create(Consumo consumo) throws IllegalArgumentException, DAOException {
-		
-		if((Integer)consumo.getConsumoID() != null) {
+		/*if((Integer)consumo.getConsumoID() != null) {
 			throw new IllegalArgumentException("Consumo already exists");
-		}
+		}*/
 		Object[] values = {
 	            consumo.getAño(),
 	            consumo.getMes(),
@@ -95,12 +96,12 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
         return consumo;
 	}
 	
-	private List<Consumo> find(String sql){
+	private List<Consumo> list(String sql,Object...values){
 		List<Consumo> consumo = new ArrayList<>();
 		
 	    try (
 	            Connection connection = daoFactory.getConnection();
-	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_CONSUMES);
+	            PreparedStatement statement = DAOUtil.prepareStatement(connection,SQL_LIST_CONSUMES_BY_USER_ID,values);
 	            ResultSet resultSet = statement.executeQuery();
 	        ) {
 	            while (resultSet.next()) {
@@ -111,7 +112,44 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 	        }
 	    return consumo;
 	}
-
+	
+	
+	@Override
+	public void create(List<Consumo> consumo) throws IllegalArgumentException, DAOException {
+		
+         try {
+        	Connection connection = daoFactory.getConnection();
+        	List<PreparedStatement> statements = getStatments(connection, consumo);
+			for(PreparedStatement s: statements)
+				s.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private List<PreparedStatement> getStatments(Connection conn, List<Consumo> consumos){
+		List<PreparedStatement> statements = new ArrayList<>();
+		for(Consumo consumo: consumos) {
+			Object [] values = {
+			        consumo.getAño(),
+		            consumo.getMes(),
+		            consumo.getDia(),
+		            consumo.getHora(),
+		            consumo.getConsumo(),
+		            consumo.getUsuarioID()
+				};
+			try {
+				statements.add(DAOUtil.prepareStatement(conn, SQL_INSERT, values));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return statements;
+	}
 	private Consumo map(ResultSet resultSet) throws SQLException {
 		Consumo consumo = new Consumo();
 		consumo.setConsumoID(resultSet.getInt("consumoID"));
