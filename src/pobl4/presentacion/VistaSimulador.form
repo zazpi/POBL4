@@ -327,6 +327,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cargar desde  hist&#xf3;rico"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelDias">
               <Properties>

@@ -55,6 +55,7 @@ public class VistaAnadirTarifa extends javax.swing.JDialog {
     	lista = new JList<>(tarifa.getPrecios().toArray(new Precio[0]));
     	panelLista.setViewportView(lista);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

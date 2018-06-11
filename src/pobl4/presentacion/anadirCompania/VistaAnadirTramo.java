@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -58,6 +59,10 @@ public class VistaAnadirTramo extends javax.swing.JDialog {
     
     public double getPrecio() {
     	return Double.parseDouble(txPrecio.getText());
+    }
+    
+    public void mostrarError() {
+    	JOptionPane.showMessageDialog(this, "Solo valores númericos","Error",JOptionPane.WARNING_MESSAGE);
     }
     
 
