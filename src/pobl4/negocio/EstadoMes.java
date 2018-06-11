@@ -27,8 +27,8 @@ public class EstadoMes implements Estados {
 		Map<String,Double> datosGrafico = new HashMap<>();
 		int año = params [0];		
 		for(Consumo c: listaConsumos) {
-			if(c.getAño() == año)
-				datosGrafico.put(String.valueOf(String.valueOf((c.getMes()))), c.getConsumo());
+			if(c.getAño() == año && !datosGrafico.containsKey(String.valueOf(c.getMes())))
+				datosGrafico.put(String.valueOf(String.valueOf((c.getMes()))), getConsumoMensual(listaConsumos, c.getMes()));
 		}
 		
 		return Utils.sortByValue(datosGrafico,true);
@@ -41,6 +41,16 @@ public class EstadoMes implements Estados {
 	public Map<String, Double> getEstadisticos(List<Consumo> listaConsumos, int... values) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public double getConsumoMensual(List<Consumo> lista, int mes) {
+		double consumoMensual = 0;
+		for(Consumo c: lista) {
+			if(c.getAño() == mes) {
+				consumoMensual+= c.getConsumo();
+			}
+		}
+		return consumoMensual;
 	}
 
 }

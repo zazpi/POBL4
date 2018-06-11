@@ -19,9 +19,9 @@ import pobl4.dominio.Consumo;
 import pobl4.dominio.SimulacionEstatica;
 import pobl4.dominio.Tarifa;
 import pobl4.dominio.User;
-import pobl4.main.Main;
 import pobl4.presentacion.VistaConsumo;
 import pobl4.presentacion.VistaLogin;
+import pobl4.presentacion.VistaMain;
 import pobl4.presentacion.VistaSimulador;
 
 /**
@@ -30,7 +30,7 @@ import pobl4.presentacion.VistaSimulador;
  */
 public class CtrlMain implements ActionListener {
 	
-	Main vista;
+	VistaMain vista;
 	DAOFactory dbInstance;
 	UserDAO userDAO;
 	TarifaDAO tarifaDAO;
@@ -45,7 +45,7 @@ public class CtrlMain implements ActionListener {
 	CtrlMain controlador;
 	Compania compania;
 	
-	public CtrlMain(Main vista) {
+	public CtrlMain(VistaMain vista) {
 		this.vista = vista;
 		startApp();
 	}
@@ -61,7 +61,7 @@ public class CtrlMain implements ActionListener {
 		tarifa = user.getTarifa();
 		tarifa.setCompania(companiaDAO.find(new Long(tarifa.getCompaniaID())));
 		tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
-		Main.USERID = user.getId();
+		VistaMain.USERID = user.getId();
 	}
 	
 	private void loadAppData() {
@@ -103,7 +103,7 @@ public class CtrlMain implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("consumo")) {
-			VistaConsumo consumo = new VistaConsumo(vista, true, user.getConsumos(), consumoDAO);
+			VistaConsumo consumo = new VistaConsumo(vista, true, user.getConsumos(), consumoDAO,userDAO);
 		}else if(e.getActionCommand().equals("simulador")) {
 			SimulacionEstatica modelo = new SimulacionEstatica();
 			CtrlSimulador controlador = new CtrlSimulador(modelo,listaCompania,user.getConsumos());

@@ -17,6 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 import org.jfree.chart.ChartPanel;
 
 import pobl4.dao.ConsumoDAO;
+import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
 import pobl4.negocio.GraficoFactory;
@@ -38,11 +39,11 @@ public class VistaConsumo extends javax.swing.JDialog {
      * @param listConsumo
      * @param consumoDAO
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO,UserDAO userDAO) {
         super(parent, modal);
         initComponents();
         this.listaConsumos = listConsumo;
-        controlador = new CtrlConsumo(this,listConsumo,consumoDAO);
+        controlador = new CtrlConsumo(this,listConsumo,consumoDAO,userDAO);
         initFiltros();
         addBtListeners();
         

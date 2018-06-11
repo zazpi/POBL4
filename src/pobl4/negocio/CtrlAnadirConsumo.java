@@ -16,9 +16,10 @@ import java.util.List;
 import javax.swing.JFileChooser;
 
 import pobl4.dao.ConsumoDAO;
+import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
-import pobl4.main.Main;
 import pobl4.presentacion.VistaAnadirConsumo;
+import pobl4.presentacion.VistaMain;
 import pobl4.utils.Utils;
 
 /**
@@ -30,9 +31,11 @@ public class CtrlAnadirConsumo implements ActionListener{
 	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
 	List<File> files;
-	public CtrlAnadirConsumo(VistaAnadirConsumo vista,ConsumoDAO consumoDAO) {
+	UserDAO userDAO;
+	public CtrlAnadirConsumo(VistaAnadirConsumo vista,ConsumoDAO consumoDAO,UserDAO userDAO) {
 		this.vista = vista;
 		this.consumoDAO = consumoDAO;
+		this.userDAO = userDAO;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -88,7 +91,7 @@ public class CtrlAnadirConsumo implements ActionListener{
 					if(data.length > 1) {
 					String fechas [] = data[1].split("/");
 
-					consumo.setUsuarioID(Main.USERID);
+					consumo.setUsuarioID(VistaMain.USERID);
 					consumo.setConsumo(Double.valueOf(data[3].replace(",", ".")));
 					consumo.setHora(Integer.valueOf(data[2]));
 					consumo.setDia(Integer.valueOf(fechas[0]));
