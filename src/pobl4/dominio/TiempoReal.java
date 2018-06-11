@@ -23,8 +23,10 @@ public class TiempoReal {
 		maxConsumo = 0.0;
 	}
 	
-	public void setConsumo(double consumo) { // aldatzeko		
-		consumoTotal += consumo * (segundos-segundosLeido);
+	public void setConsumo(double consumo) { // benetako ordu bat -> minutu bat
+		if (segundos < segundosLeido) consumoTotal += consumo * (60+segundos-segundosLeido)/60;
+		else consumoTotal += consumo * (segundos-segundosLeido)/60;
+		
 	}
 	public double getConsumo () {
 		return consumoTotal;

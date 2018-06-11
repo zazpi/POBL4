@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -180,10 +181,12 @@ public class VistaTiempoReal extends JDialog {
 		dataset.setValue(consumo);
 	}
 	
-	public void consumo (double consumo, double consumoTotal, double maxConsumo) {
+	public void consumo (double consumo, double consumoTotal, double maxConsumo) {		
+		DecimalFormat formato = new DecimalFormat("#.00");
+		
 		setVelocimetro(consumo);
-		lvalorConsumo.setText(consumoTotal + " kW");
-		lvalorMaxConsumo.setText(maxConsumo + " kW");
+		lvalorConsumo.setText(formato.format(consumoTotal) + " kW");
+		lvalorMaxConsumo.setText(formato.format(maxConsumo) + " kW");
 	}
 	
 	public void tiempo (int horas, int minutos, int segundos) {
