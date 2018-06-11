@@ -8,9 +8,9 @@ package pobl4.negocio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import pobl4.dao.DAOFactory;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.User;
 import pobl4.presentacion.VistaLogin;
@@ -24,6 +24,7 @@ import pobl4.utils.Utils;
 public class CtrlLogin implements ActionListener{
     UserDAO userDAO;
     VistaLogin login;
+    User user;
     
     public CtrlLogin(VistaLogin login,UserDAO userDAO){
         this.login = login;
@@ -32,7 +33,7 @@ public class CtrlLogin implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("entrar")){
-            User user = Utils.validateUser(userDAO, login.getTxUsuario(), login.getTxContraseña());
+            user = Utils.validateUser(userDAO, login.getTxUsuario(), login.getTxContraseña());
             if(user != null){
                 JOptionPane.showMessageDialog(login, "Welcome, "+login.getTxUsuario()+"!", "Login Success", JOptionPane.INFORMATION_MESSAGE);
                 login.closeDialog(user);

@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import pobl4.dao.CompaniaDAO;
 import pobl4.dao.ConsumoDAO;
@@ -103,6 +105,15 @@ public class Main extends JFrame{
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Main main = new Main();
 		main.setupDBConnAndDAOs();
 		main.loadAppData();

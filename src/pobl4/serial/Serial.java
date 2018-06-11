@@ -1,29 +1,22 @@
 package pobl4.serial;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.TooManyListenersException;
-
-import javax.swing.Timer;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEventListener;
 
-public class Serial implements ActionListener {
+public class Serial {
 	InputStream in;
 	OutputStream out;
 	CommPort commPort;
-	SerialPort serialPort ;
-	Timer timer;
+	SerialPort serialPort;
 	
 	public Serial() {
-	   	 timer = new Timer (1000, this);
-	   	 timer.start();
 	}
 	public void conectar ( CommPortIdentifier portIdentifier ) throws Exception
     {
@@ -90,15 +83,6 @@ public class Serial implements ActionListener {
             e.printStackTrace();
         }            
     }
-    public void escribir (int numHabAux, int numElectroAux, boolean estado) {
-    	int b = 0;
-    	b += estado?1:0;
-    			
-    	b+= numHabAux*32;
-    	
-    	b+= numElectroAux*2;
-    	escribir((byte) b);    	
-    }
     
     public int leer ()
     {
@@ -149,14 +133,5 @@ public class Serial implements ActionListener {
 	
 	public InputStream getInput() {
 		return in;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == timer) {
-			byte bytes = (byte) 255;
-			escribir(bytes);
-		}
-		
 	}
 }

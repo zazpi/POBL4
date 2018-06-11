@@ -22,6 +22,8 @@ public class SimulacionAno extends Simulacion{
 
     @Override
     public void calcularCoste() {
+        
+        porEnergia = 0;
        
         for (Consumo consumo : listaConsumos){
             if(consumo.getAño() == año){
@@ -29,7 +31,6 @@ public class SimulacionAno extends Simulacion{
             }
         }
         total = porEnergia;
-        
     }
     
 }

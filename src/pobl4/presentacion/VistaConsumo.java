@@ -32,7 +32,11 @@ public class VistaConsumo extends javax.swing.JDialog {
     DefaultComboBoxModel<String> model1;
     DefaultComboBoxModel<String> model2;
     /**
-     * Creates new form VistaConsumo
+     * 
+     * @param parent
+     * @param modal
+     * @param listConsumo
+     * @param consumoDAO
      */
     public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO) {
         super(parent, modal);
@@ -366,7 +370,7 @@ public class VistaConsumo extends javax.swing.JDialog {
         fechaFin.setModel(model2);
         
     }
-    
+
     public void setGrafico(Map<String, Double> map) {
     	ChartPanel chartPanel = GraficoFactory.getGraficoBarras(map);
     	chartPanel.setSize(jPanel2.getSize());
@@ -392,7 +396,12 @@ public class VistaConsumo extends javax.swing.JDialog {
     public int getAño() {
     	return Integer.valueOf(fechaInicio.getSelectedItem().toString());
     }
-    
+    public int getMes() {
+    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
+    }
+    public int getDia() {
+    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
+    }
     public void initFiltros() {
     	model1 = new DefaultComboBoxModel<>(getFechasInicio());
     	model2 = new DefaultComboBoxModel<>(getFechasFin());
@@ -433,6 +442,7 @@ public class VistaConsumo extends javax.swing.JDialog {
 		});
     	return fechasFin.toArray(new String [0]);
     }
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
