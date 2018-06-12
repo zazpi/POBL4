@@ -5,10 +5,15 @@
  */
 package pobl4.presentacion;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import pobl4.main.Main;
+import pobl4.negocio.CtrlMain;
 
 /**
  *
@@ -16,12 +21,23 @@ import pobl4.main.Main;
  */
 public class VistaMain extends javax.swing.JFrame {
 
+	public static int USERID = 0;
+
+	public static final long serialVersionUID = 1L;
+	CtrlMain controlador;
+	
     /**
      * Creates new form VistaMain
      */
     public VistaMain() {
+    	controlador = new CtrlMain(this);
         initComponents();
+    	this.setTitle("zazpi");
+    	this.setSize(1280, 768);
+    	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	this.setVisible(true);
         this.setLocationRelativeTo(null);
+        addListeners();
     }
     
 
@@ -171,6 +187,41 @@ public class VistaMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+    
+    private void addListeners() {
+    	jButton7.setActionCommand("simulador");
+    	jButton6.setActionCommand("consumo");
+    	jButton5.setActionCommand("tiempoReal");
+    	jButton4.setActionCommand("comparador");
+    	
+    	jButton7.addActionListener(controlador);
+    	jButton6.addActionListener(controlador);
+    	jButton5.addActionListener(controlador);
+    	jButton4.addActionListener(controlador);
+    }
+    
+    public void setUserLabel(String username) {
+    	jLabel2.setText("Username: "+username);
+    }
+	/**
+	 * @param args
+	 */
+    
+	public static void main(String[] args) {
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		VistaMain main = new VistaMain();
+		System.err.println("Everything ok chief!");
+                
+	}
 
     /**
      * @param args the command line arguments

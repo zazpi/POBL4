@@ -24,7 +24,7 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 		
 	public CtrlTiempoReal (TiempoReal modelo, Serial seriala) {
 		this.modelo = modelo;
-		//this.seriala = seriala;
+		this.seriala = seriala;
 		byteKopurua = 0;
 		bytes = new byte[] {0, 0};
 	}
@@ -41,8 +41,8 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 		if (byteKopurua == 1) {
 			int temp = ((int)bytes[1] << 8) + ((int)bytes[0]);
 			
-			System.out.println(temp);
-			recibirConsumo(temp);
+			double consumo = (((temp-1.65)*3) / 1.65);
+			recibirConsumo(consumo);
 			byteKopurua = 0;
 		}else {
 			byteKopurua++;

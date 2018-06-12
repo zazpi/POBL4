@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 import pobl4.dao.ConsumoDAO;
+import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlAnadirConsumo;
 
@@ -26,10 +27,10 @@ public class VistaAnadirConsumo extends javax.swing.JDialog{
     /**
      * Creates new form VistaAñadirConsumo2
      */
-    public VistaAnadirConsumo(VistaConsumo vista, boolean modal,ConsumoDAO consumoDAO) {
+    public VistaAnadirConsumo(VistaConsumo vista, boolean modal,ConsumoDAO consumoDAO,UserDAO userDAO) {
         super(vista, modal);
         initComponents();
-        controlador = new CtrlAnadirConsumo(this,consumoDAO);
+        controlador = new CtrlAnadirConsumo(this,consumoDAO,userDAO);
         addListeners();
         this.setVisible(true);
     }

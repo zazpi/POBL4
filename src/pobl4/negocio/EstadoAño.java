@@ -3,6 +3,7 @@
  */
 package pobl4.negocio;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import pobl4.dominio.Consumo;
+import pobl4.utils.ConsumoFactory;
 import pobl4.utils.Utils;
 
 /**
@@ -18,6 +20,8 @@ import pobl4.utils.Utils;
  *
  */
 public class EstadoAño implements Estados {
+	
+	private int AÑOS = 0;
 
 	/* (non-Javadoc)
 	 * @see pobl4.negocio.Estados#getDatosGraficos(java.util.List, int[])
@@ -38,16 +42,36 @@ public class EstadoAño implements Estados {
 	 */
 	@Override
 	public Map<String, Double> getEstadisticos(List<Consumo> listaConsumos, int... values) {
-		return null;
+		Map<String,Double> datosEstadisticos = new HashMap<>();
+		datosEstadisticos.put("consumoMedio", getConsumoAnuales(listaConsumos));
+		datosEstadisticos.put("periodoPunta", Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroPunta())/AÑOS);
+		double periodoValle = ((Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroValle())+
+				Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroSuperValle()))/AÑOS);
+		datosEstadisticos.put("periodoValle", periodoValle);
+		datosEstadisticos.put("mediaPorDia", (getConsumoAnuales(listaConsumos)*AÑOS)/Utils.getDiasPorPeriodo(listaConsumos, "ano", 0));
+		
+		return datosEstadisticos;
+	}
+	
+	private double getConsumoAnuales(List<Consumo> lista) {
+		double consumoAnualTotal = 0;
+		List<Integer> listaAños = new ArrayList<>();
+		for(Consumo c: lista) {
+				consumoAnualTotal += c.getConsumo();
+				if(!listaAños.contains(c.getAño()))
+					listaAños.add(c.getAño());
+		}
+		AÑOS = listaAños.size();
+		return consumoAnualTotal/AÑOS;
 	}
 	
 	private double getConsumoAnual(List<Consumo> lista, int año) {
-		double consumoAnual = 0;
+		double consumoMedioAnualTotal = 0;
 		for(Consumo c: lista) {
-			if(c.getAño() == año) {
-				consumoAnual+= c.getConsumo();
-			}
+			if(c.getAño() == año)
+				consumoMedioAnualTotal += c.getConsumo();
 		}
-		return consumoAnual;
+		return consumoMedioAnualTotal;
 	}
+	
 }

@@ -6,17 +6,21 @@
 package pobl4.presentacion;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -32,6 +36,7 @@ import javax.swing.border.SoftBevelBorder;
 import org.jfree.chart.ChartPanel;
 
 import pobl4.dao.ConsumoDAO;
+import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
 import pobl4.negocio.GraficoFactory;
@@ -40,12 +45,14 @@ import pobl4.negocio.GraficoFactory;
  *
  * @author asier
  */
-public class VistaConsumo extends javax.swing.JDialog {
+public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
     
     CtrlConsumo controlador;
     List<Consumo> listaConsumos;
     DefaultComboBoxModel<String> model1;
     DefaultComboBoxModel<String> model2;
+    DefaultComboBoxModel<String> model3;
+    ChartPanel chartPanel;
     /**
      * 
      * @param parent
@@ -53,14 +60,15 @@ public class VistaConsumo extends javax.swing.JDialog {
      * @param listConsumo
      * @param consumoDAO
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO,UserDAO userDAO) {
         super(parent, modal);
         initComponents();
         this.listaConsumos = listConsumo;
-        controlador = new CtrlConsumo(this,listConsumo,consumoDAO);
+        controlador = new CtrlConsumo(this,listConsumo,consumoDAO,userDAO);
         initFiltros();
         addBtListeners();
         this.setLocationRelativeTo(null);
+        this.setResizable(true);
         this.setVisible(true);
         
     }
@@ -88,16 +96,16 @@ public class VistaConsumo extends javax.swing.JDialog {
         JPanel panelDerecha = new JPanel();
         JLabel datosEstadisticos = new JLabel();
         JLabel periodoTiempo1 = new JLabel();
-        fechaInicio = new JComboBox<>();
-        fechaFin = new JComboBox<>();
+        fechaAno = new JComboBox<>();
+        fechaMes = new JComboBox<>();
         JLabel labelConsumo = new JLabel();
         JLabel labelPunta = new JLabel();
         JLabel labelValle = new JLabel();
         JLabel labelMedia = new JLabel();
-        JLabel consumo = new JLabel();
-        JLabel punta = new JLabel();
-        JLabel valle = new JLabel();
-        JLabel mediaDia = new JLabel();
+        consumo = new JLabel();
+        punta = new JLabel();
+        valle = new JLabel();
+        mediaDia = new JLabel();
         JLabel jLabel1 = new JLabel();
         JLabel jLabel2 = new JLabel();
         JLabel jLabel3 = new JLabel();
@@ -108,7 +116,6 @@ public class VistaConsumo extends javax.swing.JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(905, 565));
         setModal(true);
-        setPreferredSize(new Dimension(1188, 750));
 
         panelNombre.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
 
@@ -198,11 +205,11 @@ public class VistaConsumo extends javax.swing.JDialog {
         periodoTiempo1.setForeground(new Color(1, 1, 1));
         periodoTiempo1.setText("Periodo de tiempo");
 
-        fechaInicio.setMaximumRowCount(24);
-        fechaInicio.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        fechaAno.setMaximumRowCount(24);
+        fechaAno.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        fechaFin.setMaximumRowCount(24);
-        fechaFin.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        fechaMes.setMaximumRowCount(24);
+        fechaMes.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelConsumo.setFont(new Font("Ubuntu", 2, 18)); // NOI18N
         labelConsumo.setForeground(new Color(1, 1, 1));
@@ -278,13 +285,13 @@ public class VistaConsumo extends javax.swing.JDialog {
                     .addGroup(panelDerechaLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(fechaFin, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fechaMes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDerechaLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(periodoTiempo1)
-                            .addComponent(fechaInicio, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fechaAno, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelDerechaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(25, 25, 25)
@@ -300,11 +307,11 @@ public class VistaConsumo extends javax.swing.JDialog {
                 .addGap(38, 38, 38)
                 .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(fechaInicio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fechaFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -377,50 +384,99 @@ public class VistaConsumo extends javax.swing.JDialog {
         btDia.addActionListener(controlador);
         btHora.addActionListener(controlador);
         btMes.addActionListener(controlador);
-        fechaInicio.setModel(model1);
-        fechaFin.setModel(model2);
+        fechaAno.setModel(model1);
+        fechaMes.setModel(model2);
+        fechaDia.setModel(model3);
+        
+        fechaAno.addItemListener(this);
+        fechaMes.addItemListener(this);
         
     }
 
     public void setGrafico(Map<String, Double> map) {
-    	ChartPanel chartPanel = GraficoFactory.getGraficoBarras(map);
+    	if(chartPanel != null) { 
+    		chartPanel.removeAll();
+    		jPanel1.remove(chartPanel);}
+    	chartPanel = GraficoFactory.getGraficoBarras(map);
     	chartPanel.setSize(jPanel1.getSize());
     	jPanel1.add(chartPanel,BorderLayout.CENTER);
     	this.repaint();
     }
-    
-    public void disbaleFiltro(String filtro) {
-    	
-    	if(filtro.equals("año")) {
-    		fechaInicio.setEnabled(false);
-    		fechaFin.setEnabled(false);
-    	}
-    	if(filtro.equals("mes"))
-    		fechaFin.setEnabled(false);
-    }
-    
-    public void enableBoxes() {
-    	fechaInicio.setEnabled(true);
-    	fechaFin.setEnabled(true);
-    }
+  
     
     public int getAño() {
-    	return Integer.valueOf(fechaInicio.getSelectedItem().toString());
+    	return Integer.valueOf(fechaAno.getSelectedItem().toString());
     }
     public int getMes() {
-    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
+    	return Integer.valueOf(fechaMes.getSelectedItem().toString());
     }
     public int getDia() {
-    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
-    }
-    public void initFiltros() {
-    	model1 = new DefaultComboBoxModel<>(getFechasInicio());
-    	model2 = new DefaultComboBoxModel<>(getFechasFin());
+    	return Integer.valueOf(fechaDia.getSelectedItem().toString());
     }
     
-    public String [] getFechasInicio() {
-    	List<String> fechasInicio = new ArrayList<>();
+    public void initFiltros() {
+    	model1 = new DefaultComboBoxModel<>(getFechasInicio());
+    	Object [] params1 = {"ano",Integer.valueOf((String)model1.getSelectedItem())};
+    	UpdateFiltros(params1);
+    	Object [] params2 = {"mes", Integer.valueOf((String)model2.getSelectedItem())};
+    	UpdateFiltros(params2);
     	
+    	
+    }
+    
+    public void UpdateFiltros(Object...params) {
+    	String periodo = (String)params[0];
+    	int periodoReferencia = (int) params[1];
+    	
+    	System.out.println(periodo+periodoReferencia);
+    	if(periodo.equals("ano")) {
+    		model2 = new DefaultComboBoxModel<>(getMesesPorAno(periodoReferencia));
+    		fechaMes.setModel(model2);
+    	}else if(periodo.equals("mes")) {
+    		model3 = new DefaultComboBoxModel<>(getDiasPorMes(periodoReferencia));
+    		fechaDia.setModel(model3);
+    	}
+    	
+    	this.repaint();
+    }
+    private String [] getDiasPorMes(int mes) {
+    	List<String> fechasFin = new ArrayList<>();
+    	for(Consumo c: listaConsumos) {
+    		if(c.getMes() == mes && !fechasFin.contains(String.valueOf(c.getDia())))
+    			fechasFin.add(String.valueOf(c.getDia()));
+    	}
+    	
+    	Collections.sort(fechasFin, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasFin.toArray(new String [0]);
+	}
+
+	private String [] getMesesPorAno(int ano) {
+    	List<String> fechasFin = new ArrayList<>();
+    	for(Consumo c: listaConsumos) {
+    		if(c.getAño() == ano && !fechasFin.contains(String.valueOf(c.getMes())))
+    			fechasFin.add(String.valueOf(c.getMes()));
+    	}
+    	
+    	Collections.sort(fechasFin, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasFin.toArray(new String [0]);
+	}
+
+	public String [] getFechasInicio() {
+    	List<String> fechasInicio = new ArrayList<>();
     	for(Consumo c: listaConsumos) {
     		if(!fechasInicio.contains(String.valueOf(c.getAño())))
     			fechasInicio.add(String.valueOf(c.getAño()));
@@ -435,25 +491,12 @@ public class VistaConsumo extends javax.swing.JDialog {
 		});
     	return fechasInicio.toArray(new String [0]);
     }
-    
-    public String [] getFechasFin() {
-    	List<String> fechasFin = new ArrayList<>();
-    	for(Consumo c: listaConsumos) {
-    		if(!fechasFin.contains(String.valueOf(c.getMes())))
-    			fechasFin.add(String.valueOf(c.getMes()));
-    	}
-    	
-    	Collections.sort(fechasFin, new Comparator<String>() {
-
-			@Override
-			public int compare(String o1, String o2) {
-				// TODO Auto-generated method stub
-				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
-			}
-		});
-    	return fechasFin.toArray(new String [0]);
-    }
-   
+	
+	public void setEstadisticos(Map<String,Double> datosEstadisticos) {
+		consumo.setText(String.valueOf(datosEstadisticos.get("consumoMedio")));
+		punta.setText(String.valueOf(datosEstadisticos.get("periodoPunta")));
+		valle.setText(String.valueOf(datosEstadisticos.get("periodoValle")));		
+	}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     JButton btAnadir;
@@ -462,9 +505,25 @@ public class VistaConsumo extends javax.swing.JDialog {
     JButton btDia;
     JButton btHora;
     JButton btMes;
-    private JComboBox<String> fechaDia;
-    private JComboBox<String> fechaFin;
-    private JComboBox<String> fechaInicio;
+    JLabel consumo;
+    JComboBox<String> fechaAno;
+    JComboBox<String> fechaDia;
+    JComboBox<String> fechaMes;
     JPanel jPanel1;
+    JLabel mediaDia;
+    JLabel punta;
+    JLabel valle;
     // End of variables declaration//GEN-END:variables
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if(e.getStateChange() == e.SELECTED) {
+			if(e.getSource() == fechaAno) {
+				Object [] params = {"ano", Integer.valueOf((String) model1.getSelectedItem())};
+				UpdateFiltros(params);
+			}else if(e.getSource() == fechaMes) {
+				Object [] params = {"mes", Integer.valueOf((String) model2.getSelectedItem())};
+				UpdateFiltros(params);
+			}
+		}
+	}
 }
