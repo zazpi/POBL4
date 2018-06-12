@@ -40,9 +40,10 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 		
 		if (byteKopurua == 1) {
 			int temp = ((int)bytes[1] << 8) + ((int)bytes[0]);
-			
-			double consumo = (((temp-1.65)*3) / 1.65);
+			double voltaje = temp*3.3/4095;
+			double consumo = (((voltaje-1.65)*3) / 1.65);
 			recibirConsumo(consumo);
+			System.out.println(voltaje + "/" + consumo);
 			byteKopurua = 0;
 		}else {
 			byteKopurua++;

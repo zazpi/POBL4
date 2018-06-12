@@ -39,6 +39,7 @@ import pobl4.dao.ConsumoDAO;
 import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
+import pobl4.negocio.CtrlMain;
 import pobl4.negocio.GraficoFactory;
 
 /**
@@ -60,11 +61,11 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
      * @param listConsumo
      * @param consumoDAO
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO,UserDAO userDAO) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO,UserDAO userDAO,CtrlMain main) {
         super(parent, modal);
         initComponents();
         this.listaConsumos = listConsumo;
-        controlador = new CtrlConsumo(this,listConsumo,consumoDAO,userDAO);
+        controlador = new CtrlConsumo(this,listConsumo,consumoDAO,userDAO,main);
         initFiltros();
         addBtListeners();
         this.setLocationRelativeTo(null);
@@ -384,12 +385,16 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
         btDia.addActionListener(controlador);
         btHora.addActionListener(controlador);
         btMes.addActionListener(controlador);
+        btCalcular.addActionListener(controlador);
+        btCalcular.setActionCommand("Calcular");
+        fechaAno.addItemListener(this);
+        fechaMes.addItemListener(this);
+        if(listaConsumos.isEmpty()) return;
         fechaAno.setModel(model1);
         fechaMes.setModel(model2);
         fechaDia.setModel(model3);
         
-        fechaAno.addItemListener(this);
-        fechaMes.addItemListener(this);
+
         
     }
 
@@ -416,6 +421,7 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
     
     public void initFiltros() {
     	model1 = new DefaultComboBoxModel<>(getFechasInicio());
+    	if(model1.getSelectedItem()== null) return;
     	Object [] params1 = {"ano",Integer.valueOf((String)model1.getSelectedItem())};
     	UpdateFiltros(params1);
     	Object [] params2 = {"mes", Integer.valueOf((String)model2.getSelectedItem())};
@@ -496,6 +502,19 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
 		consumo.setText(String.valueOf(datosEstadisticos.get("consumoMedio")));
 		punta.setText(String.valueOf(datosEstadisticos.get("periodoPunta")));
 		valle.setText(String.valueOf(datosEstadisticos.get("periodoValle")));		
+		mediaDia.setText(String.valueOf(datosEstadisticos.get("mediaPorDia")));
+	}
+	
+    public JComboBox<String> getFechaAno() {
+		return fechaAno;
+	}
+
+	public JComboBox<String> getFechaDia() {
+		return fechaDia;
+	}
+
+	public JComboBox<String> getFechaMes() {
+		return fechaMes;
 	}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,7 +526,7 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
     JButton btMes;
     JLabel consumo;
     JComboBox<String> fechaAno;
-    JComboBox<String> fechaDia;
+	JComboBox<String> fechaDia;
     JComboBox<String> fechaMes;
     JPanel jPanel1;
     JLabel mediaDia;

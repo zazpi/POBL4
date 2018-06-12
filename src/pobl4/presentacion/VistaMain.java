@@ -30,8 +30,9 @@ public class VistaMain extends javax.swing.JFrame {
      * Creates new form VistaMain
      */
     public VistaMain() {
+    	initComponents();
     	controlador = new CtrlMain(this);
-        initComponents();
+        
     	this.setTitle("zazpi");
     	this.setSize(1280, 768);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

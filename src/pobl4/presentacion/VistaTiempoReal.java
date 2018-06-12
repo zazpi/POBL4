@@ -89,9 +89,9 @@ public class VistaTiempoReal extends JDialog {
 	private Component crearVelocimetro() {		
 		DialPlot plot = new DialPlot(dataset);
 	    plot.setDialFrame(new StandardDialFrame());
-	    
-	    int redLine = 3 * maximumValue / 5;
+	   
 	    double yellowLine = 1.5 * maximumValue / 5;
+	    double redLine = 3.0 * maximumValue / 5;
 	    
 	    plot.addLayer(new DialValueIndicator(0));
 	    plot.addLayer(new DialPointer.Pointer());

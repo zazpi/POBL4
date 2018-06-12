@@ -38,14 +38,15 @@ public class EstadoDia implements Estados{
 		Map<String,Double> datosEstadisticos = new HashMap<>();
 		int ano = values[0];
 		int mes = values[1];
-		int dia = values[2];
 		int [] periodosReferencia = {ano,mes};
 		List<Consumo> lista = Utils.filtraConsumoPorPeriodo(listaConsumos, "dia", periodosReferencia);
-		datosEstadisticos.put("consumoMedio", getConsumoMensual(lista,ano,mes));
-		datosEstadisticos.put("periodoPunta", Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta())/DIAS);
-		double periodoValle = ((Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroValle())+
-				Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroSuperValle()))/DIAS);
-		datosEstadisticos.put("periodoValle", periodoValle);
+		double consumoTotal = getConsumoMensual(lista,ano,mes);
+		
+		datosEstadisticos.put("consumoMedio", consumoTotal / DIAS);
+		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
+		datosEstadisticos.put("periodoPunta", consumoPunta * 100 /consumoTotal);
+		datosEstadisticos.put("periodoValle", (consumoTotal - consumoPunta) * 100 /consumoTotal);
+		
 		
 		return datosEstadisticos;
 	}
@@ -64,7 +65,7 @@ public class EstadoDia implements Estados{
 		DIAS = listaDias.size();
 		System.out.println(consumoMensual);
 		System.out.println(DIAS);
-		return consumoMensual/DIAS;
+		return consumoMensual;
 	}
 	
 	private double getConsumoDiario(List<Consumo> lista, int dia,int mes, int año) {

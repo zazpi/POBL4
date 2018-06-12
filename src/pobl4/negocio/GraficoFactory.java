@@ -14,6 +14,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -34,15 +35,14 @@ public class GraficoFactory {
 		//render
 		
 		//Opts
-		chart.setBackgroundPaint(Color.LIGHT_GRAY);
+
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
-		plot.setBackgroundPaint(Color.white);
-		plot.setRangeGridlinePaint(Color.green);
 		
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
-		renderer.setSeriesPaint(0, Color.DARK_GRAY);
-		renderer.setDrawBarOutline(false);
-		renderer.setItemMargin(0.0);
+		renderer.setGradientPaintTransformer(null);
+		renderer.setBarPainter(new StandardBarPainter());
+		renderer.setMaximumBarWidth(0.2);
+		
 		ChartPanel panel = new ChartPanel(chart,true);
 		
 		return panel;

@@ -43,12 +43,14 @@ public class EstadoAño implements Estados {
 	@Override
 	public Map<String, Double> getEstadisticos(List<Consumo> listaConsumos, int... values) {
 		Map<String,Double> datosEstadisticos = new HashMap<>();
-		datosEstadisticos.put("consumoMedio", getConsumoAnuales(listaConsumos));
-		datosEstadisticos.put("periodoPunta", Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroPunta())/AÑOS);
-		double periodoValle = ((Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroValle())+
-				Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroSuperValle()))/AÑOS);
-		datosEstadisticos.put("periodoValle", periodoValle);
-		datosEstadisticos.put("mediaPorDia", (getConsumoAnuales(listaConsumos)*AÑOS)/Utils.getDiasPorPeriodo(listaConsumos, "ano", 0));
+		double consumoTotal = getConsumoAnuales(listaConsumos);
+		double periodoPunta = Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroPunta());
+		double mediaDiario = consumoTotal / AÑOS / 365;
+		datosEstadisticos.put("periodoPunta", (periodoPunta*100/consumoTotal));
+
+		datosEstadisticos.put("periodoValle", (consumoTotal - periodoPunta)*100/consumoTotal);
+		datosEstadisticos.put("consumoMedio", consumoTotal / AÑOS);
+		datosEstadisticos.put("mediaPorDia", mediaDiario);
 		
 		return datosEstadisticos;
 	}
@@ -62,7 +64,7 @@ public class EstadoAño implements Estados {
 					listaAños.add(c.getAño());
 		}
 		AÑOS = listaAños.size();
-		return consumoAnualTotal/AÑOS;
+		return consumoAnualTotal;
 	}
 	
 	private double getConsumoAnual(List<Consumo> lista, int año) {
