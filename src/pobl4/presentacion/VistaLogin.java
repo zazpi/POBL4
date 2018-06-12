@@ -56,6 +56,7 @@ public class VistaLogin extends javax.swing.JDialog{
         controlador = new CtrlLogin(this,userDAO);
         addPromptText();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
@@ -216,7 +217,7 @@ public class VistaLogin extends javax.swing.JDialog{
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGap(0, 418, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

@@ -60,6 +60,7 @@ public class VistaComparador extends javax.swing.JDialog {
         fechaAño.setModel(modeloAno);
         actualizarComboBox();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
@@ -165,7 +166,7 @@ public class VistaComparador extends javax.swing.JDialog {
         lbTiempo.setBackground(new Color(1, 1, 1));
         lbTiempo.setFont(new Font("Ubuntu", 1, 18)); // NOI18N
         lbTiempo.setForeground(new Color(1, 1, 1));
-        lbTiempo.setText("Tiempo");
+        lbTiempo.setText("Periodo de tiempo");
 
         fechaAño.setFont(new Font("Ubuntu", 0, 18)); // NOI18N
 
@@ -194,15 +195,15 @@ public class VistaComparador extends javax.swing.JDialog {
         );
         panelDerechaLayout.setVerticalGroup(panelDerechaLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechaLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(62, 62, 62)
                 .addComponent(lbTiempo)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(fechaAño, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(fechaMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(renovable)
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(soloRenovable)
                 .addContainerGap(126, Short.MAX_VALUE))
         );

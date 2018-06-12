@@ -42,6 +42,7 @@ public class VistaRegistro extends javax.swing.JDialog implements ItemListener {
         setDefaultComboBoxItems();
         addPromptText();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     

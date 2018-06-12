@@ -6,17 +6,21 @@
 package pobl4.presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
 
 import org.jfree.chart.ChartPanel;
 
 import pobl4.dao.ConsumoDAO;
+import pobl4.dao.UserDAO;
 import pobl4.dominio.Consumo;
 import pobl4.negocio.CtrlConsumo;
 import pobl4.negocio.GraficoFactory;
@@ -25,12 +29,14 @@ import pobl4.negocio.GraficoFactory;
  *
  * @author asier
  */
-public class VistaConsumo extends javax.swing.JDialog {
+public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
     
     CtrlConsumo controlador;
     List<Consumo> listaConsumos;
     DefaultComboBoxModel<String> model1;
     DefaultComboBoxModel<String> model2;
+    DefaultComboBoxModel<String> model3;
+    ChartPanel chartPanel;
     /**
      * 
      * @param parent
@@ -38,14 +44,14 @@ public class VistaConsumo extends javax.swing.JDialog {
      * @param listConsumo
      * @param consumoDAO
      */
-    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO) {
+    public VistaConsumo(java.awt.Frame parent, boolean modal,List<Consumo> listConsumo,ConsumoDAO consumoDAO,UserDAO userDAO) {
         super(parent, modal);
         initComponents();
         this.listaConsumos = listConsumo;
-        controlador = new CtrlConsumo(this,listConsumo,consumoDAO);
+        controlador = new CtrlConsumo(this,listConsumo,consumoDAO,userDAO);
         initFiltros();
         addBtListeners();
-        
+        this.setResizable(true);
         this.setVisible(true);
         
     }
@@ -63,6 +69,7 @@ public class VistaConsumo extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         panelNombre = new javax.swing.JPanel();
         labelNombre = new javax.swing.JLabel();
         panelArriba = new javax.swing.JPanel();
@@ -74,8 +81,8 @@ public class VistaConsumo extends javax.swing.JDialog {
         panelDerecha = new javax.swing.JPanel();
         datosEstadisticos = new javax.swing.JLabel();
         periodoTiempo1 = new javax.swing.JLabel();
-        fechaInicio = new javax.swing.JComboBox<>();
-        fechaFin = new javax.swing.JComboBox<>();
+        fechaAno = new javax.swing.JComboBox<>();
+        fechaMes = new javax.swing.JComboBox<>();
         labelConsumo = new javax.swing.JLabel();
         labelPunta = new javax.swing.JLabel();
         labelValle = new javax.swing.JLabel();
@@ -86,12 +93,42 @@ public class VistaConsumo extends javax.swing.JDialog {
         mediaDia = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        fechaDia = new javax.swing.JComboBox<>();
+        btCalcular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(905, 565));
+        setMinimumSize(new java.awt.Dimension(905, 565));
+        setModal(true);
+        setPreferredSize(new java.awt.Dimension(905, 565));
 
         jPanel1.setMaximumSize(new java.awt.Dimension(905, 565));
         jPanel1.setMinimumSize(new java.awt.Dimension(905, 565));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         panelNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -103,17 +140,17 @@ public class VistaConsumo extends javax.swing.JDialog {
         panelNombre.setLayout(panelNombreLayout);
         panelNombreLayout.setHorizontalGroup(
             panelNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNombreLayout.createSequentialGroup()
-                .addGap(366, 366, 366)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNombreLayout.createSequentialGroup()
+                .addContainerGap(374, Short.MAX_VALUE)
                 .addComponent(labelNombre)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addGap(365, 365, 365))
         );
         panelNombreLayout.setVerticalGroup(
             panelNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNombreLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelNombreLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(labelNombre)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelArriba.setBackground(new java.awt.Color(190, 191, 190));
@@ -155,7 +192,7 @@ public class VistaConsumo extends javax.swing.JDialog {
                 .addComponent(btDia, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btHora, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 476, Short.MAX_VALUE)
                 .addComponent(btAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -185,23 +222,17 @@ public class VistaConsumo extends javax.swing.JDialog {
         periodoTiempo1.setForeground(new java.awt.Color(1, 1, 1));
         periodoTiempo1.setText("Periodo de tiempo");
 
-        fechaInicio.setMaximumRowCount(24);
-        fechaInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        fechaFin.setMaximumRowCount(24);
-        fechaFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelConsumo.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
         labelConsumo.setForeground(new java.awt.Color(1, 1, 1));
-        labelConsumo.setText("Consumo: ");
+        labelConsumo.setText("Consumo Medio: ");
 
         labelPunta.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
         labelPunta.setForeground(new java.awt.Color(1, 1, 1));
-        labelPunta.setText("Periodo Punta: ");
+        labelPunta.setText("Periodo Punta Medio: ");
 
         labelValle.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
         labelValle.setForeground(new java.awt.Color(1, 1, 1));
-        labelValle.setText("Periodo Valle: ");
+        labelValle.setText("Periodo Valle Medio: ");
 
         labelMedia.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
         labelMedia.setForeground(new java.awt.Color(1, 1, 1));
@@ -223,142 +254,141 @@ public class VistaConsumo extends javax.swing.JDialog {
 
         jLabel2.setText("Mes");
 
+        jLabel3.setText("Día");
+
+
+
+        btCalcular.setText("Calcular");
+        btCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalcularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDerechaLayout = new javax.swing.GroupLayout(panelDerecha);
         panelDerecha.setLayout(panelDerechaLayout);
         panelDerechaLayout.setHorizontalGroup(
             panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechaLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelDerechaLayout.createSequentialGroup()
-                            .addComponent(labelValle)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(valle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
-                            .addComponent(labelMedia)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mediaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelDerechaLayout.createSequentialGroup()
-                            .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelPunta)
-                                .addComponent(labelConsumo))
-                            .addGap(42, 42, 42)
-                            .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(punta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(datosEstadisticos)
-                        .addGap(11, 11, 11)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelDerechaLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDerechaLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDerechaLayout.createSequentialGroup()
-                        .addComponent(periodoTiempo1)
-                        .addGap(56, 56, 56)))
-                .addGap(29, 29, 29))
+                        .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelDerechaLayout.createSequentialGroup()
+                                .addComponent(periodoTiempo1)
+                                .addGap(27, 27, 27))
+                            .addGroup(panelDerechaLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(fechaMes, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDerechaLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(25, 25, 25)
+                                .addComponent(fechaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDerechaLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(fechaAno, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelDerechaLayout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(datosEstadisticos))
+                                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDerechaLayout.createSequentialGroup()
+                                        .addComponent(labelMedia)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(mediaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDerechaLayout.createSequentialGroup()
+                                        .addComponent(labelValle)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(valle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDerechaLayout.createSequentialGroup()
+                                        .addComponent(labelConsumo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDerechaLayout.createSequentialGroup()
+                                        .addComponent(labelPunta)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(punta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
+                        .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         panelDerechaLayout.setVerticalGroup(
             panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechaLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(27, 27, 27)
                 .addComponent(periodoTiempo1)
                 .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(fechaAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(fechaMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fechaDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(datosEstadisticos)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelConsumo)
                     .addComponent(consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPunta)
                     .addComponent(punta, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelValle)
                     .addComponent(valle, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMedia)
                     .addComponent(mediaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelArriba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(panelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelArriba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDerecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btCalcular)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 905, Short.MAX_VALUE)
+            .addComponent(panelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelArriba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 595, Short.MAX_VALUE)
+                .addComponent(panelDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 317, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelArriba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDerecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 114, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btCalcularActionPerformed
 
     public void addBtListeners(){
         btAnadir.addActionListener(controlador);
@@ -366,50 +396,99 @@ public class VistaConsumo extends javax.swing.JDialog {
         btDia.addActionListener(controlador);
         btHora.addActionListener(controlador);
         btMes.addActionListener(controlador);
-        fechaInicio.setModel(model1);
-        fechaFin.setModel(model2);
+        fechaAno.setModel(model1);
+        fechaMes.setModel(model2);
+        fechaDia.setModel(model3);
+        
+        fechaAno.addItemListener(this);
+        fechaMes.addItemListener(this);
         
     }
 
     public void setGrafico(Map<String, Double> map) {
-    	ChartPanel chartPanel = GraficoFactory.getGraficoBarras(map);
-    	chartPanel.setSize(jPanel2.getSize());
+    	if(chartPanel != null) { 
+    		chartPanel.removeAll();
+    		jPanel2.remove(chartPanel);}
+    	chartPanel = GraficoFactory.getGraficoBarras(map);
+    	chartPanel.setSize(jPanel1.getSize());
     	jPanel2.add(chartPanel,BorderLayout.CENTER);
     	this.repaint();
     }
-    
-    public void disbaleFiltro(String filtro) {
-    	
-    	if(filtro.equals("año")) {
-    		fechaInicio.setEnabled(false);
-    		fechaFin.setEnabled(false);
-    	}
-    	if(filtro.equals("mes"))
-    		fechaFin.setEnabled(false);
-    }
-    
-    public void enableBoxes() {
-    	fechaInicio.setEnabled(true);
-    	fechaFin.setEnabled(true);
-    }
+  
     
     public int getAño() {
-    	return Integer.valueOf(fechaInicio.getSelectedItem().toString());
+    	return Integer.valueOf(fechaAno.getSelectedItem().toString());
     }
     public int getMes() {
-    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
+    	return Integer.valueOf(fechaMes.getSelectedItem().toString());
     }
     public int getDia() {
-    	return Integer.valueOf(fechaFin.getSelectedItem().toString());
-    }
-    public void initFiltros() {
-    	model1 = new DefaultComboBoxModel<>(getFechasInicio());
-    	model2 = new DefaultComboBoxModel<>(getFechasFin());
+    	return Integer.valueOf(fechaDia.getSelectedItem().toString());
     }
     
-    public String [] getFechasInicio() {
-    	List<String> fechasInicio = new ArrayList<>();
+    public void initFiltros() {
+    	model1 = new DefaultComboBoxModel<>(getFechasInicio());
+    	Object [] params1 = {"ano",Integer.valueOf((String)model1.getSelectedItem())};
+    	UpdateFiltros(params1);
+    	Object [] params2 = {"mes", Integer.valueOf((String)model2.getSelectedItem())};
+    	UpdateFiltros(params2);
     	
+    	
+    }
+    
+    public void UpdateFiltros(Object...params) {
+    	String periodo = (String)params[0];
+    	int periodoReferencia = (int) params[1];
+    	
+    	System.out.println(periodo+periodoReferencia);
+    	if(periodo.equals("ano")) {
+    		model2 = new DefaultComboBoxModel<>(getMesesPorAno(periodoReferencia));
+    		fechaMes.setModel(model2);
+    	}else if(periodo.equals("mes")) {
+    		model3 = new DefaultComboBoxModel<>(getDiasPorMes(periodoReferencia));
+    		fechaDia.setModel(model3);
+    	}
+    	
+    	this.repaint();
+    }
+    private String [] getDiasPorMes(int mes) {
+    	List<String> fechasFin = new ArrayList<>();
+    	for(Consumo c: listaConsumos) {
+    		if(c.getMes() == mes && !fechasFin.contains(String.valueOf(c.getDia())))
+    			fechasFin.add(String.valueOf(c.getDia()));
+    	}
+    	
+    	Collections.sort(fechasFin, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasFin.toArray(new String [0]);
+	}
+
+	private String [] getMesesPorAno(int ano) {
+    	List<String> fechasFin = new ArrayList<>();
+    	for(Consumo c: listaConsumos) {
+    		if(c.getAño() == ano && !fechasFin.contains(String.valueOf(c.getMes())))
+    			fechasFin.add(String.valueOf(c.getMes()));
+    	}
+    	
+    	Collections.sort(fechasFin, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
+			}
+		});
+    	return fechasFin.toArray(new String [0]);
+	}
+
+	public String [] getFechasInicio() {
+    	List<String> fechasInicio = new ArrayList<>();
     	for(Consumo c: listaConsumos) {
     		if(!fechasInicio.contains(String.valueOf(c.getAño())))
     			fechasInicio.add(String.valueOf(c.getAño()));
@@ -424,38 +503,28 @@ public class VistaConsumo extends javax.swing.JDialog {
 		});
     	return fechasInicio.toArray(new String [0]);
     }
-    
-    public String [] getFechasFin() {
-    	List<String> fechasFin = new ArrayList<>();
-    	for(Consumo c: listaConsumos) {
-    		if(!fechasFin.contains(String.valueOf(c.getMes())))
-    			fechasFin.add(String.valueOf(c.getMes()));
-    	}
-    	
-    	Collections.sort(fechasFin, new Comparator<String>() {
-
-			@Override
-			public int compare(String o1, String o2) {
-				// TODO Auto-generated method stub
-				return Integer.valueOf(o1) < Integer.valueOf(o2)?-1:Integer.valueOf(o1) > Integer.valueOf(o2)?1:0;
-			}
-		});
-    	return fechasFin.toArray(new String [0]);
-    }
-   
+	
+	public void setEstadisticos(Map<String,Double> datosEstadisticos) {
+		consumo.setText(String.valueOf(datosEstadisticos.get("consumoMedio")));
+		punta.setText(String.valueOf(datosEstadisticos.get("periodoPunta")));
+		valle.setText(String.valueOf(datosEstadisticos.get("periodoValle")));		
+	}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnadir;
     private javax.swing.JButton btAno;
+    private javax.swing.JButton btCalcular;
     private javax.swing.JButton btDia;
     private javax.swing.JButton btHora;
     private javax.swing.JButton btMes;
     private javax.swing.JLabel consumo;
     private javax.swing.JLabel datosEstadisticos;
-    private javax.swing.JComboBox<String> fechaFin;
-    private javax.swing.JComboBox<String> fechaInicio;
+    private javax.swing.JComboBox<String> fechaDia;
+    private javax.swing.JComboBox<String> fechaMes;
+    private javax.swing.JComboBox<String> fechaAno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelConsumo;
@@ -471,4 +540,16 @@ public class VistaConsumo extends javax.swing.JDialog {
     private javax.swing.JLabel punta;
     private javax.swing.JLabel valle;
     // End of variables declaration//GEN-END:variables
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if(e.getStateChange() == e.SELECTED) {
+			if(e.getSource() == fechaAno) {
+				Object [] params = {"ano", Integer.valueOf((String) model1.getSelectedItem())};
+				UpdateFiltros(params);
+			}else if(e.getSource() == fechaMes) {
+				Object [] params = {"mes", Integer.valueOf((String) model2.getSelectedItem())};
+				UpdateFiltros(params);
+			}
+		}
+	}
 }
