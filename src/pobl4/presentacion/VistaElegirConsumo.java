@@ -5,15 +5,23 @@
  */
 package pobl4.presentacion;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import pobl4.dominio.Consumo;
@@ -43,7 +51,7 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
     public void setComboBoxes() {
         DefaultComboBoxModel modeloAno = new DefaultComboBoxModel(Utils.getListaAnos(consumos).toArray(new Integer[0]));
         comboAño.setModel(modeloAno);
-        DefaultComboBoxModel modeloMes = new DefaultComboBoxModel(Utils.getListaMeses(consumos).toArray(new String[0]));
+        DefaultComboBoxModel modeloMes = new DefaultComboBoxModel(Utils.getListaMeses(consumos,(int)modeloAno.getSelectedItem()).toArray(new String[0]));
         comboMes.setModel(modeloMes); 
     }
     
@@ -79,35 +87,81 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JPanel panelNombre = new JPanel();
+        JLabel labelNombre = new JLabel();
+        JPanel jPanel1 = new JPanel();
         comboAño = new JComboBox<>();
         comboMes = new JComboBox<>();
         btAceptar = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new Dimension(324, 250));
+        setMinimumSize(new Dimension(324, 250));
+        setPreferredSize(new Dimension(324, 250));
 
-        btAceptar.setText("jButton1");
+        panelNombre.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
+
+        labelNombre.setFont(new Font("Ubuntu", 1, 15)); // NOI18N
+        labelNombre.setForeground(new Color(16, 103, 218));
+        labelNombre.setHorizontalAlignment(SwingConstants.CENTER);
+        labelNombre.setText("ELEGIR CONSUMO");
+
+        GroupLayout panelNombreLayout = new GroupLayout(panelNombre);
+        panelNombre.setLayout(panelNombreLayout);
+        panelNombreLayout.setHorizontalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(panelNombreLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(labelNombre)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelNombreLayout.setVerticalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, panelNombreLayout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelNombre)
+                .addContainerGap())
+        );
+
+        jPanel1.setBackground(new Color(190, 191, 190));
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
+
+        btAceptar.setText("Aceptar");
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(comboAño, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboMes, 0, 177, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(btAceptar)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(comboAño, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(comboMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btAceptar)
+                .addGap(27, 27, 27))
+        );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(btAceptar)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(comboMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboAño, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+            .addComponent(panelNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(comboAño, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(comboMes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btAceptar)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(panelNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
