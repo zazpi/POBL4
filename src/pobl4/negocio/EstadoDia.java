@@ -38,7 +38,7 @@ public class EstadoDia implements Estados{
 	private double getConsumoDiario(List<Consumo> lista, int dia) {
 		double consumoDiario = 0;
 		for(Consumo c: lista) {
-			if(c.getAño() == dia) {
+			if(c.getMes() == dia) {
 				consumoDiario+= c.getConsumo();
 			}
 		}

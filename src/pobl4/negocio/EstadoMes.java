@@ -46,7 +46,7 @@ public class EstadoMes implements Estados {
 	public double getConsumoMensual(List<Consumo> lista, int mes) {
 		double consumoMensual = 0;
 		for(Consumo c: lista) {
-			if(c.getAño() == mes) {
+			if(c.getMes() == mes) {
 				consumoMensual+= c.getConsumo();
 			}
 		}
