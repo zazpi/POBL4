@@ -35,8 +35,8 @@ public class VistaTiempoReal extends JDialog {
 	
 	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
 	int minimumValue = 0;
-	int maximumValue = 100;
-	int majorTickGap = 10;
+	int maximumValue = 3;
+	double majorTickGap = 0.25;
 	
 	JLabel lvalorConsumo;
 	JLabel lvalorTiempo;
@@ -49,14 +49,14 @@ public class VistaTiempoReal extends JDialog {
 		
 		modelo = new TiempoReal();
 		
-		//cargarSerial();
+		cargarSerial();
 		
 		controlador = new CtrlTiempoReal(modelo, seriala);
 		this.controlador.setDialogo(this);
 		
-		/*if (seriala != null) {
+		if (seriala != null) {
 			seriala.addListener(controlador);		
-		}*/	
+		}	
 		
 		this.add(crearPanelDialogo());
 		this.setLocation(485, 252);
@@ -100,7 +100,7 @@ public class VistaTiempoReal extends JDialog {
 	    plot.addLayer(new StandardDialRange(redLine, maximumValue, Color.red));
 	    
 	    StandardDialScale scale = new StandardDialScale(minimumValue, maximumValue,
-	        -120, -300, majorTickGap, majorTickGap - 1);
+	        -120, -300, majorTickGap, (int) (majorTickGap - (majorTickGap - 9)));
 	    scale.setTickRadius(0.88);
 	    scale.setTickLabelOffset(0.20);
 	    plot.addScale(0, scale);
@@ -182,11 +182,9 @@ public class VistaTiempoReal extends JDialog {
 	}
 	
 	public void consumo (double consumo, double consumoTotal, double maxConsumo) {		
-		DecimalFormat formato = new DecimalFormat("#.00");
-		
 		setVelocimetro(consumo);
-		lvalorConsumo.setText(formato.format(consumoTotal) + " kW");
-		lvalorMaxConsumo.setText(formato.format(maxConsumo) + " kW");
+		lvalorConsumo.setText(String.format("%.4f", consumoTotal) + " kW");
+		lvalorMaxConsumo.setText(String.format("%.4f", maxConsumo) + " kW");
 	}
 	
 	public void tiempo (int horas, int minutos, int segundos) {

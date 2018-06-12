@@ -197,5 +197,51 @@ public class Utils {
             return buttonPressed;
         }
 
+       public static List<Consumo> filtraConsumoPorPeriodo(List<Consumo>listaConsumos,String periodo, int...periodosReferencia){
+    	   List<Consumo> lista = null;
+    	   if(periodo.equals("mes")) {
+    		   lista = new ArrayList<>();
+    		   int ano = periodosReferencia[0];
+    		   for(Consumo c: listaConsumos) {
+    			   if(c.getAño() == ano && !lista.contains(c))
+    				   lista.add(c);
+    		   }
+    	   }else if(periodo.equals("dia")) {
+    		   lista = new ArrayList<>();
+    		   int ano = periodosReferencia[0];
+    		   int mes = periodosReferencia[1];
+    		   for(Consumo c: listaConsumos) {
+    			   if(c.getAño() == ano && c.getMes() == mes && !lista.contains(c))
+    				   lista.add(c);
+    		   }
+    	   }else if(periodo.equals("hora")) {
+    		   lista = new ArrayList<>();
+    		   int ano = periodosReferencia[0];
+    		   int mes = periodosReferencia[1];
+    		   int dia = periodosReferencia[2];
+    		   for(Consumo c: listaConsumos) {
+    			   if(c.getAño() == ano && c.getMes() == mes && c.getDia() == dia)
+    				   lista.add(c);
+    		   }
+    	   }
+    	   
+    	   return lista;
+       }
        
+       public static int getDiasPorPeriodo(List<Consumo> lista, String periodo, int peridoReferencia) {
+    	   List<Integer> listaDias = new ArrayList<>();
+    	   if(periodo.equals("ano")) {
+    		   for(Consumo c: lista) {
+    			   if(!listaDias.contains(c.getDia()))
+    				   listaDias.add(c.getDia());
+    		   }
+    	   }else if(periodo.equals("mes")) {
+    		   for(Consumo c: lista) {
+    			   if(!listaDias.contains(c.getDia()) && c.getAño() == peridoReferencia)
+    				   listaDias.add(c.getDia());
+    		   }
+    	   }
+    	   
+    	   return listaDias.size();
+       }
 }
