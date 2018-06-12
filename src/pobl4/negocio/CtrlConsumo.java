@@ -25,12 +25,14 @@ public class CtrlConsumo implements ActionListener{
     VistaConsumo vista;
     ConsumoDAO consumoDAO;
     UserDAO userDAO;
+    CtrlMain main;
     
-    public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo, ConsumoDAO consumoDAO,UserDAO userDAO){
+    public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo, ConsumoDAO consumoDAO,UserDAO userDAO, CtrlMain main){
         this.vista = vista;
         this.listConsumo = listConsumo;
         this.consumoDAO = consumoDAO;
         this.userDAO = userDAO;
+        this.main = main;
     }
     
     @Override
@@ -64,6 +66,7 @@ public class CtrlConsumo implements ActionListener{
     	}
     	if(e.getActionCommand().equals("Anadir")) {
     		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO,userDAO);
+    		main.loadUserData();
     	}
     }
     

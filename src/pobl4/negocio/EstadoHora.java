@@ -48,11 +48,12 @@ public class EstadoHora implements Estados {
 		int dia = values[2];
 		int [] periodosReferencia = {ano,mes,dia};
 		List<Consumo> lista = Utils.filtraConsumoPorPeriodo(listaConsumos, "hora", periodosReferencia);
-		datosEstadisticos.put("consumoMedio", getConsumoMedioPorHora(lista,dia,mes,ano));
-		datosEstadisticos.put("periodoPunta", Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta())/HORAS);
-		double periodoValle = ((Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroValle())+
-				Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroSuperValle()))/HORAS);
-		datosEstadisticos.put("periodoValle", periodoValle);
+		double consumoTotal =  getConsumoMedioPorHora(lista,dia,mes,ano);
+		datosEstadisticos.put("consumoMedio",consumoTotal / HORAS);
+		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
+		datosEstadisticos.put("consumoMedio", consumoTotal / HORAS);
+		datosEstadisticos.put("periodoPunta", consumoPunta * 100 /consumoTotal);
+		datosEstadisticos.put("periodoValle", (consumoTotal - consumoPunta) * 100 /consumoTotal);
 		
 		return datosEstadisticos;
 	}
@@ -68,7 +69,7 @@ public class EstadoHora implements Estados {
 				listaHora.add(c.getHora());
 		}
 		HORAS = listaHora.size();
-		return consumoMedioPorHora/HORAS;
+		return consumoMedioPorHora;
 	}
 
 }

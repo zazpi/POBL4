@@ -45,30 +45,30 @@ public class EstadoMes implements Estados {
 	public Map<String, Double> getEstadisticos(List<Consumo> listaConsumos, int... values) {
 		Map<String,Double> datosEstadisticos = new HashMap<>();
 		int ano = values[0];
-		int mes = values[1];
 		int [] periodosReferencia = {ano};
 		List<Consumo> lista = Utils.filtraConsumoPorPeriodo(listaConsumos, "mes", periodosReferencia);
-		datosEstadisticos.put("consumoMedio", getConsumoAnual(lista,ano));
-		datosEstadisticos.put("periodoPunta", Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta())/MESES);
-		double periodoValle = ((Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroValle())+
-				Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroSuperValle()))/MESES);
-		datosEstadisticos.put("periodoValle", periodoValle);
+		double consumoTotal = getConsumoMensual(listaConsumos,ano);
+		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
+		datosEstadisticos.put("consumoMedio", consumoTotal / MESES);
+		datosEstadisticos.put("periodoPunta", consumoPunta * 100 /consumoTotal);
+		datosEstadisticos.put("periodoValle", (consumoTotal - consumoPunta) * 100 /consumoTotal);
 		
 		return datosEstadisticos;
 	}
 	
-	private double getConsumoAnual(List<Consumo> lista,int ano) {
+	private double getConsumoMensual(List<Consumo> lista,int ano) {
 		double consumoAnual = 0;
 		List<Integer> listaMeses = new ArrayList<>();
 		for(Consumo c: lista) {
 			if(c.getAño() == ano) {
 				consumoAnual+= c.getConsumo();
+				if(!listaMeses.contains(c.getMes()))
+					listaMeses.add(c.getMes());
 			}
-			if(!listaMeses.contains(c.getMes()))
-				listaMeses.add(c.getMes());
+
 		}
 		MESES = listaMeses.size();
-		return consumoAnual/MESES;
+		return consumoAnual;
 	}
 	
 	private double getConsumoMensual(List<Consumo> lista, int mes,int ano) {
