@@ -98,6 +98,7 @@ public class CtrlMain implements ActionListener {
 		loadAppData();
 		login();
 		loadUserData();
+		vista.setUserLabel(user.getUsername());
 	}
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)

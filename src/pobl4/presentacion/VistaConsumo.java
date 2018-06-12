@@ -385,12 +385,15 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
         btDia.addActionListener(controlador);
         btHora.addActionListener(controlador);
         btMes.addActionListener(controlador);
+        btCalcular.addActionListener(controlador);
+        btCalcular.setActionCommand("Calcular");
         fechaAno.addItemListener(this);
         fechaMes.addItemListener(this);
         if(listaConsumos.isEmpty()) return;
         fechaAno.setModel(model1);
         fechaMes.setModel(model2);
         fechaDia.setModel(model3);
+        
 
         
     }
@@ -499,6 +502,19 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
 		consumo.setText(String.valueOf(datosEstadisticos.get("consumoMedio")));
 		punta.setText(String.valueOf(datosEstadisticos.get("periodoPunta")));
 		valle.setText(String.valueOf(datosEstadisticos.get("periodoValle")));		
+		mediaDia.setText(String.valueOf(datosEstadisticos.get("mediaPorDia")));
+	}
+	
+    public JComboBox<String> getFechaAno() {
+		return fechaAno;
+	}
+
+	public JComboBox<String> getFechaDia() {
+		return fechaDia;
+	}
+
+	public JComboBox<String> getFechaMes() {
+		return fechaMes;
 	}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -510,7 +526,7 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
     JButton btMes;
     JLabel consumo;
     JComboBox<String> fechaAno;
-    JComboBox<String> fechaDia;
+	JComboBox<String> fechaDia;
     JComboBox<String> fechaMes;
     JPanel jPanel1;
     JLabel mediaDia;

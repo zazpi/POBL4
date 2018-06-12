@@ -26,6 +26,7 @@ public class CtrlConsumo implements ActionListener{
     ConsumoDAO consumoDAO;
     UserDAO userDAO;
     CtrlMain main;
+    Estados estado;
     
     public CtrlConsumo(VistaConsumo vista, List<Consumo> listConsumo, ConsumoDAO consumoDAO,UserDAO userDAO, CtrlMain main){
         this.vista = vista;
@@ -38,37 +39,55 @@ public class CtrlConsumo implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("Ano")) {
-    		Estados estado = new EstadoAño();
+    		estado = new EstadoAño();
     		int [] values = {vista.getAño()};
     		vista.setEstadisticos(estado.getEstadisticos(listConsumo, values));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));
+    		vista.getFechaAno().setEnabled(false);
+    		vista.getFechaMes().setEnabled(false);
+    		vista.getFechaDia().setEnabled(false);
     	}
     	
     	if (e.getActionCommand().equals("Mes")) {
-    		Estados estado = new EstadoMes();
+    		estado = new EstadoMes();
     		int params [] = {vista.getAño(),vista.getMes()};
     		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    		vista.getFechaAno().setEnabled(true);
+    		vista.getFechaMes().setEnabled(false);
+    		vista.getFechaDia().setEnabled(false);
     	}
     	
     	if(e.getActionCommand().equals("Dia")) {
-    		Estados estado = new EstadoDia();
+    		 estado = new EstadoDia();
     		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
     		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    		vista.getFechaAno().setEnabled(true);
+    		vista.getFechaMes().setEnabled(true);
+    		vista.getFechaDia().setEnabled(false);
     	}
     	
     	if(e.getActionCommand().equals("Hora")) {
-    		Estados estado = new EstadoHora();
+    	    estado = new EstadoHora();
     		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
     		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    		vista.getFechaAno().setEnabled(true);
+    		vista.getFechaMes().setEnabled(true);
+    		vista.getFechaDia().setEnabled(true);
     	}
     	if(e.getActionCommand().equals("Anadir")) {
     		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO,userDAO);
     		main.loadUserData();
     	}
+    	if(e.getActionCommand().equals("Calcular")) {
+    		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
+    		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
+    		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
+    	}
     }
+    
     
     
 }

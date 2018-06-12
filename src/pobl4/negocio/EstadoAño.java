@@ -45,11 +45,12 @@ public class EstadoAño implements Estados {
 		Map<String,Double> datosEstadisticos = new HashMap<>();
 		double consumoTotal = getConsumoAnuales(listaConsumos);
 		double periodoPunta = Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroPunta());
+		double mediaDiario = consumoTotal / AÑOS / 365;
 		datosEstadisticos.put("periodoPunta", (periodoPunta*100/consumoTotal));
 
 		datosEstadisticos.put("periodoValle", (consumoTotal - periodoPunta)*100/consumoTotal);
 		datosEstadisticos.put("consumoMedio", consumoTotal / AÑOS);
-		datosEstadisticos.put("mediaPorDia", (((double)consumoTotal / AÑOS) / (double) 365));
+		datosEstadisticos.put("mediaPorDia", mediaDiario);
 		
 		return datosEstadisticos;
 	}
