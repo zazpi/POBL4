@@ -257,17 +257,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txHoraInicio">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="horaInicio"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txHoraFin">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="horaFin"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txHoraFinActionPerformed"/>
               </Events>
@@ -276,25 +270,16 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txMesInicio">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="mesInicio"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txMesFin">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="mesFin"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txPrecio">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="precio"/>
-              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
               </AuxValues>

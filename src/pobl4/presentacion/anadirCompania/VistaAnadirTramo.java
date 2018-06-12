@@ -17,6 +17,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
+import org.jdesktop.xswingx.PromptSupport;
 
 import pobl4.dominio.Precio;
 import pobl4.negocio.CtrlAnadirPrecio;
@@ -30,7 +31,9 @@ public class VistaAnadirTramo extends javax.swing.JDialog {
         this.controlador = controlador;
         controlador.setVista(this);
         initComponents();
+        addPromptText();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
@@ -63,6 +66,15 @@ public class VistaAnadirTramo extends javax.swing.JDialog {
     
     public void mostrarError() {
     	JOptionPane.showMessageDialog(this, "Solo valores númericos","Error",JOptionPane.WARNING_MESSAGE);
+    }
+    
+       public void addPromptText() {
+    	PromptSupport.setPrompt("horaInicio", txHoraInicio);
+    	PromptSupport.setPrompt("horaFin", txHoraFin);
+        PromptSupport.setPrompt("mesInicio", txMesInicio);
+        PromptSupport.setPrompt("mesFin", txMesFin);
+        PromptSupport.setPrompt("precio", txPrecio);
+    	
     }
     
 
@@ -142,20 +154,11 @@ public class VistaAnadirTramo extends javax.swing.JDialog {
         labelPrecio.setForeground(new Color(1, 1, 1));
         labelPrecio.setText("Precio: ");
 
-        txHoraInicio.setText("horaInicio");
-
-        txHoraFin.setText("horaFin");
         txHoraFin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 txHoraFinActionPerformed(evt);
             }
         });
-
-        txMesInicio.setText("mesInicio");
-
-        txMesFin.setText("mesFin");
-
-        txPrecio.setText("precio");
 
         btCancelar.setText("Cancelar");
         btCancelar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));

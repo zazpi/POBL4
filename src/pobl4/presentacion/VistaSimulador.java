@@ -29,6 +29,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.xswingx.PromptSupport;
 
 import org.jfree.chart.ChartPanel;
 
@@ -50,9 +51,10 @@ public class VistaSimulador extends JDialog implements ItemListener{
         this.listaCompanias = listaCompanias;   
         controlador.setVista(this);
         initComponents();
+        addPromptText();
         addListeners();
         actualizarComboBox();
-        
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
@@ -147,6 +149,14 @@ public class VistaSimulador extends JDialog implements ItemListener{
 	public void setDias(int val) {
 		txDias.setText(String.valueOf(val));
 	}
+        
+        public void addPromptText() {
+		PromptSupport.setPrompt("potencia", txPotenciaContratada);
+		PromptSupport.setPrompt("días", txDias);
+		PromptSupport.setPrompt("punta", txPunta);
+		PromptSupport.setPrompt("valle", txValle);
+		PromptSupport.setPrompt("supervalle", txSuperValle);
+	}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +168,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
     private void initComponents() {
 
         JPanel jPanel1 = new JPanel();
-        JPanel panelNombreç = new JPanel();
+        JPanel panelNombre = new JPanel();
         JLabel labelNombre = new JLabel();
         JPanel panelDatos = new JPanel();
         JLabel labelCompania = new JLabel();
@@ -186,22 +196,22 @@ public class VistaSimulador extends JDialog implements ItemListener{
         jPanel1.setMaximumSize(new Dimension(905, 565));
         jPanel1.setMinimumSize(new Dimension(905, 565));
 
-        panelNombreç.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
+        panelNombre.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
 
         labelNombre.setFont(new Font("Ubuntu", 1, 15)); // NOI18N
         labelNombre.setForeground(new Color(16, 103, 218));
         labelNombre.setText("SIMULADOR DE FACTURAS");
 
-        GroupLayout panelNombreçLayout = new GroupLayout(panelNombreç);
-        panelNombreç.setLayout(panelNombreçLayout);
-        panelNombreçLayout.setHorizontalGroup(panelNombreçLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(panelNombreçLayout.createSequentialGroup()
+        GroupLayout panelNombreLayout = new GroupLayout(panelNombre);
+        panelNombre.setLayout(panelNombreLayout);
+        panelNombreLayout.setHorizontalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(panelNombreLayout.createSequentialGroup()
                 .addGap(349, 349, 349)
                 .addComponent(labelNombre)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panelNombreçLayout.setVerticalGroup(panelNombreçLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, panelNombreçLayout.createSequentialGroup()
+        panelNombreLayout.setVerticalGroup(panelNombreLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, panelNombreLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelNombre)
                 .addContainerGap())
@@ -325,7 +335,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
             .addGap(0, 459, Short.MAX_VALUE)
         );
         panelGraficoLayout.setVerticalGroup(panelGraficoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         tablaFactura.setBackground(new Color(190, 191, 190));
@@ -368,7 +378,7 @@ public class VistaSimulador extends JDialog implements ItemListener{
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(panelNombreç, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelNombre, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDatos, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -378,14 +388,13 @@ public class VistaSimulador extends JDialog implements ItemListener{
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(panelNombreç, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelGrafico, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelTabla, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTabla, GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(panelGrafico, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());

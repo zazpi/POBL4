@@ -33,6 +33,7 @@ public class VistaAnadirTarifa extends javax.swing.JDialog {
         controlador.setVista(this);
         initComponents();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     

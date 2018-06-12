@@ -60,6 +60,7 @@ public class VistaComparador extends javax.swing.JDialog {
         fechaAño.setModel(modeloAno);
         actualizarComboBox();
         addListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
