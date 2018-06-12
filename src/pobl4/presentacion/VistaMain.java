@@ -31,13 +31,13 @@ public class VistaMain extends javax.swing.JFrame {
      */
     public VistaMain() {
     	controlador = new CtrlMain(this);
-        //initComponents();
+        initComponents();
     	this.setTitle("zazpi");
     	this.setSize(1280, 768);
-    	this.setContentPane(mainPane());
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setVisible(true);
         this.setLocationRelativeTo(null);
+        addListeners();
     }
     
 
@@ -71,7 +71,7 @@ public class VistaMain extends javax.swing.JFrame {
         labelNombre.setText("ELECTRICOM");
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel1.setText("Usuario:   Asier");
+        jLabel1.setText("");
 
         javax.swing.GroupLayout panelNombreLayout = new javax.swing.GroupLayout(panelNombre);
         panelNombre.setLayout(panelNombreLayout);
@@ -160,9 +160,26 @@ public class VistaMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
    
+    
+    private void addListeners() {
+    	jButton7.setActionCommand("simulador");
+    	jButton6.setActionCommand("consumo");
+    	jButton5.setActionCommand("tiempoReal");
+    	jButton4.setActionCommand("comparador");
+    	
+    	jButton7.addActionListener(controlador);
+    	jButton6.addActionListener(controlador);
+    	jButton5.addActionListener(controlador);
+    	jButton4.addActionListener(controlador);
+    }
+    
+    public void setUserLabel(String username) {
+    	jLabel1.setText("Username: "+username);
+    }
 	/**
 	 * @param args
 	 */
+    
 	public static void main(String[] args) {
 		
 		try {
@@ -176,17 +193,6 @@ public class VistaMain extends javax.swing.JFrame {
 		VistaMain main = new VistaMain();
 		System.err.println("Everything ok chief!");
                 
-	}
-	
-	public Container mainPane() {
-		JPanel pane = new JPanel(new BorderLayout());
-		JButton consumo = new JButton("Mi Consumo");
-		consumo.setActionCommand("consumo");
-		consumo.addActionListener(controlador);
-		pane.add(consumo, BorderLayout.CENTER);
-		
-		
-		return pane;
 	}
 
     /**

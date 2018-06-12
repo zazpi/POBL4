@@ -103,6 +103,7 @@ public class CtrlMain implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("consumo")) {
+			System.out.println("hey");
 			VistaConsumo consumo = new VistaConsumo(vista, true, user.getConsumos(), consumoDAO,userDAO);
 		}else if(e.getActionCommand().equals("simulador")) {
 			SimulacionEstatica modelo = new SimulacionEstatica();
