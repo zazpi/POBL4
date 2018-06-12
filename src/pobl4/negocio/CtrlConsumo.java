@@ -37,24 +37,29 @@ public class CtrlConsumo implements ActionListener{
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("Ano")) {
     		Estados estado = new EstadoAño();
+    		int [] values = {vista.getAño()};
+    		vista.setEstadisticos(estado.getEstadisticos(listConsumo, values));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));
     	}
     	
     	if (e.getActionCommand().equals("Mes")) {
     		Estados estado = new EstadoMes();
-    		int params [] = {vista.getAño()};
+    		int params [] = {vista.getAño(),vista.getMes()};
+    		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
     	}
     	
     	if(e.getActionCommand().equals("Dia")) {
     		Estados estado = new EstadoDia();
-    		int params [] = {vista.getAño(),vista.getMes()};
+    		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
+    		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
     	}
     	
     	if(e.getActionCommand().equals("Hora")) {
     		Estados estado = new EstadoHora();
     		int params [] = {vista.getAño(),vista.getMes(),vista.getDia()};
+    		vista.setEstadisticos(estado.getEstadisticos(listConsumo, params));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, params));
     	}
     	if(e.getActionCommand().equals("Anadir")) {
