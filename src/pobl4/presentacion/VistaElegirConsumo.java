@@ -40,6 +40,7 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
         initComponents();
         setComboBoxes();
         setListeners();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
@@ -97,7 +98,6 @@ public class VistaElegirConsumo extends JDialog implements ActionListener {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new Dimension(324, 250));
         setMinimumSize(new Dimension(324, 250));
-        setPreferredSize(new Dimension(324, 250));
 
         panelNombre.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
 
