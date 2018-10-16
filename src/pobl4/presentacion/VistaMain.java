@@ -25,7 +25,7 @@ import pobl4.negocio.CtrlMain;
  */
 public class VistaMain extends javax.swing.JFrame {
 	private static final Logger LOGGER = Logger.getLogger(VistaMain.class.getName() );
-	public static int USERID = 0;
+	public static final int USERID = 0;
 
 	public static final long serialVersionUID = 1L;
 	CtrlMain controlador;
