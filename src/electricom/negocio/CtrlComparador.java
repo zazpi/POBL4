@@ -88,6 +88,7 @@ public class CtrlComparador implements ItemListener, ActionListener{
             case VistaComparador.BT_ANADIR:
                 Tarifa tarifa = new Tarifa();
         	CtrlAnadirTarifa controlTarifa = new CtrlAnadirTarifa(tarifa);
+        	new VistaAnadirTarifa(vista,true,controlTarifa,tarifa);
         	if(tarifa.isValid()){
                     Compania personalizado = new Compania();
                     personalizado.setId(-1);
