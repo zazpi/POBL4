@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import pobl4.daoexception.DAOException;
 import pobl4.dominio.Consumo;
@@ -18,6 +20,7 @@ import pobl4.dominio.Consumo;
  *
  */
 public class ConsumoDAOJDBC implements ConsumoDAO{
+	private static final Logger LOGGER = Logger.getLogger(ConsumoDAOJDBC.class.getName() );
 	
 	private static final String FIND_BY_ID = 
 			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE consumoID = ?";
@@ -54,9 +57,6 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 
 	@Override
 	public void create(Consumo consumo) throws IllegalArgumentException, DAOException {
-		/*if((Integer)consumo.getConsumoID() != null) {
-			throw new IllegalArgumentException("Consumo already exists");
-		}*/
 		Object[] values = {
 	            consumo.getAño(),
 	            consumo.getMes(),
@@ -71,8 +71,7 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			PreparedStatement statement = DAOUtil.prepareStatement(connection, SQL_INSERT, values);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.getMessage());
 		}
 		
 	}
@@ -123,8 +122,7 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			for(PreparedStatement s: statements)
 				s.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.getMessage());
 		}
 		
 	}
@@ -143,8 +141,7 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			try {
 				statements.add(DAOUtil.prepareStatement(conn, SQL_INSERT, values));
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.getMessage());
 			}
 		}
 		

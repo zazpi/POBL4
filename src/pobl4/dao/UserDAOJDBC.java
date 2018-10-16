@@ -6,12 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import pobl4.daoexception.DAOException;
 import pobl4.dominio.User;
 
 public class UserDAOJDBC implements UserDAO {
-
+	private static final Logger LOGGER = Logger.getLogger(UserDAOJDBC.class.getName() );
     private static final String SQL_FIND_BY_ID =
         "SELECT usuarioID,nombre,apellido,nombre_usuario,contraseña,potencia_contratada,tarifaID"
         + " FROM usuario WHERE id = ?";
@@ -105,8 +107,7 @@ public class UserDAOJDBC implements UserDAO {
                 throw new DAOException("Creating user failed, no rows affected.");
             }
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.getMessage());
 		}
 	}
 	

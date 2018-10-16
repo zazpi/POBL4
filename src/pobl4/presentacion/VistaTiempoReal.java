@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -30,6 +32,7 @@ import pobl4.negocio.CtrlTiempoReal;
 import pobl4.serial.Serial;
 
 public class VistaTiempoReal extends JDialog {
+	private static final Logger LOGGER = Logger.getLogger(VistaTiempoReal.class.getName());
 	CtrlTiempoReal controlador;
 	TiempoReal modelo;
 	
@@ -72,7 +75,7 @@ public class VistaTiempoReal extends JDialog {
 		try {
 			seriala.conectar(seriala.encontrarPuerto());
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			LOGGER.log(Level.SEVERE,e1.getMessage());
 		}
 	}
 

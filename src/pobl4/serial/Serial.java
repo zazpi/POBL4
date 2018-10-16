@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.TooManyListenersException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEventListener;
+import pobl4.presentacion.VistaTiempoReal;
 
 public class Serial {
+	private static final Logger LOGGER = Logger.getLogger(Serial.class.getName());
 	InputStream in;
 	OutputStream out;
 	CommPort commPort;
@@ -80,7 +84,7 @@ public class Serial {
         }
         catch ( IOException e )
         {
-            e.printStackTrace();
+        	LOGGER.log(Level.SEVERE,e1.getMessage());
         }            
     }
     
@@ -93,7 +97,7 @@ public class Serial {
         }
         catch ( IOException e )
         {
-            e.printStackTrace();
+        	LOGGER.log(Level.SEVERE,e1.getMessage());
         } 
         return bytes;
     }
@@ -126,7 +130,7 @@ public class Serial {
 		try {
 			serialPort.addEventListener(listener);
 		} catch (TooManyListenersException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e1.getMessage());
 		}
 		
 	}
