@@ -46,9 +46,9 @@ public class EstadoAño implements Estados {
 		double consumoTotal = getConsumoAnuales(listaConsumos);
 		double periodoPunta = Utils.calcularConsumoPeriodo(listaConsumos, ConsumoFactory.getFiltroPunta());
 		double mediaDiario = consumoTotal / AÑOS / 365;
-		datosEstadisticos.put("periodoPunta", (periodoPunta*100/consumoTotal));
+		datosEstadisticos.put("periodoPunta", (consumoTotal!=0)?(periodoPunta*100/consumoTotal):0);
 
-		datosEstadisticos.put("periodoValle", (consumoTotal - periodoPunta)*100/consumoTotal);
+		datosEstadisticos.put("periodoValle", (consumoTotal!=0)?((consumoTotal - periodoPunta)*100/consumoTotal):0);
 		datosEstadisticos.put("consumoMedio", consumoTotal / AÑOS);
 		datosEstadisticos.put("mediaPorDia", mediaDiario);
 		
