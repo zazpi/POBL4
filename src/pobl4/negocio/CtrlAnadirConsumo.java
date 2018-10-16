@@ -12,11 +12,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
 
 import pobl4.dao.ConsumoDAO;
 import pobl4.dao.UserDAO;
+import pobl4.dao.UserDAOJDBC;
 import pobl4.dominio.Consumo;
 import pobl4.presentacion.VistaAnadirConsumo;
 import pobl4.presentacion.VistaMain;
@@ -27,7 +30,7 @@ import pobl4.utils.Utils;
  *
  */
 public class CtrlAnadirConsumo implements ActionListener{
-
+	private static final Logger LOGGER = Logger.getLogger(CtrlAnadirConsumo.class.getName() );
 	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
 	List<File> files;
@@ -103,11 +106,9 @@ public class CtrlAnadirConsumo implements ActionListener{
 				}
 				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.getMessage());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.getMessage());
 			}
 		}
 		          System.out.println("bukatuta");

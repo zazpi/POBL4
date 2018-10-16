@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import pobl4.daoexception.DAOException;
 import pobl4.dominio.Precio;
@@ -19,7 +21,7 @@ import pobl4.dominio.Tarifa;
  *
  */
 public class TarifaDAOJDBC implements TarifaDAO{
-	
+	private static final Logger LOGGER = Logger.getLogger(TarifaDAOJDBC.class.getName() );
 	private static final String FIND_BY_ID = 
 			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa WHERE tarifaID = ?";
 	private static final String FIND_BY_COMPANY_ID =
@@ -110,7 +112,7 @@ public class TarifaDAOJDBC implements TarifaDAO{
 	            }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.getMessage());
 			}
 	}
 	

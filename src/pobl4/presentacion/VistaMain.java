@@ -7,12 +7,16 @@ package pobl4.presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import pobl4.negocio.CtrlAnadirConsumo;
 import pobl4.negocio.CtrlMain;
 
 /**
@@ -20,8 +24,8 @@ import pobl4.negocio.CtrlMain;
  * @author asier
  */
 public class VistaMain extends javax.swing.JFrame {
-
-	public static int USERID = 0;
+	private static final Logger LOGGER = Logger.getLogger(VistaMain.class.getName() );
+	public static final int USERID = 0;
 
 	public static final long serialVersionUID = 1L;
 	CtrlMain controlador;
@@ -215,8 +219,7 @@ public class VistaMain extends javax.swing.JFrame {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.getMessage());
 		}
 		
 		VistaMain main = new VistaMain();
