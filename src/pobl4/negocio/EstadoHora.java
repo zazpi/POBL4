@@ -52,8 +52,8 @@ public class EstadoHora implements Estados {
 		datosEstadisticos.put("consumoMedio",consumoTotal / HORAS);
 		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
 		datosEstadisticos.put("consumoMedio", consumoTotal / HORAS);
-		datosEstadisticos.put("periodoPunta", consumoPunta * 100 /consumoTotal);
-		datosEstadisticos.put("periodoValle", (consumoTotal - consumoPunta) * 100 /consumoTotal);
+		datosEstadisticos.put("periodoPunta", (consumoTotal!=0)?(consumoPunta * 100 /consumoTotal):0);
+		datosEstadisticos.put("periodoValle", (consumoTotal!=0)?((consumoTotal - consumoPunta) * 100 /consumoTotal):0);
 		
 		return datosEstadisticos;
 	}
