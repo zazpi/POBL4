@@ -5,18 +5,13 @@
  */
 package electricom.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import electricom.negocio.CtrlAnadirConsumo;
 import electricom.negocio.CtrlMain;
 
 /**
