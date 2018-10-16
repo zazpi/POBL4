@@ -86,10 +86,6 @@ public class UserDAOJDBC implements UserDAO {
 
 	@Override
 	public void create(User user) throws IllegalArgumentException, DAOException {
-		/*if ((Integer)user.getId() != null) {
-            throw new IllegalArgumentException("User is already created, the user ID is not null.");
-		}*/
-            
 		Object[] values = {
 	            user.getNombre(),
 	            user.getApellido(),

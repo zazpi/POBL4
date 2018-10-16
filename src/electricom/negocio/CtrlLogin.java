@@ -45,7 +45,7 @@ public class CtrlLogin implements ActionListener{
         }
         
         if(e.getActionCommand().equals("registro")) {
-        	VistaRegistro registro = new VistaRegistro(login, true,userDAO,login.getListCompanias(),login.getListTarifas());
+        	new VistaRegistro(login, true,userDAO,login.getListCompanias(),login.getListTarifas());
         }
     }
     

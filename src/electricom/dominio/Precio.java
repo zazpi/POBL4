@@ -21,7 +21,7 @@ public class Precio implements Serializable{
 	private int hora_fin;
 	private int mes_inicio;
 	private int mes_fin;
-	private double precio;
+	private double precioEUR;
 	private int tarifaID;
 	public int getId() {
 		return id;
@@ -54,10 +54,10 @@ public class Precio implements Serializable{
 		this.mes_fin = mes_fin;
 	}
 	public double getPrecio() {
-		return precio;
+		return precioEUR;
 	}
 	public void setPrecio(double precio) {
-		this.precio = precio;
+		this.precioEUR = precio;
 	}
 	public int getTarifaID() {
 		return tarifaID;
@@ -78,11 +78,11 @@ public class Precio implements Serializable{
 	@Override
 	public String toString() {
 		return "Precio [id=" + id + ", hora_inicio=" + hora_inicio + ", hora_fin=" + hora_fin + ", mes_inicio="
-				+ mes_inicio + ", mes_fin=" + mes_fin + ", precio=" + precio + ", tarifaID=" + tarifaID + "]";
+				+ mes_inicio + ", mes_fin=" + mes_fin + ", precio=" + precioEUR + ", tarifaID=" + tarifaID + "]";
 	}
 	
 	public boolean isValid() {
-		return (precio != 0); // egiteke
+		return (precioEUR != 0); // egiteke
 	}
 	
 	

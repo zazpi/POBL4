@@ -23,11 +23,8 @@ public class CSVFilter extends FileFilter {
 		}
 		
 		String extension = getExtension(f);
-		if(extension!=null) {
-			if(extension.equals("csv"))
-				return true;
-		}
-		return false;
+		return(extension!=null && extension.equals("csv"));
+
 	}
 	
     public static String getExtension(File f) {
@@ -43,7 +40,6 @@ public class CSVFilter extends FileFilter {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

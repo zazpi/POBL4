@@ -31,12 +31,12 @@ public class CtrlAnadirTarifa implements ActionListener {
                 break;
             case "anadir":
             	CtrlAnadirPrecio ctrl = new CtrlAnadirPrecio();
-            	VistaAnadirTramo vis = new VistaAnadirTramo(vista,true,ctrl);
             	Precio precio = ctrl.getPrecio();
             	if(precio!= null)
             		tarifa.getPrecios().add(precio);
             	vista.actualizarListaPrecios();
                 break;
+            default:
             case "cancelar":
                 vista.dispose();
                 break;

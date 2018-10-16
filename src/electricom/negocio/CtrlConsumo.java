@@ -78,7 +78,7 @@ public class CtrlConsumo implements ActionListener{
     		vista.getFechaDia().setEnabled(true);
     	}
     	if(e.getActionCommand().equals("Anadir")) {
-    		VistaAnadirConsumo vistaAñadirConsumo = new VistaAnadirConsumo(vista, true,consumoDAO,userDAO);
+    		new VistaAnadirConsumo(vista, true,consumoDAO,userDAO);
     		main.loadUserData();
     	}
     	if(e.getActionCommand().equals("Calcular")) {

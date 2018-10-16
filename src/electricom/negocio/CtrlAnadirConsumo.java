@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,7 +20,6 @@ import javax.swing.JFileChooser;
 
 import electricom.dao.ConsumoDAO;
 import electricom.dao.UserDAO;
-import electricom.dao.UserDAOJDBC;
 import electricom.dominio.Consumo;
 import electricom.presentacion.VistaAnadirConsumo;
 import electricom.presentacion.VistaMain;
@@ -29,7 +29,7 @@ import electricom.utils.Utils;
  * @author Lucas
  *
  */
-public class CtrlAnadirConsumo implements ActionListener{
+public class CtrlAnadirConsumo implements ActionListener, Serializable{
 	private static final Logger LOGGER = Logger.getLogger(CtrlAnadirConsumo.class.getName() );
 	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
@@ -111,7 +111,6 @@ public class CtrlAnadirConsumo implements ActionListener{
 				LOGGER.log(Level.SEVERE,e.getMessage());
 			}
 		}
-		          System.out.println("bukatuta");
 		return list;
 		
 	}

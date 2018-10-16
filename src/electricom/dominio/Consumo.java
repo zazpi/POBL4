@@ -21,7 +21,7 @@ public class Consumo implements Serializable{
 	private int mes;
 	private int dia;
 	private int hora;
-	private double consumo;
+	private double consumoKW;
 	private int usuarioID;
         
         public Consumo(){
@@ -30,7 +30,7 @@ public class Consumo implements Serializable{
         public Consumo(int mes, int hora, double consumo){
             this.mes = mes;
             this.hora = hora;
-            this.consumo = consumo;
+            this.consumoKW = consumo;
         }
 	
 
@@ -65,10 +65,10 @@ public class Consumo implements Serializable{
 		this.hora = hora;
 	}
 	public double getConsumo() {
-		return consumo;
+		return consumoKW;
 	}
 	public void setConsumo(double consumo) {
-		this.consumo = consumo;
+		this.consumoKW = consumo;
 	}
 	public int getUsuarioID() {
 		return usuarioID;

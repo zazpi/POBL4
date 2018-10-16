@@ -50,7 +50,6 @@ public class DAOProperties {
         String property = PROPERTIES.getProperty(fullKey);
 
         if (property == null || property.trim().length() == 0) {
-        	    property = null;
                 throw new DAOConfigException("Required property '" + fullKey + "'"
                     + " is missing in properties file '" + PROPERTIES_FILE + "'.");
             

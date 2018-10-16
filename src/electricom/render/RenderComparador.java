@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.Serializable;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,7 +25,7 @@ import electricom.dominio.Simulacion;
  *
  * @author asier
  */
-public class RenderComparador implements ListCellRenderer<Simulacion>{
+public class RenderComparador implements ListCellRenderer<Simulacion>, Serializable{
 
     public RenderComparador() {
         

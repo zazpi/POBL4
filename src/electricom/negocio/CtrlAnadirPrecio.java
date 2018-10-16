@@ -2,12 +2,13 @@ package electricom.negocio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import electricom.dominio.Precio;
 import electricom.presentacion.anadirCompania.VistaAnadirTramo;
 
 
-public class CtrlAnadirPrecio implements ActionListener {
+public class CtrlAnadirPrecio implements ActionListener, Serializable {
 
 	Precio precio = null;
 	VistaAnadirTramo vista;

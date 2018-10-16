@@ -15,7 +15,6 @@ import electricom.dao.PrecioDAO;
 import electricom.dao.TarifaDAO;
 import electricom.dao.UserDAO;
 import electricom.dominio.Compania;
-import electricom.dominio.Consumo;
 import electricom.dominio.SimulacionEstatica;
 import electricom.dominio.Tarifa;
 import electricom.dominio.User;
@@ -58,11 +57,11 @@ public class CtrlMain implements ActionListener {
 	}
 	
 	public void loadUserData() {
-		user.setConsumos(consumoDAO.list(new Long(user.getId())));
-		user.setTarifa(tarifaDAO.find(new Long(user.getTafiraID())));
+		user.setConsumos(consumoDAO.list((long) user.getId()));
+		user.setTarifa(tarifaDAO.find((long) user.getTafiraID()));
 		tarifa = user.getTarifa();
-		tarifa.setCompania(companiaDAO.find(new Long(tarifa.getCompaniaID())));
-		tarifa.setPrecios(precioDAO.list(new Long(tarifa.getTarifaID())));
+		tarifa.setCompania(companiaDAO.find((long) tarifa.getCompaniaID()));
+		tarifa.setPrecios(precioDAO.list((long) tarifa.getTarifaID()));
 		VistaMain.USERID = user.getId();
 	}
 	
@@ -74,8 +73,8 @@ public class CtrlMain implements ActionListener {
 		for(Compania c : listaCompania) {
 			List<Tarifa> tList = new ArrayList<>();
 			for(Tarifa t : listaTarifas) {
-				t.setPrecios(precioDAO.list(new Long(t.getTarifaID())));
-				t.setCompania(companiaDAO.find(new Long(t.getCompaniaID())));
+				t.setPrecios(precioDAO.list((long) t.getTarifaID()));
+				t.setCompania(companiaDAO.find((long) t.getCompaniaID()));
 				if(t.getCompaniaID() == c.getId())
 					tList.add(t);
 			}
@@ -107,16 +106,16 @@ public class CtrlMain implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("consumo")) {
 			System.out.println("hey");
-			VistaConsumo consumo = new VistaConsumo(vista, true, user.getConsumos(), consumoDAO,userDAO,this);
+			new VistaConsumo(vista, true, user.getConsumos(), consumoDAO,userDAO,this);
 		}else if(e.getActionCommand().equals("simulador")) {
 			SimulacionEstatica modelo = new SimulacionEstatica();
 			CtrlSimulador controlador = new CtrlSimulador(modelo,listaCompania,user.getConsumos());
-			VistaSimulador simulador = new VistaSimulador(vista,true,controlador,modelo,listaCompania);
+			new VistaSimulador(vista,true,controlador,modelo,listaCompania);
 		}else if(e.getActionCommand().equals("tiempoReal")) {
-			VistaTiempoReal tiemporeal = new VistaTiempoReal(vista);
+			new VistaTiempoReal(vista);
 		}else if(e.getActionCommand().equals("comparador")) {
 			CtrlComparador controlador = new CtrlComparador(listaCompania,user.getConsumos());
-			VistaComparador comparador = new VistaComparador(vista,true,controlador,user.getConsumos());
+			new VistaComparador(vista,true,controlador,user.getConsumos());
 		}
 		
 

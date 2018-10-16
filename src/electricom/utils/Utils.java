@@ -8,10 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.swing.AbstractAction;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import electricom.dao.ConsumoDAO;

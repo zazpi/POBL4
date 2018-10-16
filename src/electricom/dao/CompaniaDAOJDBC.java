@@ -12,7 +12,6 @@ import java.util.List;
 
 import electricom.daoexception.DAOException;
 import electricom.dominio.Compania;
-import electricom.dominio.Consumo;
 
 /**
  * @author Lucas

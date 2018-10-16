@@ -14,10 +14,6 @@ import java.sql.SQLException;
 public class DAOUtil {
 
 	
-	public DAOUtil() {
-		
-	}
-	
 	public static PreparedStatement prepareStatement (Connection connection, String sql, Object... values) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(sql);
 		setValues(statement, values);

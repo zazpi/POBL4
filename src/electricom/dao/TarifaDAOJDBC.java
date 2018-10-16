@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import electricom.daoexception.DAOException;
-import electricom.dominio.Precio;
 import electricom.dominio.Tarifa;
 
 /**

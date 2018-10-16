@@ -28,8 +28,6 @@ public class ConsumoDAOJDBC implements ConsumoDAO{
 			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ? LIMIT 50000";
 	private static final String SQL_INSERT = 
 			"INSERT INTO consumo (año,mes,dia,hora,consumo,usuarioID) VALUES(?,?,?,?,?,?)";
-	private static final String SQL_LIST_CONSUMES =
-			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo";
 	private static final String SQL_LIST_CONSUMES_BY_USER_ID =
 			"SELECT consumoID,año,mes,dia,hora,consumo,usuarioID FROM consumo WHERE usuarioID = ? LIMIT 50000";
 
