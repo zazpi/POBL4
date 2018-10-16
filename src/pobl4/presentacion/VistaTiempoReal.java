@@ -36,7 +36,7 @@ public class VistaTiempoReal extends JDialog {
 	CtrlTiempoReal controlador;
 	TiempoReal modelo;
 	
-	public DefaultValueDataset dataset = new DefaultValueDataset(0);	
+	public final DefaultValueDataset dataset = new DefaultValueDataset(0);	
 	int minimumValue = 0;
 	int maximumValue = 3;
 	double majorTickGap = 0.25;
