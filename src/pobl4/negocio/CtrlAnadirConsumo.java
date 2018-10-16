@@ -83,8 +83,7 @@ public class CtrlAnadirConsumo implements ActionListener{
 		List<Consumo> list = new ArrayList<>();
 		for(File f: files) {
 			try(BufferedReader in = new BufferedReader(new FileReader(f.getAbsolutePath()))){
-				String line;
-				in.readLine();
+				String line = in.readLine();
 				while((line = in.readLine())!=null) {
 					Consumo consumo = new Consumo();
 					String data [] = line.split(";");
