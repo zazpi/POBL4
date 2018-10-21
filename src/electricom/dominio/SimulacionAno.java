@@ -26,7 +26,7 @@ public class SimulacionAno extends Simulacion{
         porEnergia = 0;
        
         for (Consumo consumo : listaConsumos){
-            if(consumo.getAño() == año){
+            if(consumo.getAno() == año){
                 porEnergia += getCoste(tarifa, consumo);
             }
         }

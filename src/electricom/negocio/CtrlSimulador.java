@@ -43,14 +43,12 @@ public class CtrlSimulador implements ActionListener{
                     modeloSimulacion.calcularCoste();
                     vista.actualizarTabla();
         	}catch (NumberFormatException ex) {
-        		System.out.println("INPUT ERROR");
         		vista.mostrarError();
         	}
 
         }else if(actionCommand.equals("anadir")) {
         	Tarifa tarifa = new Tarifa();
         	CtrlAnadirTarifa controlTarifa = new CtrlAnadirTarifa(tarifa);
-        	VistaAnadirTarifa añadirTarifa = new VistaAnadirTarifa(vista,true,controlTarifa,tarifa); 
         	if(tarifa.isValid())
         		vista.getCompania().getTarifas().add(tarifa);
         	vista.actualizarComboBox();

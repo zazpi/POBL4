@@ -31,6 +31,7 @@ import electricom.utils.Utils;
  */
 public class CtrlAnadirConsumo implements ActionListener, Serializable{
 	private static final Logger LOGGER = Logger.getLogger(CtrlAnadirConsumo.class.getName() );
+	private static final long serialVersionUID = 1L;
 	VistaAnadirConsumo vista;
 	ConsumoDAO consumoDAO;
 	List<File> files;
@@ -98,7 +99,7 @@ public class CtrlAnadirConsumo implements ActionListener, Serializable{
 					consumo.setHora(Integer.valueOf(data[2]));
 					consumo.setDia(Integer.valueOf(fechas[0]));
 					consumo.setMes(Integer.valueOf(fechas[1]));
-					consumo.setAño(Integer.valueOf(fechas[2]));
+					consumo.setAno(Integer.valueOf(fechas[2]));
 					list.add(consumo);
 					}
 					

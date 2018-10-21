@@ -18,7 +18,7 @@ import electricom.utils.Utils;
  */
 public class EstadoHora implements Estados {
 	
-	private int HORAS = 0;
+	private int hora = 0;
 
 	/* (non-Javadoc)
 	 * @see pobl4.negocio.Estados#getDatosGraficos(java.util.List, int[])
@@ -26,11 +26,11 @@ public class EstadoHora implements Estados {
 	@Override
 	public Map<String, Double> getDatosGraficos(List<Consumo> listaConsumos, int... params) {
 		Map<String,Double> datosGrafico = new HashMap<>();
-		int año = params [0];
+		int ano = params [0];
 		int mes = params [1];
 		int dia = params [2];
 		for(Consumo c: listaConsumos) {
-			if(c.getAño() == año && c.getMes() == mes && c.getDia() == dia)
+			if(c.getAno() == ano && c.getMes() == mes && c.getDia() == dia)
 				datosGrafico.put(String.valueOf(String.valueOf((c.getHora()))), c.getConsumo());
 		}
 		
@@ -49,26 +49,26 @@ public class EstadoHora implements Estados {
 		int [] periodosReferencia = {ano,mes,dia};
 		List<Consumo> lista = Utils.filtraConsumoPorPeriodo(listaConsumos, "hora", periodosReferencia);
 		double consumoTotal =  getConsumoMedioPorHora(lista,dia,mes,ano);
-		datosEstadisticos.put("consumoMedio",consumoTotal / HORAS);
+		datosEstadisticos.put("consumoMedio",consumoTotal / hora);
 		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
-		datosEstadisticos.put("consumoMedio", consumoTotal / HORAS);
+		datosEstadisticos.put("consumoMedio", consumoTotal / hora);
 		datosEstadisticos.put("periodoPunta", (consumoTotal!=0)?(consumoPunta * 100 /consumoTotal):0);
 		datosEstadisticos.put("periodoValle", (consumoTotal!=0)?((consumoTotal - consumoPunta) * 100 /consumoTotal):0);
 		
 		return datosEstadisticos;
 	}
 	
-	private double getConsumoMedioPorHora(List<Consumo> listaConsumos,int dia, int mes, int año) {
+	private double getConsumoMedioPorHora(List<Consumo> listaConsumos,int dia, int mes, int ano) {
 		double consumoMedioPorHora = 0;
 		List<Integer> listaHora = new ArrayList<>();
 		for(Consumo c: listaConsumos) {
-			if(c.getDia() == dia && c.getAño() == año && c.getMes() == mes) {
+			if(c.getDia() == dia && c.getAno() == ano && c.getMes() == mes) {
 				consumoMedioPorHora+= c.getConsumo();
 			}
 			if(!listaHora.contains(c.getHora()))
 				listaHora.add(c.getHora());
 		}
-		HORAS = listaHora.size();
+		hora = listaHora.size();
 		return consumoMedioPorHora;
 	}
 

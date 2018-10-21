@@ -464,7 +464,7 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
 	private String [] getMesesPorAno(int ano) {
     	List<String> fechasFin = new ArrayList<>();
     	for(Consumo c: listaConsumos) {
-    		if(c.getAño() == ano && !fechasFin.contains(String.valueOf(c.getMes())))
+    		if(c.getAno() == ano && !fechasFin.contains(String.valueOf(c.getMes())))
     			fechasFin.add(String.valueOf(c.getMes()));
     	}
     	
@@ -482,8 +482,8 @@ public class VistaConsumo extends javax.swing.JDialog implements ItemListener{
 	public String [] getFechasInicio() {
     	List<String> fechasInicio = new ArrayList<>();
     	for(Consumo c: listaConsumos) {
-    		if(!fechasInicio.contains(String.valueOf(c.getAño())))
-    			fechasInicio.add(String.valueOf(c.getAño()));
+    		if(!fechasInicio.contains(String.valueOf(c.getAno())))
+    			fechasInicio.add(String.valueOf(c.getAno()));
     	}
     	Collections.sort(fechasInicio, new Comparator<String>() {
 

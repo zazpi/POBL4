@@ -18,17 +18,17 @@ import electricom.utils.Utils;
  */
 public class EstadoDia implements Estados{
 	
-	private int DIAS = 0;
+	private int dias = 0;
 
 	@Override
 	public Map<String, Double> getDatosGraficos(List<Consumo> listaConsumos, int... params) {
 	Map<String,Double> datosGrafico = new HashMap<>();
 	
-	int año = params [0];
+	int ano = params [0];
 	int mes = params [1];
 		for(Consumo c: listaConsumos) {
-			if (c.getAño() == año && c.getMes() == mes && !datosGrafico.containsKey(String.valueOf(c.getDia())))
-				datosGrafico.put(String.valueOf(c.getDia()), getConsumoDiario(listaConsumos, c.getDia(),c.getMes(),c.getAño()));
+			if (c.getAno() == ano && c.getMes() == mes && !datosGrafico.containsKey(String.valueOf(c.getDia())))
+				datosGrafico.put(String.valueOf(c.getDia()), getConsumoDiario(listaConsumos, c.getDia(),c.getMes(),c.getAno()));
 		}
 		return Utils.sortByValue(datosGrafico,false);
 	}
@@ -42,7 +42,7 @@ public class EstadoDia implements Estados{
 		List<Consumo> lista = Utils.filtraConsumoPorPeriodo(listaConsumos, "dia", periodosReferencia);
 		double consumoTotal = getConsumoMensual(lista,ano,mes);
 		
-		datosEstadisticos.put("consumoMedio", consumoTotal / DIAS);
+		datosEstadisticos.put("consumoMedio", consumoTotal / dias);
 		double consumoPunta = Utils.calcularConsumoPeriodo(lista, ConsumoFactory.getFiltroPunta());
 		datosEstadisticos.put("periodoPunta", (consumoTotal!=0)?(consumoPunta * 100 /consumoTotal):0);
 		datosEstadisticos.put("periodoValle", (consumoTotal!=0)?((consumoTotal - consumoPunta) * 100 /consumoTotal):0);
@@ -55,23 +55,20 @@ public class EstadoDia implements Estados{
 		double consumoMensual = 0;
 		List<Integer> listaDias = new ArrayList<>();
 		for(Consumo c: lista) {
-			if(c.getAño() == ano && c.getMes() == mes) {
+			if(c.getAno() == ano && c.getMes() == mes) {
 				consumoMensual+= c.getConsumo();
-				System.out.println("hey");
 			}
 			if(!listaDias.contains(c.getDia()))
 				listaDias.add(c.getDia());
 		}
-		DIAS = listaDias.size();
-		System.out.println(consumoMensual);
-		System.out.println(DIAS);
+		dias = listaDias.size();
 		return consumoMensual;
 	}
 	
-	private double getConsumoDiario(List<Consumo> lista, int dia,int mes, int año) {
+	private double getConsumoDiario(List<Consumo> lista, int dia,int mes, int ano) {
 		double consumoDiario = 0;
 		for(Consumo c: lista) {
-			if(c.getDia() == dia && c.getAño() == año && c.getMes() == mes) {
+			if(c.getDia() == dia && c.getAno() == ano && c.getMes() == mes) {
 				consumoDiario+= c.getConsumo();
 			}
 		}
