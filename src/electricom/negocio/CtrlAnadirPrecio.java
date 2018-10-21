@@ -19,10 +19,10 @@ public class CtrlAnadirPrecio implements ActionListener, Serializable {
         if(actionCommand.equals("anadir")){
         	try {
         		precio = new Precio();
-        		precio.setHora_inicio(vista.getHoraInicio());
-        		precio.setHora_fin(vista.getHoraFin());
-        		precio.setMes_inicio(vista.getMesInicio());
-        		precio.setMes_fin(vista.getMesFin());
+        		precio.setHoraInicio(vista.getHoraInicio());
+        		precio.setHoraFin(vista.getHoraFin());
+        		precio.setMesInicio(vista.getMesInicio());
+        		precio.setMesFin(vista.getMesFin());
         		precio.setPrecio(vista.getPrecio());
         		vista.dispose();
         	}catch (NumberFormatException ex) {

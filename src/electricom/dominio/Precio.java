@@ -17,10 +17,10 @@ public class Precio implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private int hora_inicio;
-	private int hora_fin;
-	private int mes_inicio;
-	private int mes_fin;
+	private int horaInicio;
+	private int horaFin;
+	private int mesInicio;
+	private int mesFin;
 	private double precioEUR;
 	private int tarifaID;
 	public int getId() {
@@ -29,29 +29,29 @@ public class Precio implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getHora_inicio() {
-		return hora_inicio;
+	public int getHoraInicio() {
+		return horaInicio;
 	}
-	public void setHora_inicio(int hora_inicio) {
-		this.hora_inicio = hora_inicio;
+	public void setHoraInicio(int horaInicio) {
+		this.horaInicio = horaInicio;
 	}
-	public int getHora_fin() {
-		return hora_fin;
+	public int getHoraFin() {
+		return horaFin;
 	}
-	public void setHora_fin(int hora_fin) {
-		this.hora_fin = hora_fin;
+	public void setHoraFin(int horaFin) {
+		this.horaFin = horaFin;
 	}
-	public int getMes_inicio() {
-		return mes_inicio;
+	public int setMesInicio() {
+		return mesInicio;
 	}
-	public void setMes_inicio(int mes_inicio) {
-		this.mes_inicio = mes_inicio;
+	public void setMesInicio(int mesInicio) {
+		this.mesInicio = mesInicio;
 	}
-	public int getMes_fin() {
-		return mes_fin;
+	public int getMesFin() {
+		return mesFin;
 	}
-	public void setMes_fin(int mes_fin) {
-		this.mes_fin = mes_fin;
+	public void setMesFin(int mesFin) {
+		this.mesFin = mesFin;
 	}
 	public double getPrecio() {
 		return precioEUR;
@@ -67,22 +67,20 @@ public class Precio implements Serializable{
 	}
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 	@Override
 	public String toString() {
-		return "Precio [id=" + id + ", hora_inicio=" + hora_inicio + ", hora_fin=" + hora_fin + ", mes_inicio="
-				+ mes_inicio + ", mes_fin=" + mes_fin + ", precio=" + precioEUR + ", tarifaID=" + tarifaID + "]";
+		return "Precio [id=" + id + ", hora_inicio=" + horaInicio + ", hora_fin=" + horaFin + ", mes_inicio="
+				+ mesInicio + ", mes_fin=" + mesFin + ", precio=" + precioEUR + ", tarifaID=" + tarifaID + "]";
 	}
 	
 	public boolean isValid() {
-		return (precioEUR != 0); // egiteke
+		return (precioEUR != 0);
 	}
 	
 	

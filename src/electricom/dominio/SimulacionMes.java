@@ -23,7 +23,7 @@ public class SimulacionMes extends Simulacion{
         porEnergia = 0;
         
         for (Consumo consumo : listaConsumos){
-            if(consumo.getAño() == año && consumo.getMes() == mes){
+            if(consumo.getAno() == año && consumo.getMes() == mes){
                 porEnergia += getCoste(tarifa, consumo);
             }
         }

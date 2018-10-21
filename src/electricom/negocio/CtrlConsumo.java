@@ -39,7 +39,7 @@ public class CtrlConsumo implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("Ano")) {
-    		estado = new EstadoAño();
+    		estado = new EstadoAno();
     		int [] values = {vista.getAño()};
     		vista.setEstadisticos(estado.getEstadisticos(listConsumo, values));
     		vista.setGrafico(estado.getDatosGraficos(listConsumo, null));

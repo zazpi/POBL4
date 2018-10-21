@@ -10,7 +10,11 @@ public abstract class Simulacion implements Comparable{
     int dias;
     
     // Datos calculados
-    double porEnergia, porPotencia, porImpuestos, porIva, total;
+    double porEnergia;
+    double porPotencia;
+    double porImpuestos;
+    double porIva;
+    double total;
     
     public abstract void calcularCoste();
     
@@ -25,8 +29,9 @@ public abstract class Simulacion implements Comparable{
         List<Precio> precios = tarifa.getPrecios();
         Precio precio = null;
         for(Precio pr : precios){
-            if(!checkPeriodo(consumo.getMes(),pr.getMes_inicio(),pr.getMes_fin())) continue;
-            if(!checkPeriodo(consumo.getHora(),pr.getHora_inicio(),pr.getHora_fin())) continue;
+            if(!checkPeriodo(consumo.getMes(),pr.setMesInicio(),pr.getMesFin()) || 
+            		!checkPeriodo(consumo.getHora(),pr.getHoraInicio(),pr.getHoraFin())) continue;
+            
             precio = pr;
         }
         

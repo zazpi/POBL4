@@ -43,7 +43,6 @@ public class CtrlTiempoReal implements ActionListener, SerialListener, SerialPor
 			double voltaje = temp*3.3/4095;
 			double consumo = (((voltaje-1.65)*3) / 1.65);
 			recibirConsumo(consumo);
-			System.out.println(voltaje + "/" + consumo);
 			byteKopurua = 0;
 		}else {
 			byteKopurua++;

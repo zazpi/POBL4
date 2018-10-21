@@ -3,8 +3,6 @@
  */
 package electricom.negocio;
 
-import java.awt.Color;
-import java.awt.RenderingHints;
 import java.util.Map;
 import java.util.Map.Entry;
 

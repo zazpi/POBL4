@@ -108,8 +108,8 @@ public class Utils {
             listaAnos = new ArrayList<>();
             
             for(Consumo c : listaConsumos){
-                if(!listaAnos.contains(c.getAño())){
-                    listaAnos.add(c.getAño());
+                if(!listaAnos.contains(c.getAno())){
+                    listaAnos.add(c.getAno());
                 }
             }
             return listaAnos;
@@ -121,7 +121,7 @@ public class Utils {
             listaMeses = new ArrayList<>();
             
             for(Consumo c : listaConsumos){
-                if((!listaMeses.contains(translateMonthToString(c.getMes())) && (c.getAño() == año))){
+                if((!listaMeses.contains(translateMonthToString(c.getMes())) && (c.getAno() == año))){
                     listaMeses.add(translateMonthToString(c.getMes()));
                 }
             }
@@ -168,7 +168,7 @@ public class Utils {
     	public static List<Consumo> filtrarConsumo(List<Consumo> consumos,int año, int mes){
     		List<Consumo> consumoFiltrado = new ArrayList<>();
     		for(Consumo c : consumos) {
-    			if(c.getAño() == año && c.getMes() == mes)
+    			if(c.getAno() == año && c.getMes() == mes)
     				consumoFiltrado.add(c);
     		}
     		return consumoFiltrado;
@@ -201,7 +201,7 @@ public class Utils {
     		   lista = new ArrayList<>();
     		   int ano = periodosReferencia[0];
     		   for(Consumo c: listaConsumos) {
-    			   if(c.getAño() == ano && !lista.contains(c))
+    			   if(c.getAno() == ano && !lista.contains(c))
     				   lista.add(c);
     		   }
     	   }else if(periodo.equals("dia")) {
@@ -209,7 +209,7 @@ public class Utils {
     		   int ano = periodosReferencia[0];
     		   int mes = periodosReferencia[1];
     		   for(Consumo c: listaConsumos) {
-    			   if(c.getAño() == ano && c.getMes() == mes && !lista.contains(c))
+    			   if(c.getAno() == ano && c.getMes() == mes && !lista.contains(c))
     				   lista.add(c);
     		   }
     	   }else if(periodo.equals("hora")) {
@@ -218,7 +218,7 @@ public class Utils {
     		   int mes = periodosReferencia[1];
     		   int dia = periodosReferencia[2];
     		   for(Consumo c: listaConsumos) {
-    			   if(c.getAño() == ano && c.getMes() == mes && c.getDia() == dia)
+    			   if(c.getAno() == ano && c.getMes() == mes && c.getDia() == dia)
     				   lista.add(c);
     		   }
     	   }
@@ -235,7 +235,7 @@ public class Utils {
     		   }
     	   }else if(periodo.equals("mes")) {
     		   for(Consumo c: lista) {
-    			   if(!listaDias.contains(c.getDia()) && c.getAño() == peridoReferencia)
+    			   if(!listaDias.contains(c.getDia()) && c.getAno() == peridoReferencia)
     				   listaDias.add(c.getDia());
     		   }
     	   }

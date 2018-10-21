@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package electricom.dao;
 
@@ -21,19 +21,19 @@ import electricom.dominio.Tarifa;
  */
 public class TarifaDAOJDBC implements TarifaDAO{
 	private static final Logger LOGGER = Logger.getLogger(TarifaDAOJDBC.class.getName() );
-	private static final String FIND_BY_ID = 
+	private static final String FIND_BY_ID =
 			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa WHERE tarifaID = ?";
 	private static final String FIND_BY_COMPANY_ID =
 			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa WHERE compañiaID = ?";
-	private static final String SQL_INSERT = 
+	private static final String SQL_INSERT =
 			"INSERT INTO tarifa(descripcion,renovable,compañia) VALUES(?,?,?)";
 	private static final String SQL_LIST_TARIFA =
 			"SELECT tarifaID,descripcion,renovable,compañiaID FROM tarifa";
-	
+
 	private DAOFactory daoFactory;
-	
+
 	TarifaDAOJDBC(DAOFactory daoFactory){
-		
+
 		this.daoFactory = daoFactory;
 	}
 
@@ -41,23 +41,23 @@ public class TarifaDAOJDBC implements TarifaDAO{
 	public Tarifa find(Long id) throws DAOException {
 		return find(FIND_BY_ID,id);
 	}
-	
+
 	@Override
 	public Tarifa findByCompany(Long id) throws DAOException {
 		return find(FIND_BY_COMPANY_ID,id);
 	}
-	
+
 	@Override
 	public List<Tarifa> list() {
 		return list(SQL_LIST_TARIFA);
 	}
-	
+
 	private List<Tarifa> list(String sql){
 		List<Tarifa> tarifa = new ArrayList<>();
-		
+
 	    try (
 	            Connection connection = daoFactory.getConnection();
-	            PreparedStatement statement = connection.prepareStatement(SQL_LIST_TARIFA);
+	            PreparedStatement statement = connection.prepareStatement(sql);
 	            ResultSet resultSet = statement.executeQuery();
 	        ) {
 	            while (resultSet.next()) {
@@ -68,11 +68,11 @@ public class TarifaDAOJDBC implements TarifaDAO{
 	        }
 	    return tarifa;
 	}
-	
+
 	private Tarifa find(String sql, Object...values) {
 		Tarifa tarifa = null;
 
-	      
+
 		try (
             Connection connection = daoFactory.getConnection();
             PreparedStatement statement = DAOUtil.prepareStatement(connection, sql, values);
@@ -86,22 +86,22 @@ public class TarifaDAOJDBC implements TarifaDAO{
         }
 
         return tarifa;
-		
+
 	}
 
 	@Override
 	public void create(Tarifa tarifa) throws IllegalArgumentException, DAOException {
-		
+
 		if((Integer)tarifa.getTarifaID() != null) {
 			 throw new IllegalArgumentException("Tarifa already exists.");
 		}
-		
+
 		Object[] values = {
 	            tarifa.getDescripcion(),
 	            tarifa.isRenovable(),
 	            tarifa.getCompaniaID()
 		};
-		
+
 	    try (
 	        	Connection connection = daoFactory.getConnection();
 				PreparedStatement statement = DAOUtil.prepareStatement(connection, SQL_INSERT, values);){
@@ -114,7 +114,7 @@ public class TarifaDAOJDBC implements TarifaDAO{
 				LOGGER.log(Level.SEVERE,e.getMessage());
 			}
 	}
-	
+
 	private Tarifa map(ResultSet resultSet) throws SQLException {
 		Tarifa tarifa = new Tarifa();
 		tarifa.setTarifaID(resultSet.getInt("tarifaID"));

@@ -17,7 +17,7 @@ public class Consumo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private int año;
+	private int ano;
 	private int mes;
 	private int dia;
 	private int hora;
@@ -40,11 +40,11 @@ public class Consumo implements Serializable{
 	public void setConsumoID(int consumoID) {
 		this.id = consumoID;
 	}
-	public int getAño() {
-		return año;
+	public int getAno() {
+		return ano;
 	}
-	public void setAño(int año) {
-		this.año = año;
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 	public int getMes() {
 		return mes;
